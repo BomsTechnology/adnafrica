@@ -7,7 +7,7 @@ const LoginAdmin = () => import("../views/back/Login.vue");
 const Dashboard = () => import("../views/back/Dashboard.vue");
 const NotFound = () => import("../views/front/NotFound.vue");
 
-const siteName = "Elodis Sarl";
+const siteName = "Adnafrica";
 
 const routes = [
     // front routes

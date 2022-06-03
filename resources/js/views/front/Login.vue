@@ -4,12 +4,8 @@ import useAuth from "../../services/authServices.js";
 
 <template>
     <section>
-        <div
-            class="m-auto w-full max-w-sm rounded-md bg-white p-6 shadow-md dark:bg-gray-800"
-        >
-            <h1
-                class="text-center text-3xl font-semibold text-gray-700 dark:text-white"
-            >
+        <div class="m-auto w-full max-w-sm rounded-md bg-white p-6 shadow-md">
+            <h1 class="text-center text-3xl font-semibold text-gray-700">
                 Se Connecter
             </h1>
             <p
@@ -27,7 +23,7 @@ import useAuth from "../../services/authServices.js";
                     <input
                         type="email"
                         required
-                        class="mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300"
+                        class="mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-primary-color focus:outline-none focus:ring focus:ring-primary-color focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-primary-color"
                     />
                 </div>
 
@@ -40,7 +36,7 @@ import useAuth from "../../services/authServices.js";
                         >
                         <a
                             href="#"
-                            class="text-xs text-blue-500 hover:underline dark:text-gray-400"
+                            class="text-xs text-primary-color hover:underline dark:text-gray-400"
                             >Mot de passe oublié ?</a
                         >
                     </div>
@@ -48,13 +44,13 @@ import useAuth from "../../services/authServices.js";
                     <input
                         type="password"
                         required
-                        class="mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300"
+                        class="mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-primary-color focus:outline-none focus:ring focus:ring-primary-color focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-primary-color"
                     />
                 </div>
 
                 <div class="mt-6">
                     <button
-                        class="w-full transform rounded-md bg-blue-500 px-4 py-2 tracking-wide text-white transition-colors duration-200 hover:bg-blue-700 focus:bg-blue-500 focus:outline-none"
+                        class="w-full transform rounded-md bg-primary-color px-4 py-2 tracking-wide text-white transition-colors duration-200 hover:bg-secondary-color focus:bg-primary-color focus:outline-none"
                     >
                         Se Connecter
                     </button>
@@ -65,7 +61,7 @@ import useAuth from "../../services/authServices.js";
                 Vous n'avez pas de compte ?
                 <router-link
                     :to="{ name: 'register' }"
-                    class="font-medium text-blue-700 hover:underline dark:text-gray-200"
+                    class="font-medium text-primary-color hover:underline dark:text-gray-200"
                     >S'inscrire</router-link
                 >
             </p>

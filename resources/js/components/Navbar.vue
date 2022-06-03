@@ -1,23 +1,88 @@
 <script setup>
 import { ref } from "vue";
-import { XIcon, MenuIcon } from "@heroicons/vue/solid";
+import {
+    XIcon,
+    MenuIcon,
+    DocumentAddIcon,
+    UserIcon,
+    ChatIcon,
+    HeartIcon,
+    TableIcon,
+    ChevronDownIcon,
+    SearchIcon,
+    LocationMarkerIcon,
+} from "@heroicons/vue/solid";
 
 const open = ref(false);
 </script>
 
 <template>
-    <nav class="fixed top-0 w-full bg-blue-500 shadow-lg dark:bg-gray-800">
-        <div class="container mx-auto px-6 py-3">
+    <nav class="noScroll z-50" id="navbar">
+        <div class="container mx-auto px-12 py-3">
             <div
                 class="flex flex-col md:flex-row md:items-center md:justify-between"
             >
-                <div class="flex items-center justify-between">
+                <div class="flex w-auto items-center justify-between md:w-2/3">
                     <div class="flex items-center">
                         <router-link
                             :to="{ name: 'home' }"
-                            class="transform text-2xl font-bold text-white transition-colors duration-200 hover:text-gray-100 dark:text-white dark:hover:text-gray-300 lg:text-3xl"
-                            >Elodis Sarl</router-link
+                            class="transform text-2xl font-bold transition-colors duration-200 lg:text-3xl"
+                            >Adnafrica</router-link
                         >
+                    </div>
+
+                    <div class="ml-8 hidden lg:block">
+                        <form id="searchNav" class="hidden">
+                            <div class="grid grid-cols-4">
+                                <div
+                                    class="flex w-full cursor-pointer items-center justify-between border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 hover:bg-gray-100"
+                                >
+                                    <div>
+                                        <TableIcon
+                                            class="h-6 w-6 text-gray-400"
+                                        />
+                                    </div>
+                                    <div>Catégorie</div>
+                                    <div>
+                                        <ChevronDownIcon
+                                            class="h-6 w-6 text-gray-400"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="relative">
+                                    <span class="absolute left-3 top-2"
+                                        ><SearchIcon
+                                            class="h-6 w-6 text-gray-400"
+                                    /></span>
+                                    <input
+                                        type="text"
+                                        class="block w-full border border-gray-300 bg-gray-50 py-3 pl-12 text-sm text-gray-900 focus:border-primary-color focus:ring-primary-color dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                                        placeholder="Que recherchez - vous ?"
+                                        required
+                                    />
+                                </div>
+                                <div class="relative">
+                                    <span class="absolute left-3 top-2"
+                                        ><LocationMarkerIcon
+                                            class="h-6 w-6 text-gray-400"
+                                    /></span>
+                                    <input
+                                        type="text"
+                                        class="block w-full border border-gray-300 bg-gray-50 py-3 pl-12 text-sm text-gray-900 focus:border-primary-color focus:ring-primary-color"
+                                        placeholder="Situé à..."
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <button
+                                        type="submit"
+                                        class="block w-full bg-primary-color px-5 py-3 text-center text-sm font-medium text-white hover:bg-secondary-color focus:outline-none focus:ring-4 focus:ring-blue-300"
+                                    >
+                                        Rechercher
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
 
                     <!-- Mobile menu button -->
@@ -34,7 +99,7 @@ const open = ref(false);
                             <button
                                 v-if="!open"
                                 type="button"
-                                class="text-white hover:text-gray-600 focus:text-gray-600 focus:outline-none dark:text-gray-200 dark:hover:text-gray-400 dark:focus:text-gray-400"
+                                class="hover:text-gray-600 focus:text-gray-600 focus:outline-none dark:text-gray-200 dark:hover:text-gray-400 dark:focus:text-gray-400"
                                 aria-label="toggle menu"
                             >
                                 <MenuIcon class="h-6 w-6 fill-current" />
@@ -42,7 +107,7 @@ const open = ref(false);
                             <button
                                 v-if="open"
                                 type="button"
-                                class="text-white hover:text-gray-600 focus:text-gray-600 focus:outline-none dark:text-gray-200 dark:hover:text-gray-400 dark:focus:text-gray-400"
+                                class="hover:text-gray-600 focus:text-gray-600 focus:outline-none dark:text-gray-200 dark:hover:text-gray-400 dark:focus:text-gray-400"
                                 aria-label="toggle menu"
                             >
                                 <XIcon class="h-6 w-6 fill-current" />
@@ -52,42 +117,41 @@ const open = ref(false);
                 </div>
 
                 <div class="-mx-1 hidden items-center py-2 md:mx-0 md:flex">
+                    <div class="flex items-center justify-center space-x-2">
+                        <HeartIcon class="h-8 w-8" />
+                        <ChatIcon class="h-8 w-8" />
+                        <UserIcon class="h-8 w-8" />
+                    </div>
                     <router-link
                         :to="{ name: 'login' }"
-                        class="mx-1 block w-1/2 transform rounded-2xl border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-blue-500 transition-colors duration-200 hover:border hover:bg-blue-500 hover:text-white md:mx-2 md:w-auto"
-                        >Se Connecter</router-link
+                        class="mx-1 flex w-1/2 transform items-center space-x-2 rounded-2xl border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-primary-color transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
                     >
-                    <router-link
-                        :to="{ name: 'register' }"
-                        class="mx-1 block w-1/2 transform rounded-2xl border border-white bg-blue-500 px-3 py-2 text-center text-sm font-medium leading-5 text-white transition-colors duration-200 hover:bg-white hover:text-blue-500 md:mx-0 md:w-auto"
-                        >S'inscrire</router-link
-                    >
+                        <DocumentAddIcon class="h-6 w-6" />
+                        Déposer une annonce
+                    </router-link>
                 </div>
             </div>
         </div>
     </nav>
-    <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
-    <Transition
-        enter-active-class="transition duration-500"
-        enter-from-class="opacity-0 translate-x-full"
-        enter-to-class="opacity-1 translate-x-0"
-        leave-active-class="transition duration-500"
-        leave-from-class="opacity-1 translate-x-0"
-        leave-to-class="opacity-0 translate-x-full"
-    >
-        <div class="mt-14 items-center bg-white p-4 shadow md:flex" v-if="open">
-            <div class="-mx-1 flex items-center py-2 md:mx-0">
-                <router-link
-                    :to="{ name: 'login' }"
-                    class="mx-1 block w-1/2 transform rounded-md bg-gray-500 px-3 py-2 text-center text-sm font-medium leading-5 text-white transition-colors duration-200 hover:bg-blue-600 md:mx-2 md:w-auto"
-                    >Se Connecter</router-link
-                >
-                <router-link
-                    :to="{ name: 'register' }"
-                    class="mx-1 block w-1/2 transform rounded-md bg-blue-500 px-3 py-2 text-center text-sm font-medium leading-5 text-white transition-colors duration-200 hover:bg-blue-600 md:mx-0 md:w-auto"
-                    >S'inscrire</router-link
-                >
+
+    <div id="mobileNavbar" class="z-50">
+        <Transition
+            enter-active-class="transition duration-500"
+            enter-from-class="opacity-0 translate-x-full"
+            enter-to-class="opacity-1 translate-x-0"
+            leave-active-class="transition duration-500"
+            leave-from-class="opacity-1 translate-x-0"
+            leave-to-class="opacity-0 translate-x-full"
+        >
+            <div class="items-center bg-white p-4 shadow md:flex" v-if="open">
+                <div class="-mx-1 flex items-center py-2 md:mx-0">
+                    <router-link
+                        :to="{ name: 'login' }"
+                        class="mx-1 block w-1/2 transform rounded-md bg-gray-500 px-3 py-2 text-center text-sm font-medium leading-5 text-white transition-colors duration-200 hover:bg-blue-600 md:mx-2 md:w-auto"
+                        >Se Connecter</router-link
+                    >
+                </div>
             </div>
-        </div>
-    </Transition>
+        </Transition>
+    </div>
 </template>
