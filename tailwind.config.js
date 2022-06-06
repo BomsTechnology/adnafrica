@@ -15,6 +15,8 @@ module.exports = {
             colors: {
                 "primary-color": "#16a085",
                 "secondary-color": "#1abc9c",
+                "footer-color": "#576574",
+                "subfooter-color": "#222f3e",
             },
         },
     },

@@ -1,7 +1,7 @@
 <script setup>
 import Navbar from "./components/Navbar.vue";
 import { ArrowCircleUpIcon } from "@heroicons/vue/solid";
-// import Footer from "./components/Footer.vue";
+import Footer from "./components/Footer.vue";
 // import Goback from "./components/Goback.vue";
 
 const goTop = () => {
@@ -42,5 +42,5 @@ const goTop = () => {
             <ArrowCircleUpIcon class="h-6 w-6" />
         </button>
     </div>
-    <!-- <Footer /> -->
+    <Footer />
 </template>

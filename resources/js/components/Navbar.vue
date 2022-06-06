@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import Ping from "./Ping.vue";
 import {
     XIcon,
     MenuIcon,
@@ -11,6 +12,7 @@ import {
     ChevronDownIcon,
     SearchIcon,
     LocationMarkerIcon,
+    BellIcon,
 } from "@heroicons/vue/solid";
 
 const open = ref(false);
@@ -22,11 +24,11 @@ const open = ref(false);
             <div
                 class="flex flex-col md:flex-row md:items-center md:justify-between"
             >
-                <div class="flex w-auto items-center justify-between md:w-2/3">
+                <div class="flex w-full items-center justify-between lg:w-2/3">
                     <div class="flex items-center">
                         <router-link
                             :to="{ name: 'home' }"
-                            class="transform text-2xl font-bold transition-colors duration-200 lg:text-3xl"
+                            class="transform text-2xl font-bold uppercase tracking-widest transition-colors duration-200 lg:text-3xl"
                             >Adnafrica</router-link
                         >
                     </div>
@@ -86,7 +88,7 @@ const open = ref(false);
                     </div>
 
                     <!-- Mobile menu button -->
-                    <div class="relative block md:hidden" @click="open = !open">
+                    <div class="relative block lg:hidden" @click="open = !open">
                         <transition-group
                             enter-active-class="transition duration-500"
                             enter-from-class="opacity-0 rotate-45"
@@ -116,15 +118,30 @@ const open = ref(false);
                     </div>
                 </div>
 
-                <div class="-mx-1 hidden items-center py-2 md:mx-0 md:flex">
+                <div class="-mx-1 hidden items-center py-2 md:mx-0 lg:flex">
                     <div class="flex items-center justify-center space-x-2">
-                        <HeartIcon class="h-8 w-8" />
-                        <ChatIcon class="h-8 w-8" />
-                        <UserIcon class="h-8 w-8" />
+                        <a href="#" class="relative" title="Mes alertes"
+                            ><BellIcon class="h-8 w-8" /><Ping :color="'red'"
+                        /></a>
+                        <a
+                            href="#"
+                            class="relative"
+                            title="Mes annonces Favoris"
+                            ><HeartIcon class="h-8 w-8" />
+                            <Ping :color="'red'" />
+                        </a>
+
+                        <a href="#" class="relative" title="Mes messages"
+                            ><ChatIcon class="h-8 w-8"
+                        /></a>
+
+                        <a href="#" class="relative" title="Mon compte"
+                            ><UserIcon class="h-8 w-8"
+                        /></a>
                     </div>
                     <router-link
                         :to="{ name: 'login' }"
-                        class="mx-1 flex w-1/2 transform items-center space-x-2 rounded-2xl border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-primary-color transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
+                        class="mx-1 flex w-1/2 transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-primary-color transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
                     >
                         <DocumentAddIcon class="h-6 w-6" />
                         Déposer une annonce

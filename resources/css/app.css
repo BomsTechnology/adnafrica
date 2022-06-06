@@ -6,7 +6,12 @@
 
 .swiper-button-next,
 .swiper-button-prev {
-    @apply !text-primary-color;
+    @apply !h-10 !w-10 !rounded-full !bg-white !p-4 !text-primary-color !shadow-lg md:!p-6;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    @apply !text-xs !font-bold md:!text-lg;
 }
 
 .noScroll {
