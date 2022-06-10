@@ -1,8 +1,12 @@
+import { ref } from 'vue';
 <script setup>
 const props = defineProps({
     errors: String,
-    hideErrors: Function,
 });
+const errors = ref(props.errors);
+const hideErrors = () => {
+    errors.value = "";
+};
 </script>
 
 <template>

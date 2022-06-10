@@ -1,9 +1,10 @@
 <script setup>
-import useAuth from "../../services/authServices.js";
+// import useAuth from "../../services/authServices.js";
 </script>
 
 <template>
-    <section>
+    <Goback />
+    <section class="mb-16">
         <div class="m-auto w-full max-w-sm rounded-md bg-white p-6 shadow-md">
             <h1 class="text-center text-3xl font-semibold text-gray-700">
                 Se Connecter

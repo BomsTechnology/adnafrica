@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-    <footer class="bg-footer-color py-8 px-8 text-white md:px-28">
+    <footer class="bg-footer-color py-10 px-8 text-white md:px-28">
         <div class="container mx-auto py-4">
             <div class="lg:flex">
                 <div class="-mx-6 w-full lg:w-2/5">
@@ -15,80 +15,92 @@
                         </div>
 
                         <p class="mt-2 max-w-md">
-                            Join 31,000+ other and never miss out on new tips,
-                            tutorials, and more.
+                            Agence de conseils et de création web, GNO SOLUTIONS
+                            vous accompagne dans la création et la maintenance
+                            de votre site internet et e-commerce. Bénéficiez
+                            d’une expertise sur mesure en stratégie digitale et
+                            développement web.
                         </p>
                     </div>
                 </div>
 
                 <div class="mt-6 lg:mt-0 lg:flex-1">
                     <div
-                        class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4"
+                        class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3"
                     >
                         <div>
-                            <h3 class="font-bold uppercase">About</h3>
+                            <h3 class="font-bold uppercase">
+                                Informations Légales
+                            </h3>
                             <a
                                 href="#"
                                 class="mt-2 block text-sm hover:underline"
-                                >Company</a
+                                >Conditions génerales d'utilisation</a
                             >
                             <a
                                 href="#"
                                 class="mt-2 block text-sm hover:underline"
-                                >community</a
+                                >Conditions générales de vente</a
                             >
                             <a
                                 href="#"
                                 class="mt-2 block text-sm hover:underline"
-                                >Careers</a
+                                >Vos droits et obligations</a
+                            >
+                            <a
+                                href="#"
+                                class="mt-2 block text-sm hover:underline"
+                                >Charte de bonne conduite</a
+                            >
+                            <a
+                                href="#"
+                                class="mt-2 block text-sm hover:underline"
+                                >Avis utilisateurs</a
+                            >
+                            <a
+                                href="#"
+                                class="mt-2 block text-sm hover:underline"
+                                >Décision de justice</a
                             >
                         </div>
 
                         <div>
-                            <h3 class="font-bold uppercase">Blog</h3>
+                            <h3 class="font-bold uppercase">Des Questions</h3>
                             <a
                                 href="#"
                                 class="mt-2 block text-sm hover:underline"
-                                >Tec</a
+                                >Aide
+                            </a>
+                            <a
+                                href="#"
+                                class="mt-2 block text-sm hover:underline"
+                                >Contact
+                            </a>
+                            <a
+                                href="#"
+                                class="mt-2 block text-sm hover:underline"
+                                >Service de paiement sécurisé et la livraison</a
                             >
                             <a
                                 href="#"
                                 class="mt-2 block text-sm hover:underline"
-                                >Music</a
-                            >
-                            <a
-                                href="#"
-                                class="mt-2 block text-sm hover:underline"
-                                >Videos</a
+                                >Demandez des conseils</a
                             >
                         </div>
 
                         <div>
-                            <h3 class="font-bold uppercase">Products</h3>
+                            <h3 class="font-bold uppercase">
+                                Lieux populaires
+                            </h3>
                             <a
                                 href="#"
                                 class="mt-2 block text-sm hover:underline"
-                                >Mega cloud</a
-                            >
+                                >Douala - Cameroun
+                            </a>
                             <a
                                 href="#"
                                 class="mt-2 block text-sm hover:underline"
-                                >Aperion UI</a
-                            >
-                            <a
-                                href="#"
-                                class="mt-2 block text-sm hover:underline"
-                                >Meraki UI</a
-                            >
-                        </div>
-
-                        <div>
-                            <h3 class="font-bold uppercase">Contact</h3>
-                            <span class="mt-2 block text-sm hover:underline"
-                                >+1 526 654 8965</span
-                            >
-                            <span class="mt-2 block text-sm hover:underline"
-                                >example@email.com</span
+                                >Yaounde - Camroun</a
                             >
                         </div>
                     </div>

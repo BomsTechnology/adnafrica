@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const Home = () => import("../views/front/Home.vue");
 const Login = () => import("../views/front/Login.vue");
+const SingleAds = () => import("../views/front/SingleAds.vue");
+const Account = () => import("../views/front/Account.vue");
 const Register = () => import("../views/front/Register.vue");
 const LoginAdmin = () => import("../views/back/Login.vue");
 const Dashboard = () => import("../views/back/Dashboard.vue");
@@ -34,6 +36,22 @@ const routes = [
         component: Register,
         meta: {
             title: siteName + " - S'inscrire",
+        },
+    },
+    {
+        path: "/ads",
+        name: "ads.single",
+        component: SingleAds,
+        meta: {
+            title: siteName + " - ads",
+        },
+    },
+    {
+        path: "/account",
+        name: "account",
+        component: Account,
+        meta: {
+            title: siteName + " - ads",
         },
     },
     {

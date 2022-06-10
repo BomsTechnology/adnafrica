@@ -12,11 +12,11 @@ const goBack = () => {
     <div class="m-4">
         <button
             @click="goBack()"
-            class="flex items-center space-x-1 rounded-full border border-blue-500 bg-white px-2 py-1 text-blue-500 shadow transition-colors duration-300 hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white"
+            class="flex items-center space-x-1 rounded-full border border-primary-color bg-white px-2 py-1 text-primary-color shadow transition-colors duration-300 hover:bg-primary-color hover:text-white focus:bg-primary-color focus:text-white"
         >
             <ArrowCircleLeftIcon class="h-5 w-5" />
 
-            <span>Retour</span>
+            <span class="hidden text-sm md:block">Retour</span>
         </button>
     </div>
 </template>

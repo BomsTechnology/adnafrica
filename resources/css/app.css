@@ -19,7 +19,14 @@
 }
 
 .isScroll {
-    @apply fixed top-0 w-full bg-white text-primary-color shadow-lg;
+    @apply fixed top-0 w-full bg-white text-gray-800 shadow-lg;
+}
+
+.noScroll .add-ads {
+    @apply text-primary-color;
+}
+.isScroll .add-ads {
+    @apply border !border-gray-800 hover:!bg-white hover:!text-gray-800;
 }
 
 .isScrollMobile {

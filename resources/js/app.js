@@ -4,10 +4,15 @@ import { createApp } from "vue";
 import router from "./router/index.js";
 import App from "./App.vue";
 import BackOffice from "./BackOffice.vue";
+import Goback from "./components/Goback.vue";
+import Error from "./components/Error.vue";
+import Alert from "./components/Alert.vue";
 
 if (!window.location.href.includes("admin")) {
     const app = createApp(App);
-    app.use(router).mount("#app");
+    app.component("Goback", Goback);
+    app.component("Alert", Alert);
+    app.component("Error", Error).use(router).mount("#app");
 } else {
     const app2 = createApp(BackOffice);
     app2.use(router).mount("#backoffice");
@@ -26,17 +31,29 @@ function toogleClass() {
         document.body.scrollTop > 100 ||
         document.documentElement.scrollTop > 100
     ) {
-        navbar.classList.remove("noScroll");
-        searchNav.classList.remove("hidden");
+        if (!document.getElementById("navAds")) {
+            navbar.classList.remove("noScroll");
+            mobileNavbar.classList.add("isScrollMobile");
+            navbar.classList.add("isScroll");
+            searchNav.classList.remove("hidden");
+        } else {
+            var navAds = document.getElementById("navAds");
+            navAds.classList.remove("hidden");
+        }
+
         btnToTop.classList.remove("hidden");
-        mobileNavbar.classList.add("isScrollMobile");
         btnToTop.classList.add("flex");
-        navbar.classList.add("isScroll");
     } else {
-        mobileNavbar.classList.remove("isScrollMobile");
-        navbar.classList.remove("isScroll");
-        searchNav.classList.add("hidden");
-        navbar.classList.add("noScroll");
+        if (!document.getElementById("navAds")) {
+            mobileNavbar.classList.remove("isScrollMobile");
+            navbar.classList.remove("isScroll");
+            navbar.classList.add("noScroll");
+            searchNav.classList.add("hidden");
+        } else {
+            var navAds = document.getElementById("navAds");
+            navAds.classList.add("hidden");
+        }
+
         btnToTop.classList.remove("flex");
         btnToTop.classList.add("hidden");
     }

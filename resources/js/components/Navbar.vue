@@ -19,7 +19,7 @@ const open = ref(false);
 </script>
 
 <template>
-    <nav class="noScroll z-50" id="navbar">
+    <nav class="noScroll z-40" id="navbar">
         <div class="container mx-auto px-12 py-3">
             <div
                 class="flex flex-col md:flex-row md:items-center md:justify-between"
@@ -78,7 +78,7 @@ const open = ref(false);
                                 <div>
                                     <button
                                         type="submit"
-                                        class="block w-full bg-primary-color px-5 py-3 text-center text-sm font-medium text-white hover:bg-secondary-color focus:outline-none focus:ring-4 focus:ring-blue-300"
+                                        class="block w-full bg-gray-800 px-5 py-3 text-center text-sm font-medium text-white hover:bg-gray-600 focus:outline-none focus:ring-4 focus:ring-blue-300"
                                     >
                                         Rechercher
                                     </button>
@@ -141,10 +141,10 @@ const open = ref(false);
                     </div>
                     <router-link
                         :to="{ name: 'login' }"
-                        class="mx-1 flex w-1/2 transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-primary-color transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
+                        class="add-ads mx-1 flex w-1/2 transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
                     >
                         <DocumentAddIcon class="h-6 w-6" />
-                        Déposer une annonce
+                        <span>Déposer une annonce</span>
                     </router-link>
                 </div>
             </div>
@@ -161,12 +161,44 @@ const open = ref(false);
             leave-to-class="opacity-0 translate-x-full"
         >
             <div class="items-center bg-white p-4 shadow md:flex" v-if="open">
-                <div class="-mx-1 flex items-center py-2 md:mx-0">
+                <div class="-mx-1 py-2">
                     <router-link
                         :to="{ name: 'login' }"
-                        class="mx-1 block w-1/2 transform rounded-md bg-gray-500 px-3 py-2 text-center text-sm font-medium leading-5 text-white transition-colors duration-200 hover:bg-blue-600 md:mx-2 md:w-auto"
-                        >Se Connecter</router-link
+                        class="mx-1 flex w-full transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2"
                     >
+                        <DocumentAddIcon class="h-6 w-6" />
+                        <span>Déposer une annonce</span>
+                    </router-link>
+                    <hr class="my-6 h-px border-none bg-gray-300" />
+                    <router-link
+                        :to="{ name: 'login' }"
+                        class="mx-1 flex w-full transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
+                    >
+                        <BellIcon class="h-6 w-6" />
+                        <span>Mes Alertes</span>
+                    </router-link>
+                    <router-link
+                        :to="{ name: 'login' }"
+                        class="mx-1 flex w-full transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
+                    >
+                        <HeartIcon class="h-6 w-6" />
+                        <span>Mes Favoris</span>
+                    </router-link>
+                    <router-link
+                        :to="{ name: 'login' }"
+                        class="mx-1 flex w-full transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
+                    >
+                        <ChatIcon class="h-6 w-6" />
+                        <span>Mes Messages</span>
+                    </router-link>
+                    <hr class="my-6 h-px border-none bg-gray-300" />
+                    <router-link
+                        :to="{ name: 'login' }"
+                        class="mx-1 flex w-full transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
+                    >
+                        <UserIcon class="h-6 w-6" />
+                        <span>Mon Compte</span>
+                    </router-link>
                 </div>
             </div>
         </Transition>
