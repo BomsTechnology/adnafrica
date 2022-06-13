@@ -19974,7 +19974,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "enter-active-class": "transition duration-1000",
         "enter-from-class": "opacity-0 translate-y-10",
         "enter-to-class": "opacity-1 translate-y-0",
-        "leave-active-class": "transition duration-500",
+        "leave-active-class": "transition duration-500 ",
         "leave-from-class": "opacity-1 translate-y-0",
         "leave-to-class": "opacity-0 -translate-y-10",
         mode: "out-in"
@@ -20643,10 +20643,14 @@ function toogleClass() {
 
   if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
     if (!document.getElementById("navAds")) {
+      navbar.classList.add("isScroll");
+
+      if (!location.href.includes("account")) {
+        searchNav.classList.remove("hidden");
+      }
+
       navbar.classList.remove("noScroll");
       mobileNavbar.classList.add("isScrollMobile");
-      navbar.classList.add("isScroll");
-      searchNav.classList.remove("hidden");
     } else {
       var navAds = document.getElementById("navAds");
       navAds.classList.remove("hidden");
@@ -20659,7 +20663,10 @@ function toogleClass() {
       mobileNavbar.classList.remove("isScrollMobile");
       navbar.classList.remove("isScroll");
       navbar.classList.add("noScroll");
-      searchNav.classList.add("hidden");
+
+      if (!location.href.includes("account")) {
+        searchNav.classList.add("hidden");
+      }
     } else {
       var navAds = document.getElementById("navAds");
       navAds.classList.add("hidden");

@@ -20,7 +20,7 @@ const goTop = () => {
                 enter-active-class="transition duration-1000"
                 enter-from-class="opacity-0 translate-y-10"
                 enter-to-class="opacity-1 translate-y-0"
-                leave-active-class="transition duration-500"
+                leave-active-class="transition duration-500 "
                 leave-from-class="opacity-1 translate-y-0"
                 leave-to-class="opacity-0 -translate-y-10"
                 mode="out-in"

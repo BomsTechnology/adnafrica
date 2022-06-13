@@ -1,17 +1,52 @@
 <script setup>
 import {
     StarIcon,
+    SpeakerphoneIcon,
     LocationMarkerIcon,
     DotsVerticalIcon,
+    SwitchHorizontalIcon,
+    AdjustmentsIcon,
 } from "@heroicons/vue/solid";
+import AccountAds from "../../components/AccountAds.vue";
+import AccountSetting from "../../components/AccountSetting.vue";
+import AccountTransaction from "../../components/AccountTransaction.vue";
+import { reactive } from "vue";
+
+const open = reactive({
+    ads: true,
+    transaction: false,
+    setting: false,
+});
+
+function changeTab(tab) {
+    switch (tab) {
+        case "ads":
+            open.setting = false;
+            open.transaction = false;
+            open.ads = true;
+            break;
+        case "transaction":
+            open.setting = false;
+            open.ads = false;
+            open.transaction = true;
+            break;
+        case "setting":
+            open.transaction = false;
+            open.ads = false;
+            open.setting = true;
+            break;
+    }
+}
 </script>
 
 <template>
-    <div class="px-10 md:px-28">
+    <div class="px-4 md:px-28">
         <div
-            class="flex h-48 w-full items-center justify-between rounded-lg bg-white px-8"
+            class="flex w-full flex-col items-center justify-between rounded-lg bg-white py-2 px-8 lg:h-48 lg:flex-row"
         >
-            <div class="flex items-center space-x-2 py-3 px-2">
+            <div
+                class="flex flex-col items-center space-x-2 py-3 px-2 text-center lg:flex-row lg:text-left"
+            >
                 <div class="mr-2 h-28 w-28 overflow-hidden rounded-full">
                     <img
                         src="/images/icone/default_avatar.svg"
@@ -32,24 +67,28 @@ import {
                     </h4>
                 </div>
             </div>
-            <div class="flex flex-col justify-center">
+            <div class="flex justify-center lg:flex-col">
                 <button
                     type="button"
                     title="options"
-                    class="flex items-center justify-center rounded border border-primary-color p-2 text-primary-color hover:bg-primary-color hover:text-white"
+                    class="flex items-center justify-center space-x-2 rounded border border-primary-color p-2 text-primary-color hover:bg-primary-color hover:text-white"
                 >
                     <DotsVerticalIcon class="h-6 w-6" />
-                    <span class="text-sm font-thin">Options</span>
+                    <span class="hidden text-sm font-thin lg:block"
+                        >Options</span
+                    >
                 </button>
-                <span class="mt-1 flex">
-                    <StarIcon class="h-4 w-4 text-orange-400" />
-                    <StarIcon class="h-4 w-4 text-orange-400" /><StarIcon
-                        class="h-4 w-4 text-orange-400"
-                    /><StarIcon class="h-4 w-4 text-orange-400" /><StarIcon
-                        class="h-4 w-4 text-gray-400"
-                    />
+                <span class="mt-1 lg:flex">
+                    <span class="mt-1 flex">
+                        <StarIcon class="h-4 w-4 text-orange-400" />
+                        <StarIcon class="h-4 w-4 text-orange-400" /><StarIcon
+                            class="h-4 w-4 text-orange-400"
+                        /><StarIcon class="h-4 w-4 text-orange-400" /><StarIcon
+                            class="h-4 w-4 text-gray-400"
+                        />
+                    </span>
                     <span
-                        class="ml-1 text-sm font-semibold text-gray-500 hover:underline"
+                        class="ml-1 text-center text-sm font-semibold text-gray-500 hover:underline"
                         >10 Avis</span
                     >
                 </span>
@@ -61,81 +100,85 @@ import {
                 class="-mb-px flex flex-wrap text-center text-sm font-medium text-gray-900"
             >
                 <li class="mr-2">
-                    <a
-                        href="#"
-                        class="group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-secondary-color hover:text-secondary-color"
+                    <button
+                        @click="changeTab('ads')"
+                        type="button"
+                        :class="[
+                            open.ads
+                                ? 'inline-flex rounded-t-lg border-b-2 border-primary-color p-4 text-primary-color'
+                                : 'group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-secondary-color hover:text-secondary-color',
+                        ]"
                     >
-                        <svg
-                            class="mr-2 h-5 w-5 text-gray-700 group-hover:text-secondary-color"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                fill-rule="evenodd"
-                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                                clip-rule="evenodd"
-                            ></path></svg
-                        >Profile
-                    </a>
+                        <span
+                            ><SpeakerphoneIcon
+                                :class="[
+                                    open.ads
+                                        ? 'mr-2 h-5 w-5 text-primary-color'
+                                        : 'mr-2 h-5 w-5 text-gray-700 group-hover:text-secondary-color',
+                                ]"
+                        /></span>
+                        <span class="hidden md:block">Annonces</span>
+                    </button>
                 </li>
                 <li class="mr-2">
-                    <a
-                        href="#"
-                        class="active group inline-flex rounded-t-lg border-b-2 border-primary-color p-4 text-primary-color"
+                    <button
+                        @click="changeTab('transaction')"
+                        type="button"
+                        :class="[
+                            open.transaction
+                                ? 'inline-flex rounded-t-lg border-b-2 border-primary-color p-4 text-primary-color'
+                                : 'group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-secondary-color hover:text-secondary-color',
+                        ]"
                         aria-current="page"
                     >
-                        <svg
-                            class="mr-2 h-5 w-5 text-primary-color"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-                            ></path></svg
-                        >Dashboard
-                    </a>
+                        <span
+                            ><SwitchHorizontalIcon
+                                :class="[
+                                    open.transaction
+                                        ? 'mr-2 h-5 w-5 text-primary-color'
+                                        : 'mr-2 h-5 w-5 text-gray-700 group-hover:text-secondary-color',
+                                ]"
+                        /></span>
+                        <span class="hidden md:block">Transactions</span>
+                    </button>
                 </li>
                 <li class="mr-2">
-                    <a
-                        href="#"
-                        class="group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-secondary-color hover:text-secondary-color"
+                    <button
+                        @click="changeTab('setting')"
+                        type="button"
+                        :class="[
+                            open.setting
+                                ? 'inline-flex rounded-t-lg border-b-2 border-primary-color p-4 text-primary-color'
+                                : 'group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-secondary-color hover:text-secondary-color',
+                        ]"
                     >
-                        <svg
-                            class="mr-2 h-5 w-5 text-gray-700 group-hover:text-secondary-color"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"
-                            ></path></svg
-                        >Settings
-                    </a>
-                </li>
-                <li class="mr-2">
-                    <a
-                        href="#"
-                        class="group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-secondary-color hover:text-secondary-color"
-                    >
-                        <svg
-                            class="mr-2 h-5 w-5 text-gray-700 group-hover:text-secondary-color"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                            <path
-                                fill-rule="evenodd"
-                                d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
-                                clip-rule="evenodd"
-                            ></path></svg
-                        >Contacts
-                    </a>
+                        <span
+                            ><AdjustmentsIcon
+                                :class="[
+                                    open.setting
+                                        ? 'mr-2 h-5 w-5 text-primary-color'
+                                        : 'mr-2 h-5 w-5 text-gray-700 group-hover:text-secondary-color',
+                                ]"
+                        /></span>
+                        <span class="hidden md:block">Paramètres</span>
+                    </button>
                 </li>
             </ul>
         </div>
-        <div class="h-[1000px]"></div>
+        <div class="relative h-[1000px]">
+            <transition-group
+                enter-active-class="transition duration-1000"
+                enter-from-class="opacity-0 translate-x-20"
+                enter-to-class="opacity-1 translate-x-0"
+                leave-active-class="transition duration-1000 absolute ease-out"
+                leave-from-class="opacity-1 translate-x-0"
+                leave-to-class=" -translate-x-full opacity-0"
+                mode="out-in"
+            >
+                <div v-if="open.ads"><AccountAds /></div>
+                <div v-if="open.transaction"><AccountSetting /></div>
+                <div v-if="open.setting"><AccountTransaction /></div>
+            </transition-group>
+        </div>
     </div>
 </template>

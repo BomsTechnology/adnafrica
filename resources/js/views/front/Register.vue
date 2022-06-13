@@ -28,7 +28,6 @@ const register = async () => {
             <h1 class="text-center text-3xl font-semibold text-gray-700">
                 Rejoindre Adnafrica
             </h1>
-            <Error :errors="errors" />
             <form @submit.prevent="register()" class="mt-6">
                 <div class="mt-4">
                     <div>

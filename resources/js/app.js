@@ -32,10 +32,13 @@ function toogleClass() {
         document.documentElement.scrollTop > 100
     ) {
         if (!document.getElementById("navAds")) {
-            navbar.classList.remove("noScroll");
-            mobileNavbar.classList.add("isScrollMobile");
             navbar.classList.add("isScroll");
-            searchNav.classList.remove("hidden");
+            if (!location.href.includes("account")) {
+                searchNav.classList.remove("hidden");
+            }
+            navbar.classList.remove("noScroll");
+
+            mobileNavbar.classList.add("isScrollMobile");
         } else {
             var navAds = document.getElementById("navAds");
             navAds.classList.remove("hidden");
@@ -46,9 +49,12 @@ function toogleClass() {
     } else {
         if (!document.getElementById("navAds")) {
             mobileNavbar.classList.remove("isScrollMobile");
+
             navbar.classList.remove("isScroll");
             navbar.classList.add("noScroll");
-            searchNav.classList.add("hidden");
+            if (!location.href.includes("account")) {
+                searchNav.classList.add("hidden");
+            }
         } else {
             var navAds = document.getElementById("navAds");
             navAds.classList.add("hidden");
