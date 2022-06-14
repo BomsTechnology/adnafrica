@@ -32,7 +32,7 @@ const toogleFavorite = () => {
     /> -->
     <h1
         v-if="props.category != null"
-        class="mt-8 flex w-auto items-center space-x-2 py-4 font-semibold text-gray-500 hover:underline hover:underline-offset-1"
+        class="mt-8 flex w-auto items-center space-x-2 py-4 font-semibold text-gray-500 decoration-primary-color decoration-dotted decoration-2 hover:underline hover:underline-offset-2"
     >
         <span><SpeakerphoneIcon class="h-6 w-6 rotate-[-25deg]" /></span>
         <span>{{ props.category }}</span>

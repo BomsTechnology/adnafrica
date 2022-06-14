@@ -5,6 +5,9 @@ const Login = () => import("../views/front/Login.vue");
 const SingleAds = () => import("../views/front/SingleAds.vue");
 const Account = () => import("../views/front/Account.vue");
 const Register = () => import("../views/front/Register.vue");
+const Alert = () => import("../views/front/Alert.vue");
+const Chat = () => import("../views/front/Chat.vue");
+const Favorite = () => import("../views/front/Favorite.vue");
 const LoginAdmin = () => import("../views/back/Login.vue");
 const Dashboard = () => import("../views/back/Dashboard.vue");
 const NotFound = () => import("../views/front/NotFound.vue");
@@ -12,7 +15,7 @@ const NotFound = () => import("../views/front/NotFound.vue");
 const siteName = "Adnafrica";
 
 const routes = [
-    // front routes
+    // front office routes
     {
         path: "/",
         name: "home",
@@ -47,6 +50,30 @@ const routes = [
         },
     },
     {
+        path: "/chat",
+        name: "chat",
+        component: Chat,
+        meta: {
+            title: siteName,
+        },
+    },
+    {
+        path: "/alert",
+        name: "alert",
+        component: Alert,
+        meta: {
+            title: siteName,
+        },
+    },
+    {
+        path: "/favorite",
+        name: "favorite",
+        component: Favorite,
+        meta: {
+            title: siteName,
+        },
+    },
+    {
         path: "/account",
         name: "account",
         component: Account,
@@ -63,6 +90,7 @@ const routes = [
         },
     },
 
+    // back office routes
     {
         path: "/admin",
         name: "admin",

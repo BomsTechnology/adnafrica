@@ -120,24 +120,35 @@ const open = ref(false);
 
                 <div class="-mx-1 hidden items-center py-2 md:mx-0 lg:flex">
                     <div class="flex items-center justify-center space-x-2">
-                        <a href="#" class="relative" title="Mes alertes"
-                            ><BellIcon class="h-8 w-8" /><Ping :color="'red'"
-                        /></a>
-                        <a
-                            href="#"
+                        <router-link
+                            :to="{ name: 'alert' }"
+                            class="relative"
+                            title="Mes alertes"
+                            ><BellIcon class="h-8 w-8" />
+                            <!--  <Ping :color="'red'"/> -->
+                        </router-link>
+
+                        <router-link
+                            :to="{ name: 'favorite' }"
                             class="relative"
                             title="Mes annonces Favoris"
                             ><HeartIcon class="h-8 w-8" />
-                            <Ping :color="'red'" />
-                        </a>
+                            <!--  <Ping :color="'red'" /> -->
+                        </router-link>
 
-                        <a href="#" class="relative" title="Mes messages"
+                        <router-link
+                            :to="{ name: 'chat' }"
+                            class="relative"
+                            title="Mes messages"
                             ><ChatIcon class="h-8 w-8"
-                        /></a>
+                        /></router-link>
 
-                        <a href="#" class="relative" title="Mon compte"
+                        <router-link
+                            :to="{ name: 'account' }"
+                            class="relative"
+                            title="Mon compte"
                             ><UserIcon class="h-8 w-8"
-                        /></a>
+                        /></router-link>
                     </div>
                     <router-link
                         :to="{ name: 'login' }"
@@ -171,21 +182,21 @@ const open = ref(false);
                     </router-link>
                     <hr class="my-6 h-px border-none bg-gray-300" />
                     <router-link
-                        :to="{ name: 'login' }"
+                        :to="{ name: 'alert' }"
                         class="mx-1 flex w-full transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
                     >
                         <BellIcon class="h-6 w-6" />
                         <span>Mes Alertes</span>
                     </router-link>
                     <router-link
-                        :to="{ name: 'login' }"
+                        :to="{ name: 'favorite' }"
                         class="mx-1 flex w-full transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
                     >
                         <HeartIcon class="h-6 w-6" />
                         <span>Mes Favoris</span>
                     </router-link>
                     <router-link
-                        :to="{ name: 'login' }"
+                        :to="{ name: 'chat' }"
                         class="mx-1 flex w-full transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
                     >
                         <ChatIcon class="h-6 w-6" />
@@ -193,7 +204,7 @@ const open = ref(false);
                     </router-link>
                     <hr class="my-6 h-px border-none bg-gray-300" />
                     <router-link
-                        :to="{ name: 'login' }"
+                        :to="{ name: 'account' }"
                         class="mx-1 flex w-full transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
                     >
                         <UserIcon class="h-6 w-6" />

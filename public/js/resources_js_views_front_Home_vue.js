@@ -331,7 +331,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = {
   key: 0,
-  "class": "mt-8 flex w-auto items-center space-x-2 py-4 font-semibold text-gray-500 hover:underline hover:underline-offset-1"
+  "class": "mt-8 flex w-auto items-center space-x-2 py-4 font-semibold text-gray-500 decoration-primary-color decoration-dotted decoration-2 hover:underline hover:underline-offset-2"
 };
 var _hoisted_2 = {
   "class": "flex items-center space-x-2 py-3 px-2"
