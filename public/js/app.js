@@ -20360,25 +20360,21 @@ var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Mes Alertes", -1
+var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Mes Favoris", -1
 /* HOISTED */
 );
 
-var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Mes Favoris", -1
+var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Mes Messages", -1
 /* HOISTED */
 );
 
-var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Mes Messages", -1
-/* HOISTED */
-);
-
-var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", {
+var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", {
   "class": "my-6 h-px border-none bg-gray-300"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Mon Compte", -1
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Mon Compte", -1
 /* HOISTED */
 );
 
@@ -20429,22 +20425,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: {
-      name: 'alert'
-    },
-    "class": "relative",
-    title: "Mes alertes"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BellIcon"], {
-        "class": "h-8 w-8"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  <Ping :color=\"'red'\"/> ")];
-    }),
-    _: 1
-    /* STABLE */
-
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <router-link\r\n                            :to=\"{ name: 'alert' }\"\r\n                            class=\"relative\"\r\n                            title=\"Mes alertes\"\r\n                            ><BellIcon class=\"h-8 w-8\" />\r\n                             <Ping :color=\"'red'\"/> \r\n                        </router-link> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: {
       name: 'favorite'
     },
@@ -20526,21 +20507,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1
         /* STABLE */
 
-      }), _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-        to: {
-          name: 'alert'
-        },
-        "class": "mx-1 flex w-full transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
-      }, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BellIcon"], {
-            "class": "h-6 w-6"
-          }), _hoisted_29];
-        }),
-        _: 1
-        /* STABLE */
-
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+      }), _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <router-link\r\n                        :to=\"{ name: 'alert' }\"\r\n                        class=\"mx-1 flex w-full transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto\"\r\n                    >\r\n                        <BellIcon class=\"h-6 w-6\" />\r\n                        <span>Mes Alertes</span>\r\n                    </router-link> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
         to: {
           name: 'favorite'
         },
@@ -20549,7 +20516,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["HeartIcon"], {
             "class": "h-6 w-6"
-          }), _hoisted_30];
+          }), _hoisted_29];
         }),
         _: 1
         /* STABLE */
@@ -20563,12 +20530,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ChatIcon"], {
             "class": "h-6 w-6"
-          }), _hoisted_31];
+          }), _hoisted_30];
         }),
         _: 1
         /* STABLE */
 
-      }), _hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+      }), _hoisted_31, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
         to: {
           name: 'account'
         },
@@ -20577,7 +20544,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["UserIcon"], {
             "class": "h-6 w-6"
-          }), _hoisted_33];
+          }), _hoisted_32];
         }),
         _: 1
         /* STABLE */

@@ -37,6 +37,10 @@ function changeView(view) {
 </script>
 
 <template>
+    <div class="block lg:hidden">
+        <Goback />
+    </div>
+
     <section class="px-4 md:px-28">
         <div
             class="relative mb-10 flex h-[600px] w-full rounded-lg bg-white shadow-lg"

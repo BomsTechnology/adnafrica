@@ -120,13 +120,13 @@ const open = ref(false);
 
                 <div class="-mx-1 hidden items-center py-2 md:mx-0 lg:flex">
                     <div class="flex items-center justify-center space-x-2">
-                        <router-link
+                        <!-- <router-link
                             :to="{ name: 'alert' }"
                             class="relative"
                             title="Mes alertes"
                             ><BellIcon class="h-8 w-8" />
-                            <!--  <Ping :color="'red'"/> -->
-                        </router-link>
+                             <Ping :color="'red'"/> 
+                        </router-link> -->
 
                         <router-link
                             :to="{ name: 'favorite' }"
@@ -181,13 +181,13 @@ const open = ref(false);
                         <span>Déposer une annonce</span>
                     </router-link>
                     <hr class="my-6 h-px border-none bg-gray-300" />
-                    <router-link
+                    <!-- <router-link
                         :to="{ name: 'alert' }"
                         class="mx-1 flex w-full transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
                     >
                         <BellIcon class="h-6 w-6" />
                         <span>Mes Alertes</span>
-                    </router-link>
+                    </router-link> -->
                     <router-link
                         :to="{ name: 'favorite' }"
                         class="mx-1 flex w-full transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"

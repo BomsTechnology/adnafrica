@@ -22,8 +22,18 @@ class User extends Authenticatable
         'lastname',
         'email',
         'type',
-        'phone',    
+        'phone',
         'password',
+        'status',
+        'avatar',
+        'location',
+        'notification_phone',
+        'notification_email',
+        'website',
+        'facbook',
+        'twitter',
+        'instagram',
+        'linkedin',
     ];
 
     /**
@@ -44,9 +54,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function trainings()
-    {
-        return $this->belongsToMany(Training::class);
-    }
 }
