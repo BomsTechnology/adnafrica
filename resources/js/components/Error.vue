@@ -1,17 +1,20 @@
-import { ref } from 'vue';
 <script setup>
 const props = defineProps({
     errors: String,
 });
-const errors = ref(props.errors);
+const emit = defineEmits(["cleanErrors"]);
+
 const hideErrors = () => {
-    errors.value = "";
+    emit("cleanErrors");
 };
 </script>
 
 <template>
     <Transition name="toast">
-        <div class="mt-4 w-full bg-red-500 text-white" v-if="errors != ''">
+        <div
+            class="mt-4 w-full bg-red-500 text-white"
+            v-if="props.errors != ''"
+        >
             <div
                 class="container mx-auto flex items-center justify-between px-6 py-4"
             >
@@ -22,8 +25,8 @@ const hideErrors = () => {
                         ></path>
                     </svg>
 
-                    <p class="mx-3">
-                        {{ errors }}
+                    <p class="mx-3 text-sm">
+                        {{ props.errors }}
                     </p>
                 </div>
 

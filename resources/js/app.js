@@ -1,18 +1,33 @@
 require("./bootstrap");
 
 import { createApp } from "vue";
-import router from "./router/index.js";
+import { createPinia } from "pinia";
 import App from "./App.vue";
 import BackOffice from "./BackOffice.vue";
 import Goback from "./components/Goback.vue";
 import Error from "./components/Error.vue";
+import Spin from "./components/Spin.vue";
 import Alert from "./components/Alert.vue";
+import * as ConfirmDialog from "vuejs-confirm-dialog";
+import VueTelInput from "vue-tel-input";
+import "vue-tel-input/dist/vue-tel-input.css";
+const pinia = createPinia();
+import router from "./router/index.js";
+const globalOptions = {
+    mode: "auto",
+};
 
 if (!window.location.href.includes("admin")) {
     const app = createApp(App);
+    app.use(pinia);
+    app.use(router);
+    app.use(ConfirmDialog);
+    app.use(VueTelInput, globalOptions);
     app.component("Goback", Goback);
     app.component("Alert", Alert);
-    app.component("Error", Error).use(router).mount("#app");
+    app.component("Spin", Spin);
+    app.component("Error", Error);
+    app.mount("#app");
 } else {
     const app2 = createApp(BackOffice);
     app2.use(router).mount("#backoffice");

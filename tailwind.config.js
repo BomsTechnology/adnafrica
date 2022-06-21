@@ -1,5 +1,5 @@
 module.exports = {
-    darkMode: false,
+    darkMode: "",
     content: [
         "./storage/framework/views/*.php",
         "./resources/**/*.blade.php",

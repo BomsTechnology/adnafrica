@@ -78,9 +78,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/DotsVerticalIcon.js");
 /* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/SwitchHorizontalIcon.js");
 /* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/AdjustmentsIcon.js");
-/* harmony import */ var _components_AccountAds_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/AccountAds.vue */ "./resources/js/components/AccountAds.vue");
-/* harmony import */ var _components_AccountSetting_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/AccountSetting.vue */ "./resources/js/components/AccountSetting.vue");
-/* harmony import */ var _components_AccountTransaction_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/AccountTransaction.vue */ "./resources/js/components/AccountTransaction.vue");
+/* harmony import */ var _components_AccountAds_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/AccountAds.vue */ "./resources/js/components/AccountAds.vue");
+/* harmony import */ var _components_AccountSetting_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/AccountSetting.vue */ "./resources/js/components/AccountSetting.vue");
+/* harmony import */ var _components_AccountTransaction_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/AccountTransaction.vue */ "./resources/js/components/AccountTransaction.vue");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 

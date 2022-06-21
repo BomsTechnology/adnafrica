@@ -151,7 +151,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _components_CarrousselAds_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/CarrousselAds.vue */ "./resources/js/components/CarrousselAds.vue");
+/* harmony import */ var _components_CarrousselAds_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/CarrousselAds.vue */ "./resources/js/components/CarrousselAds.vue");
 /* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/ShareIcon.js");
 /* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/LocationMarkerIcon.js");
 /* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/ExclamationIcon.js");
@@ -161,7 +161,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/PhoneIcon.js");
 /* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/ChatAltIcon.js");
 /* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/CurrencyEuroIcon.js");
-/* harmony import */ var _components_Slider_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/Slider.vue */ "./resources/js/components/Slider.vue");
+/* harmony import */ var _components_Slider_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/Slider.vue */ "./resources/js/components/Slider.vue");
 /* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/HeartIcon.js");
 
 

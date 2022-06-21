@@ -176,9 +176,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _components_SearchSection_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/SearchSection.vue */ "./resources/js/components/SearchSection.vue");
-/* harmony import */ var _components_CarrousselCategory_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/CarrousselCategory.vue */ "./resources/js/components/CarrousselCategory.vue");
-/* harmony import */ var _components_CarrousselAds_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/CarrousselAds.vue */ "./resources/js/components/CarrousselAds.vue");
+/* harmony import */ var _components_SearchSection_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/SearchSection.vue */ "./resources/js/components/SearchSection.vue");
+/* harmony import */ var _components_CarrousselCategory_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/CarrousselCategory.vue */ "./resources/js/components/CarrousselCategory.vue");
+/* harmony import */ var _components_CarrousselAds_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/CarrousselAds.vue */ "./resources/js/components/CarrousselAds.vue");
 
 
 

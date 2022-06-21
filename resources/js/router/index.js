@@ -1,16 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-
-const Home = () => import("../views/front/Home.vue");
-const Login = () => import("../views/front/Login.vue");
-const SingleAds = () => import("../views/front/SingleAds.vue");
-const Account = () => import("../views/front/Account.vue");
-const Register = () => import("../views/front/Register.vue");
-const Alert = () => import("../views/front/Alert.vue");
-const Chat = () => import("../views/front/Chat.vue");
-const Favorite = () => import("../views/front/Favorite.vue");
-const LoginAdmin = () => import("../views/back/Login.vue");
-const Dashboard = () => import("../views/back/Dashboard.vue");
-const NotFound = () => import("../views/front/NotFound.vue");
+import { useAuthenticateStore } from "@/stores/authenticate";
 
 const siteName = "Adnafrica";
 
@@ -19,16 +8,16 @@ const routes = [
     {
         path: "/",
         name: "home",
-        component: Home,
+        component: () => import("@/views/front/Home.vue"),
         meta: {
             title: siteName + " - Accueil",
         },
     },
     {
-        path: "/login/:redirect?",
+        path: "/login",
         name: "login",
         props: true,
-        component: Login,
+        component: () => import("@/views/front/Login.vue"),
         meta: {
             title: siteName + " - Se Connecter",
         },
@@ -36,7 +25,7 @@ const routes = [
     {
         path: "/register",
         name: "register",
-        component: Register,
+        component: () => import("../views/front/Register.vue"),
         meta: {
             title: siteName + " - S'inscrire",
         },
@@ -44,7 +33,7 @@ const routes = [
     {
         path: "/ads",
         name: "ads.single",
-        component: SingleAds,
+        component: () => import("../views/front/SingleAds.vue"),
         meta: {
             title: siteName + " - ads",
         },
@@ -52,39 +41,35 @@ const routes = [
     {
         path: "/chat",
         name: "chat",
-        component: Chat,
+        component: () => import("../views/front/Chat.vue"),
         meta: {
             title: siteName,
+            requiresAuth: true,
         },
     },
-    {
-        path: "/alert",
-        name: "alert",
-        component: Alert,
-        meta: {
-            title: siteName,
-        },
-    },
+
     {
         path: "/favorite",
         name: "favorite",
-        component: Favorite,
+        component: () => import("../views/front/Favorite.vue"),
         meta: {
             title: siteName,
+            requiresAuth: true,
         },
     },
     {
         path: "/account",
         name: "account",
-        component: Account,
+        component: () => import("../views/front/Account.vue"),
         meta: {
             title: siteName + " - ads",
+            requiresAuth: true,
         },
     },
     {
         path: "/:pathMatch(.*)",
         name: "not.found",
-        component: NotFound,
+        component: () => import("../views/front/NotFound.vue"),
         meta: {
             title: siteName + " - Page Introuvable",
         },
@@ -94,12 +79,12 @@ const routes = [
     {
         path: "/admin",
         name: "admin",
-        component: LoginAdmin,
+        component: () => import("../views/back/Login.vue"),
         name: "admin",
         children: [
             {
                 path: "",
-                component: LoginAdmin,
+                component: () => import("../views/back/Login.vue"),
                 name: "admin.login",
                 meta: {
                     title: siteName + " - Admin Panel",
@@ -107,7 +92,7 @@ const routes = [
             },
             {
                 path: "ho",
-                component: Dashboard,
+                component: () => import("../views/back/Dashboard.vue"),
                 name: "admin.dash",
                 meta: {
                     title: siteName + " - Dashboard",
@@ -115,7 +100,7 @@ const routes = [
             },
             {
                 path: "dashboard",
-                component: Dashboard,
+                component: () => import("../views/back/Dashboard.vue"),
                 name: "admin.o",
                 meta: {
                     title: siteName + " - Dashboard",
@@ -140,6 +125,15 @@ const router = createRouter({
             return { top: 0 };
         }
     },
+});
+
+router.beforeEach((to, from, next) => {
+    const authenticateStore = useAuthenticateStore();
+    if (to.meta.requiresAuth && !authenticateStore.token) {
+        next({ name: "login" });
+    } else {
+        next();
+    }
 });
 
 router.afterEach((to) => {

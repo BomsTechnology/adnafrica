@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import CarrousselAds from "../../components/CarrousselAds.vue";
+import CarrousselAds from "@/components/CarrousselAds.vue";
 import {
     ShareIcon,
     LocationMarkerIcon,
@@ -12,7 +12,7 @@ import {
     ChatAltIcon,
     CurrencyEuroIcon,
 } from "@heroicons/vue/solid";
-import Slider from "../../components/Slider.vue";
+import Slider from "@/components/Slider.vue";
 import { HeartIcon } from "@heroicons/vue/outline";
 
 const openSlider = ref(false);

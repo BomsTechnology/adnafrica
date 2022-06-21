@@ -1,7 +1,7 @@
 <script setup>
-import SearchSection from "../../components/SearchSection.vue";
-import CarrousselCategory from "../../components/CarrousselCategory.vue";
-import CarrousselAds from "../../components/CarrousselAds.vue";
+import SearchSection from "@/components/SearchSection.vue";
+import CarrousselCategory from "@/components/CarrousselCategory.vue";
+import CarrousselAds from "@/components/CarrousselAds.vue";
 
 const cuisineList = [
     {

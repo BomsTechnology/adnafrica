@@ -7,9 +7,9 @@ import {
     SwitchHorizontalIcon,
     AdjustmentsIcon,
 } from "@heroicons/vue/solid";
-import AccountAds from "../../components/AccountAds.vue";
-import AccountSetting from "../../components/AccountSetting.vue";
-import AccountTransaction from "../../components/AccountTransaction.vue";
+import AccountAds from "@/components/AccountAds.vue";
+import AccountSetting from "@/components/AccountSetting.vue";
+import AccountTransaction from "@/components/AccountTransaction.vue";
 import { reactive } from "vue";
 
 const open = reactive({
