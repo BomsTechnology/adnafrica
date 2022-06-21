@@ -10,6 +10,7 @@ import {
 import AccountAds from "@/components/AccountAds.vue";
 import AccountSetting from "@/components/AccountSetting.vue";
 import AccountTransaction from "@/components/AccountTransaction.vue";
+import { useAuthenticateStore } from "@/stores/authenticate";
 import { reactive } from "vue";
 
 const open = reactive({
@@ -18,6 +19,7 @@ const open = reactive({
     setting: false,
 });
 
+const authenticateStore = useAuthenticateStore();
 function changeTab(tab) {
     switch (tab) {
         case "ads":
@@ -55,16 +57,29 @@ function changeTab(tab) {
                     />
                 </div>
                 <div>
-                    <h2 class="text-xl font-bold text-gray-800">Boms</h2>
+                    <h2 class="text-justify text-xl font-bold text-gray-800">
+                        {{ authenticateStore.user.firstname }}
+                        <span v-if="authenticateStore.user.lastname">
+                            {{ authenticateStore.user.lastname }}</span
+                        >
+                    </h2>
                     <h3 class="mt-1 text-sm font-semibold text-gray-600">
-                        A rejoint adnafrica en Janvier 2022
+                        A rejoint adnafrica en
+                        {{
+                            new Date(
+                                authenticateStore.user.phone_verified_at
+                            ).toLocaleDateString("fr-FR", {
+                                year: "numeric",
+                                month: "long",
+                            })
+                        }}
                     </h3>
-                    <h4
+                    <!-- <h4
                         class="mt-1 flex items-center space-x-1 text-xs font-light text-gray-400"
                     >
                         <LocationMarkerIcon class="h-3 w-3" />
                         <span>Douala Bonamousadi</span>
-                    </h4>
+                    </h4> -->
                 </div>
             </div>
             <div class="flex justify-center lg:flex-col">

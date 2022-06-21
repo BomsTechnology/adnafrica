@@ -94,7 +94,7 @@ function changeView(view) {
                             <input
                                 id="checkbox-all-search"
                                 type="checkbox"
-                                class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
+                                class="dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
                             />
                             <label for="checkbox-all-search" class="text-xs"
                                 >Tout selectionner</label
@@ -135,7 +135,7 @@ function changeView(view) {
                             <input
                                 id="checkbox-all-search"
                                 type="checkbox"
-                                class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
+                                class="dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
                             />
                         </div>
                     </div>
@@ -165,7 +165,7 @@ function changeView(view) {
                             <input
                                 id="checkbox-all-search"
                                 type="checkbox"
-                                class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
+                                class="dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
                             />
                         </div>
                     </div>
@@ -196,7 +196,7 @@ function changeView(view) {
                         <input
                             id="checkbox-all-search"
                             type="checkbox"
-                            class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
+                            class="dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
                         />
                         <label for="checkbox-all-search" class="text-xs"
                             >Tout selectionner</label
@@ -238,7 +238,7 @@ function changeView(view) {
                             <input
                                 id="checkbox-all-search"
                                 type="checkbox"
-                                class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
+                                class="dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
                             />
                         </div>
                     </div>
@@ -268,7 +268,7 @@ function changeView(view) {
                             <input
                                 id="checkbox-all-search"
                                 type="checkbox"
-                                class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
+                                class="dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
                             />
                         </div>
                     </div>
@@ -314,6 +314,10 @@ function changeView(view) {
                             Various versions have evolved over the years,
                             sometimes by accident, sometimes on purpose
                             (injected humour and the like).
+
+                            <span class="mt-2 block text-xs font-bold"
+                                >16 h 40</span
+                            >
                         </p>
                     </div>
 
@@ -322,6 +326,10 @@ function changeView(view) {
                             class="whitespace-pre-line break-all rounded-l-lg rounded-tr-lg bg-primary-color p-2 text-xs leading-normal tracking-wider text-white"
                         >
                             It is a long established fact
+                            <span
+                                class="mt-2 block text-right text-xs font-bold"
+                                >16 h 45</span
+                            >
                         </p>
                     </div>
                     <div class="mb-2 flex justify-end pl-10">
@@ -332,13 +340,17 @@ function changeView(view) {
                             ipsum' will uncover many web sites still in their
                             infancy. Various versions have evolved over the
                             years, sometimes by accident, sometimes on pur
+                            <span
+                                class="mt-2 block text-right text-xs font-bold"
+                                >16 h 46</span
+                            >
                         </p>
                     </div>
                 </div>
 
                 <form class="0 w-full bg-white">
                     <div
-                        class="flex items-center rounded-lg py-2 px-3 dark:bg-gray-700"
+                        class="dark:bg-gray-700 flex items-center rounded-lg py-2 px-3"
                     >
                         <textarea
                             id="chat"
