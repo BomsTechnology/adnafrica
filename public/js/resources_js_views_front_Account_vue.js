@@ -429,7 +429,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   ), $setup.authenticateStore.user.lastname ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.authenticateStore.user.lastname), 1
   /* TEXT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_7, " A rejoint adnafrica en " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(new Date($setup.authenticateStore.user.phone_verified_at).toLocaleDateString("fr-FR", {
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_7, " A rejoint adnafrica en " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(new Date($setup.authenticateStore.user.created_at).toLocaleDateString("fr-FR", {
     year: "numeric",
     month: "long"
   })), 1

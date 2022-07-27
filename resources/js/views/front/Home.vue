@@ -3,6 +3,7 @@ import SearchSection from "@/components/SearchSection.vue";
 import CarrousselCategory from "@/components/CarrousselCategory.vue";
 import CarrousselAds from "@/components/CarrousselAds.vue";
 
+
 const cuisineList = [
     {
         name: "Gâteau à la crème chocolat",

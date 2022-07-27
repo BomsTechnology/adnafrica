@@ -67,7 +67,7 @@ function changeTab(tab) {
                         A rejoint adnafrica en
                         {{
                             new Date(
-                                authenticateStore.user.phone_verified_at
+                                authenticateStore.user.created_at
                             ).toLocaleDateString("fr-FR", {
                                 year: "numeric",
                                 month: "long",

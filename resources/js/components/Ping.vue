@@ -1,6 +1,9 @@
 <script setup>
 const props = defineProps({
-    color: String,
+    color: {
+        type: String,
+        default: 'red'
+    },
 });
 const color1 = "bg-" + props.color + "-400";
 const color2 = "bg-" + props.color + "-500";

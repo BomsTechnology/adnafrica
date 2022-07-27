@@ -7,7 +7,7 @@
 
     <title>Adnafrica</title>
 
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="bg-gray-50 font-montserrat">
@@ -15,7 +15,6 @@
     <div id="app">
         <App></App>
     </div>
-    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 
 </html>
