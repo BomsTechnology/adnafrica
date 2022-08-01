@@ -1,6 +1,5 @@
 import axios from "axios";
 import { ref } from "vue";
-import router from "../router";
 
 export default function useAuth() {
     const user = ref([]);
@@ -76,21 +75,22 @@ export default function useAuth() {
         }
     };
 
-    // const loginAdmin = async (data) => {
-    //     errors.value = "";
-    //     try {
-    //         loading.value = 1;
-    //         let response = await axios.post("/api/login-admin", data);
-    //         localStorage.user = JSON.stringify(response.data.data.user);
-    //         localStorage.token = response.data.data.token;
-    //         loading.value = 2;
-    //         router.push({ name: "admin.dash" });
-    //     } catch (e) {
-    //         loading.value = 0;
-    //         errors.value = "invalid email or password";
-    //     }
-    // };
-
+    const loginAdmin = async (data) => {
+        errors.value = "";
+        try {
+            loading.value = 1;
+            let response = await axios.post("/api/login-admin", data);
+            localStorage.user = JSON.stringify(response.data.data.user);
+            localStorage.tokenUser = response.data.data.token;
+            loading.value = 2;
+        } catch (e) {
+            loading.value = 0;
+            errors.value = "invalid email or password";
+        }
+    };
+    const cleanErrors = () => {
+        errors.value = "";
+    };
     return {
         sendEmailVerification,
         sendSmsVerification,
@@ -99,6 +99,7 @@ export default function useAuth() {
         loading,
         user,
         loginUser,
-        // loginAdmin,
+        cleanErrors,
+        loginAdmin,
     };
 }

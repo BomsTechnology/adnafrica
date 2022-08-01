@@ -30,7 +30,7 @@
 }
 
 .isScrollMobile {
-    @apply fixed top-14 w-full;
+    @apply fixed top-14 mt-10 w-full;
 }
 /* width */
 ::-webkit-scrollbar {

@@ -1,7 +1,7 @@
 <script setup>
 import useAuth from "@/services/authServices.js";
 import { reactive } from "vue";
-const { loginUser, errors, loading } = useAuth();
+const { loginUser, errors, loading, cleanErrors } = useAuth();
 const user = reactive({
     email: "",
     password: "",
@@ -12,9 +12,6 @@ const login = async () => {
     if (errors.value == "") {
         location.href = "/";
     }
-};
-const cleanErrors = () => {
-    errors.value = "";
 };
 </script>
 

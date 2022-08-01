@@ -1,9 +1,8 @@
-import './bootstrap';
-import '../css/app.css';
+import "./bootstrap";
+import "../css/app.css";
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import App from "./App.vue";
-import BackOffice from "./BackOffice.vue";
 import Goback from "./components/Goback.vue";
 import Error from "./components/Error.vue";
 import Spin from "./components/Spin.vue";
@@ -17,21 +16,16 @@ const globalOptions = {
     mode: "auto",
 };
 
-if (!window.location.href.includes("admin")) {
-    const app = createApp(App);
-    app.use(pinia);
-    app.use(router);
-    app.use(ConfirmDialog);
-    app.use(VueTelInput, globalOptions);
-    app.component("Goback", Goback);
-    app.component("Alert", Alert);
-    app.component("Spin", Spin);
-    app.component("Error", Error);
-    app.mount("#app");
-} else {
-    const app2 = createApp(BackOffice);
-    app2.use(router).mount("#backoffice");
-}
+const app = createApp(App);
+app.use(pinia);
+app.use(router);
+app.use(ConfirmDialog);
+app.use(VueTelInput, globalOptions);
+app.component("Goback", Goback);
+app.component("Alert", Alert);
+app.component("Spin", Spin);
+app.component("Error", Error);
+app.mount("#app");
 
 window.onscroll = function () {
     toogleClass();

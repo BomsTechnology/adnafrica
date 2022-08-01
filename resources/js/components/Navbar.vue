@@ -19,7 +19,7 @@ const open = ref(false);
 </script>
 
 <template>
-    <nav class="noScroll z-40" id="navbar">
+    <nav class="noScroll z-40 mb-10" id="navbar">
         <div class="container mx-auto px-12 py-3">
             <div
                 class="flex flex-col md:flex-row md:items-center md:justify-between"
@@ -58,7 +58,7 @@ const open = ref(false);
                                     /></span>
                                     <input
                                         type="text"
-                                        class="block w-full border border-gray-300 bg-gray-50 py-3 pl-12 text-sm text-gray-900 focus:border-primary-color focus:ring-primary-color dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                                        class="dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 block w-full border border-gray-300 bg-gray-50 py-3 pl-12 text-sm text-gray-900 focus:border-primary-color focus:ring-primary-color"
                                         placeholder="Que recherchez - vous ?"
                                         required
                                     />
@@ -101,7 +101,7 @@ const open = ref(false);
                             <button
                                 v-if="!open"
                                 type="button"
-                                class="hover:text-gray-600 focus:text-gray-600 focus:outline-none dark:text-gray-200 dark:hover:text-gray-400 dark:focus:text-gray-400"
+                                class="dark:text-gray-200 dark:hover:text-gray-400 dark:focus:text-gray-400 hover:text-gray-600 focus:text-gray-600 focus:outline-none"
                                 aria-label="toggle menu"
                             >
                                 <MenuIcon class="h-6 w-6 fill-current" />
@@ -109,7 +109,7 @@ const open = ref(false);
                             <button
                                 v-if="open"
                                 type="button"
-                                class="hover:text-gray-600 focus:text-gray-600 focus:outline-none dark:text-gray-200 dark:hover:text-gray-400 dark:focus:text-gray-400"
+                                class="dark:text-gray-200 dark:hover:text-gray-400 dark:focus:text-gray-400 hover:text-gray-600 focus:text-gray-600 focus:outline-none"
                                 aria-label="toggle menu"
                             >
                                 <XIcon class="h-6 w-6 fill-current" />
@@ -171,7 +171,10 @@ const open = ref(false);
             leave-from-class="opacity-1 translate-x-0"
             leave-to-class="opacity-0 translate-x-full"
         >
-            <div class="items-center bg-white p-4 shadow md:flex" v-if="open">
+            <div
+                class="-mt-10 items-center bg-white p-4 shadow md:flex"
+                v-if="open"
+            >
                 <div class="-mx-1 py-2">
                     <router-link
                         :to="{ name: 'login' }"

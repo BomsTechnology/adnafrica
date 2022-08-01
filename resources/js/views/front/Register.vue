@@ -8,11 +8,12 @@ import {
 } from "@heroicons/vue/outline";
 import useAuth from "@/services/authServices.js";
 import { useAuthenticateStore } from "@/stores/authenticate";
-import LeaveModal from "@/components/LeaveModal";
+import LeaveModal from "@/components/LeaveModal.vue";
 import { createConfirmDialog } from "vuejs-confirm-dialog";
 import { onBeforeRouteLeave } from "vue-router";
 
 const {
+    cleanErrors,
     sendEmailVerification,
     sendSmsVerification,
     errors,
@@ -144,9 +145,7 @@ onBeforeRouteLeave((to, from, next) => {
         next();
     }
 });
-const cleanErrors = () => {
-    errors.value = "";
-};
+
 const toogleShowPassword = async () => {
     showPassword.value = !showPassword.value;
 };

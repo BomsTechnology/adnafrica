@@ -3,7 +3,6 @@ import SearchSection from "@/components/SearchSection.vue";
 import CarrousselCategory from "@/components/CarrousselCategory.vue";
 import CarrousselAds from "@/components/CarrousselAds.vue";
 
-
 const cuisineList = [
     {
         name: "Gâteau à la crème chocolat",
@@ -139,11 +138,11 @@ const autoList = [
 <template>
     <div class="px-4 text-center">
         <h1 class="text-2xl font-bold lg:text-3xl">
-            Retrouvez vos annonces classées
+            Retrouvez vos entreprises africaines et annonces classées
         </h1>
         <h5 class="mt-2 mb-8 font-light lg:text-lg">
-            Naviguez parmi plus de 15,000,000 annonces tandis que de nouvelles
-            arrivent quotidiennement
+            Naviguez parmi plus de 15,000,000 entreprises et annonces tandis que
+            de nouvelles arrivent quotidiennement
         </h5>
     </div>
     <SearchSection />

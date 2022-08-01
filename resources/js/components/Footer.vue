@@ -1,6 +1,24 @@
-<script setup></script>
+<script setup>
+import { ArrowCircleUpIcon } from "@heroicons/vue/solid";
+const goTop = () => {
+    document.body.scrollIntoView({
+        behavior: "smooth",
+    });
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+};
+</script>
 
 <template>
+    <div>
+        <button
+            @click="goTop()"
+            id="btnToTop"
+            class="fixed bottom-8 right-4 z-40 hidden items-center justify-center rounded-full border border-primary-color bg-white p-2 text-primary-color"
+        >
+            <ArrowCircleUpIcon class="h-6 w-6" />
+        </button>
+    </div>
     <footer class="bg-footer-color py-10 px-8 text-white md:px-28">
         <div class="container mx-auto py-4">
             <div class="lg:flex">
