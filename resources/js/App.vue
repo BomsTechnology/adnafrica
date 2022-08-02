@@ -1,8 +1,8 @@
 <script setup></script>
 
 <template>
-    <div class="flex">
-        <div>
+    <div class="flex h-full">
+        <div class="h-full">
             <router-view name="sidebar"></router-view>
         </div>
 

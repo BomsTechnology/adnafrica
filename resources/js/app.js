@@ -28,7 +28,7 @@ app.component("Error", Error);
 app.mount("#app");
 
 window.onscroll = function () {
-    toogleClass();
+    if (!window.location.href.includes("admin")) toogleClass();
 };
 
 function toogleClass() {

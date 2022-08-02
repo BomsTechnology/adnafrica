@@ -8,7 +8,8 @@ import {
     UserIcon,
     ChatIcon,
     HeartIcon,
-    TableIcon,
+    CollectionIcon,
+    ViewBoardsIcon,
     ChevronDownIcon,
     SearchIcon,
     LocationMarkerIcon,
@@ -35,24 +36,37 @@ const open = ref(false);
 
                     <div class="ml-8 hidden lg:block">
                         <form id="searchNav" class="hidden">
-                            <div class="grid grid-cols-4">
+                            <div class="grid grid-cols-9">
+                                <div class="relative col-span-2">
+                                    <span class="absolute left-3 top-3"
+                                        ><ViewBoardsIcon
+                                            class="h-6 w-6 text-gray-400"
+                                    /></span>
+                                    <select
+                                        class="form-selec block w-full rounded border border-gray-300 bg-gray-50 py-3 pl-12 text-sm text-gray-900 focus:border-primary-color focus:ring-primary-color"
+                                        required
+                                    >
+                                        <option value="">Entreprise</option>
+                                        <option value="">Annonce</option>
+                                    </select>
+                                </div>
                                 <div
-                                    class="flex w-full cursor-pointer items-center justify-between border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 hover:bg-gray-100"
+                                    class="col-span-2 flex w-full cursor-pointer items-center justify-between border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 hover:bg-gray-100"
                                 >
                                     <div>
-                                        <TableIcon
+                                        <CollectionIcon
                                             class="h-6 w-6 text-gray-400"
                                         />
                                     </div>
-                                    <div>Catégorie</div>
+                                    <div class="w-full pl-4">Catégorie</div>
                                     <div>
                                         <ChevronDownIcon
                                             class="h-6 w-6 text-gray-400"
                                         />
                                     </div>
                                 </div>
-                                <div class="relative">
-                                    <span class="absolute left-3 top-2"
+                                <div class="relative col-span-2">
+                                    <span class="absolute left-3 top-3"
                                         ><SearchIcon
                                             class="h-6 w-6 text-gray-400"
                                     /></span>
@@ -63,7 +77,7 @@ const open = ref(false);
                                         required
                                     />
                                 </div>
-                                <div class="relative">
+                                <div class="relative col-span-2">
                                     <span class="absolute left-3 top-2"
                                         ><LocationMarkerIcon
                                             class="h-6 w-6 text-gray-400"
@@ -78,9 +92,9 @@ const open = ref(false);
                                 <div>
                                     <button
                                         type="submit"
-                                        class="block w-full bg-gray-800 px-5 py-3 text-center text-sm font-medium text-white hover:bg-gray-600 focus:outline-none focus:ring-4 focus:ring-blue-300"
+                                        class="flex h-full w-full justify-center bg-gray-800 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-600 focus:outline-none focus:ring-4 focus:ring-blue-300"
                                     >
-                                        Rechercher
+                                        <SearchIcon class="h-6 w-6" />
                                     </button>
                                 </div>
                             </div>
@@ -175,7 +189,7 @@ const open = ref(false);
                 class="-mt-10 items-center bg-white p-4 shadow md:flex"
                 v-if="open"
             >
-                <div class="-mx-1 py-2">
+                <div class="-mx-1 w-full py-2">
                     <router-link
                         :to="{ name: 'login' }"
                         class="mx-1 flex w-full transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2"

@@ -29,7 +29,7 @@ const open = reactive({
 </script>
 
 <template>
-    <div class="relative z-50 h-screen">
+    <div class="relative z-50 h-full">
         <transition
             enter-active-class="transition duration-1000 "
             enter-from-class="-translate-x-full"

@@ -1,38 +1,51 @@
 <script setup>
 import {
-    TableIcon,
     ChevronDownIcon,
     SearchIcon,
     LocationMarkerIcon,
+    CollectionIcon,
+    ViewBoardsIcon,
 } from "@heroicons/vue/solid";
 </script>
 
 <template>
     <form class="mx-auto w-full rounded bg-white p-8 shadow-md lg:w-[1000px]">
-        <div class="mb-6 grid grid-cols-2 gap-2 lg:grid-cols-4">
+        <div class="mb-6 grid grid-cols-2 gap-2 lg:grid-cols-9">
+            <div class="relative lg:col-span-2">
+                <span class="absolute left-3 top-3"
+                    ><ViewBoardsIcon class="h-6 w-6 text-gray-400"
+                /></span>
+                <select
+                    class="form-selec block w-full rounded border border-gray-300 bg-gray-50 py-3 pl-12 text-sm text-gray-900 focus:border-primary-color focus:ring-primary-color"
+                    required
+                >
+                    <option value="">Entreprise</option>
+                    <option value="">Annonce</option>
+                </select>
+            </div>
             <div
-                class="flex w-full cursor-pointer items-center justify-between rounded border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 hover:bg-gray-100"
+                class="flex w-full cursor-pointer items-center justify-between rounded border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 hover:bg-gray-100 lg:col-span-2"
             >
                 <div>
-                    <TableIcon class="h-6 w-6 text-gray-400" />
+                    <CollectionIcon class="h-6 w-6 text-gray-400" />
                 </div>
-                <div>Catégorie</div>
+                <div class="w-full pl-4">Catégorie</div>
                 <div>
                     <ChevronDownIcon class="h-6 w-6 text-gray-400" />
                 </div>
             </div>
-            <div class="relative">
-                <span class="absolute left-3 top-2"
+            <div class="relative lg:col-span-2">
+                <span class="absolute left-3 top-3"
                     ><SearchIcon class="h-6 w-6 text-gray-400"
                 /></span>
                 <input
                     type="text"
-                    class="block w-full rounded border border-gray-300 bg-gray-50 py-3 pl-12 text-sm text-gray-900 focus:border-primary-color focus:ring-primary-color dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                    class="block w-full rounded border border-gray-300 bg-gray-50 py-3 pl-12 text-sm text-gray-900 focus:border-primary-color focus:ring-primary-color"
                     placeholder="Que recherchez - vous ?"
                     required
                 />
             </div>
-            <div class="relative">
+            <div class="relative lg:col-span-2">
                 <span class="absolute left-3 top-2"
                     ><LocationMarkerIcon class="h-6 w-6 text-gray-400"
                 /></span>
@@ -43,12 +56,12 @@ import {
                     required
                 />
             </div>
-            <div>
+            <div class="col-span-2 lg:col-span-1">
                 <button
                     type="submit"
-                    class="block w-full rounded bg-primary-color px-5 py-3 text-center text-sm font-medium text-white hover:bg-secondary-color focus:outline-none focus:ring-4 focus:ring-blue-300"
+                    class="flex w-full justify-center rounded bg-primary-color px-5 py-3 text-center text-sm font-medium text-white hover:bg-secondary-color focus:outline-none focus:ring-4 focus:ring-blue-300"
                 >
-                    Rechercher
+                    <SearchIcon class="h-6 w-6" />
                 </button>
             </div>
         </div>
