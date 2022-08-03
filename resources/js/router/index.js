@@ -297,7 +297,7 @@ router.beforeEach((to, from, next) => {
 
     if (
         to.meta.isAdmin &&
-        authenticateStore.user.type != "admin" &&
+        (!authenticateStore.user || authenticateStore.user.type != "admin") &&
         to.meta.requiresAuth &&
         !authenticateStore.token
     ) {

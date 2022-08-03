@@ -19,8 +19,8 @@ class CategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'parentId' => $this->parent,
-            'parent' => $this->parent != null ? new CategoryResource(Category::find($this->parent)) : null,
+            'parent' => $this->parent,
+            'image' => $this->image,
             'children' =>  Category::where('parent', '=', $this->id)->orderBy('id', 'desc')->get(),
         ];
     }

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('categories', function (Blueprint $table) {
             $table->unsignedBigInteger('parent')->nullable();
-            $table->foreign('parent')->references('id')->on('categories');
+            $table->foreign('parent')->references('id')->on('categories')->onDelete('set null');
         });
     }
 

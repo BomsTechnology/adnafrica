@@ -7,6 +7,8 @@ use App\Http\Requests\CategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -29,13 +31,20 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         $data = $request->validated();
-        $filename = '/uploads/category/' . time() . '.' . $request->file('image')->extension();
-        $request->file('image')->storePubliclyAs('public', $filename);
+
+        if ($request->file('image')) {
+            $filename = '/uploads/category/' . time() . '.' . $request->file('image')->extension();
+            $request->file('image')->storePubliclyAs('public', $filename);
+        } else {
+            $filename = null;
+        }
+
         $category = Category::create([
             'name' => $data['name'],
             'parent' => $data['parent'] == 'null' ? null : $data['parent'],
             'image' => $filename,
         ]);
+
         return new CategoryResource($category);
     }
 
@@ -59,17 +68,49 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        dd($request->name);
+        $request->validate([
+            "name" => "required|string",
+        ]);
+
+        if ($request->file('image')) {
+            $filename = '/uploads/category/' . time() . '.' . $request->file('image')->extension();
+            $request->file('image')->storePubliclyAs('public', $filename);
+        } else {
+            $filename = $request->image;
+        }
+
+        $category->update(
+            [
+                'name' => $request->name,
+                'parent' => $request->parent == 'null' ? null : $request->parent,
+                'image' => $filename,
+            ]
+        );
+
+        return new CategoryResource($category);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
+     * @param  string  $categories
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(string $categories)
     {
-        //
+        $categories = json_decode($categories);
+
+        foreach ($categories as  $item) {
+            $category = Category::find($item);
+            if ($category->image != NULL) {
+                if (File::exists(public_path(substr($category->image, 1, null)))) {
+                    File::delete(public_path(substr($category->image, 1, null)));
+                }
+            }
+            $category->delete();
+        }
+
+        return response()->noContent();
     }
 }

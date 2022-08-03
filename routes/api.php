@@ -14,6 +14,8 @@ Route::post("/login-admin", [AuthController::class, 'login_admin']);
 Route::get('/categories', [CategoryController::class, 'index']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::post('/category', [CategoryController::class, 'store']);
+    Route::post('/categories', [CategoryController::class, 'store']);
+    Route::put('/categories/{category}', [CategoryController::class, 'update']);
+    Route::delete('/categories/{categories}', [CategoryController::class, 'destroy']);
     Route::post("/logout", [AuthController::class, 'logout']);
 });

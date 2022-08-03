@@ -1,11 +1,11 @@
 import axios from "axios";
 import { ref } from "vue";
-
+import { useRouter } from "vue-router";
 export default function useAuth() {
     const user = ref([]);
     const errors = ref("");
     const loading = ref(0);
-
+    const router = useRouter();
     const sendEmailVerification = async (data) => {
         errors.value = "";
         try {
@@ -82,6 +82,9 @@ export default function useAuth() {
             let response = await axios.post("/api/login-admin", data);
             localStorage.user = JSON.stringify(response.data.data.user);
             localStorage.tokenUser = response.data.data.token;
+            // router.push({
+            //     name: "admin.dashboard",
+            // });
             loading.value = 2;
         } catch (e) {
             loading.value = 0;

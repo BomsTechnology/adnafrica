@@ -1,9 +1,9 @@
 <script setup>
 import useAuth from "@/services/authServices.js";
 import { reactive } from "vue";
-import { useRouter } from "vue-router";
+
 const { loginAdmin, errors, loading, cleanErrors } = useAuth();
-const router = useRouter();
+
 const user = reactive({
     email: "",
     password: "",
@@ -12,9 +12,7 @@ const user = reactive({
 const login = async () => {
     await loginAdmin({ ...user });
     if (errors.value == "") {
-        router.push({
-            name: "admin.dashboard",
-        });
+        location.href = "/admin";
     }
 };
 </script>
