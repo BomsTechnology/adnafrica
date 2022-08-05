@@ -40,7 +40,7 @@ export default function useCategory() {
                 for (const key in e.response.data.errors)
                     errors.value += e.response.data.errors[key][0] + "\n";
             } else {
-                errors.value = e.message;
+                errors.value = e.response.data.message;
             }
         }
     };
@@ -57,7 +57,7 @@ export default function useCategory() {
                 for (const key in e.response.data.errors)
                     errors.value += e.response.data.errors[key][0] + "\n";
             } else {
-                errors.value = e.message;
+                errors.value = e.response.data.message;
             }
         }
     };
@@ -66,7 +66,7 @@ export default function useCategory() {
         errors.value = "";
         try {
             loading.value = 1;
-            await axiosClientFile.put(`/categories/${id}`, data);
+            await axiosClientFile.post(`/categories/${id}`, data);
             loading.value = 2;
         } catch (e) {
             loading.value = 0;
@@ -74,7 +74,7 @@ export default function useCategory() {
                 for (const key in e.response.data.errors)
                     errors.value += e.response.data.errors[key][0] + "\n";
             } else {
-                errors.value = e.message;
+                errors.value = e.response.data.message;
             }
         }
     };
@@ -93,7 +93,7 @@ export default function useCategory() {
                 for (const key in e.response.data.errors)
                     errors.value += e.response.data.errors[key][0] + "\n";
             } else {
-                errors.value = e.message;
+                errors.value = e.response.data.message;
             }
         }
     };
@@ -118,8 +118,6 @@ export default function useCategory() {
                 });
             }
         }
-
-        console.log(deleteArray.value);
     };
 
     const toogleChildDeleteArray = async (index, i) => {
@@ -162,7 +160,6 @@ export default function useCategory() {
             });
             deleteArray.value = [];
         }
-        console.log(deleteArray.value);
     };
 
     const cleanErrors = () => {

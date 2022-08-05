@@ -29,7 +29,6 @@ const search = ref("");
 const isEdit = ref(false);
 
 const handleImage = async () => {
-    console.log(image.value);
     category.image = image.value.files[0];
 };
 const saveCategory = async () => {
@@ -40,7 +39,7 @@ const saveCategory = async () => {
     if (!isEdit.value) {
         await createCategory(data);
     } else {
-        console.log(category);
+        data.append("_method", "PUT");
         await updateCategory(data, category.id);
         if (errors.value == "") isEdit.value = false;
     }
@@ -135,7 +134,10 @@ onMounted(async () => {
                             >
                             <div class="flex space-x-3">
                                 <div
-                                    v-if="isEdit"
+                                    v-if="
+                                        isEdit &&
+                                        typeof category.image === 'string'
+                                    "
                                     class="h-10 w-10 overflow-hidden rounded-full"
                                 >
                                     <img

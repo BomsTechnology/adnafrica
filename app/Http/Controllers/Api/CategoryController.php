@@ -56,7 +56,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return new CategoryResource($category);
     }
 
     /**
@@ -68,12 +68,17 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        dd($request->name);
+        // dd($request->name);
         $request->validate([
             "name" => "required|string",
         ]);
 
         if ($request->file('image')) {
+            if ($category->image != NULL) {
+                if (File::exists(public_path(substr($category->image, 1, null)))) {
+                    File::delete(public_path(substr($category->image, 1, null)));
+                }
+            }
             $filename = '/uploads/category/' . time() . '.' . $request->file('image')->extension();
             $request->file('image')->storePubliclyAs('public', $filename);
         } else {

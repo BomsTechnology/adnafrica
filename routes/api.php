@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\CurrencyController;
 
 Route::post("/register", [AuthController::class, 'register']);
 Route::post("/send-verification-email", [AuthController::class, 'sendVerificationEmail']);
@@ -17,5 +18,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/categories', [CategoryController::class, 'store']);
     Route::put('/categories/{category}', [CategoryController::class, 'update']);
     Route::delete('/categories/{categories}', [CategoryController::class, 'destroy']);
+    Route::apiResource('/currencies', CurrencyController::class);
+
     Route::post("/logout", [AuthController::class, 'logout']);
 });
