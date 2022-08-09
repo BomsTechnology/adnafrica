@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from "vue";
 import Ping from "./Ping.vue";
 import {
     XIcon,
@@ -13,10 +12,33 @@ import {
     ChevronDownIcon,
     SearchIcon,
     LocationMarkerIcon,
-    BellIcon,
+    ChevronRightIcon,
 } from "@heroicons/vue/solid";
+import { ref, onMounted, reactive } from "vue";
+import useCategory from "@/services/categoryServices";
+import { onClickOutside } from "@vueuse/core";
 
+const { loading, categories, getCategories } = useCategory();
 const open = ref(false);
+const categoryModal = ref(null);
+const showCategory = ref(false);
+const selectCategory = reactive({
+    category: null,
+    subCategory: "all",
+});
+onMounted(async () => {
+    await getCategories();
+});
+onClickOutside(categoryModal, () => {
+    showCategory.value = false;
+});
+const selectedCategory = async (category) => {
+    selectCategory.category = category;
+};
+const selectedSubCategory = async (subCategory) => {
+    selectCategory.subCategory = subCategory;
+    showCategory.value = false;
+};
 </script>
 
 <template>
@@ -36,7 +58,70 @@ const open = ref(false);
 
                     <div class="ml-8 hidden lg:block">
                         <form id="searchNav" class="hidden">
-                            <div class="grid grid-cols-9">
+                            <div class="relative grid grid-cols-9">
+                                <div
+                                    v-if="showCategory"
+                                    ref="categoryModal"
+                                    class="absolute top-14 left-0 z-10 flex h-96 w-full rounded-md bg-white shadow-xl"
+                                >
+                                    <div
+                                        class="h-full w-2/5 border-r py-4 px-6 text-sm"
+                                    >
+                                        <button
+                                            @click="selectedSubCategory('all')"
+                                            type="button"
+                                            class="block w-full rounded p-2 text-left hover:bg-secondary-color hover:text-white"
+                                        >
+                                            Toutes Catégories
+                                        </button>
+                                        <button
+                                            type="button"
+                                            v-for="category in categories"
+                                            :key="category.id"
+                                            @click="selectedCategory(category)"
+                                            class="group flex w-full items-center justify-between rounded p-2 hover:bg-secondary-color hover:text-white"
+                                        >
+                                            <span>{{ category.name }}</span>
+                                            <span
+                                                ><ChevronRightIcon
+                                                    class="h-5 w-5 stroke-white text-white"
+                                            /></span>
+                                        </button>
+                                    </div>
+                                    <div
+                                        class="h-full w-3/5 overflow-y-auto py-4 px-2 text-sm"
+                                    >
+                                        <button
+                                            v-if="selectCategory.category"
+                                            @click="
+                                                selectedSubCategory(
+                                                    selectCategory.category
+                                                )
+                                            "
+                                            type="button"
+                                            class="block w-4/5 rounded p-2 text-left hover:bg-secondary-color hover:text-white"
+                                        >
+                                            {{ selectCategory.category.name }}
+                                        </button>
+                                        <button
+                                            v-if="
+                                                selectCategory.category &&
+                                                selectCategory.category.children
+                                                    .length != 0
+                                            "
+                                            v-for="subCategory in selectCategory
+                                                .category.children"
+                                            @click="
+                                                selectedSubCategory(subCategory)
+                                            "
+                                            :key="subCategory.id"
+                                            type="button"
+                                            class="block w-4/5 whitespace-nowrap rounded p-2 text-left hover:bg-secondary-color hover:text-white"
+                                        >
+                                            {{ subCategory.name }}
+                                        </button>
+                                    </div>
+                                </div>
                                 <div class="relative col-span-2">
                                     <span class="absolute left-3 top-3"
                                         ><ViewBoardsIcon
@@ -51,6 +136,7 @@ const open = ref(false);
                                     </select>
                                 </div>
                                 <div
+                                    @click="showCategory = !showCategory"
                                     class="col-span-2 flex w-full cursor-pointer items-center justify-between border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 hover:bg-gray-100"
                                 >
                                     <div>
@@ -58,7 +144,21 @@ const open = ref(false);
                                             class="h-6 w-6 text-gray-400"
                                         />
                                     </div>
-                                    <div class="w-full pl-4">Catégorie</div>
+                                    <div class="w-full whitespace-nowrap pl-4">
+                                        <span
+                                            v-if="
+                                                selectCategory.subCategory ==
+                                                'all'
+                                            "
+                                        >
+                                            Toutes Catégories
+                                        </span>
+                                        <span v-else>
+                                            {{
+                                                selectCategory.subCategory.name
+                                            }}
+                                        </span>
+                                    </div>
                                     <div>
                                         <ChevronDownIcon
                                             class="h-6 w-6 text-gray-400"

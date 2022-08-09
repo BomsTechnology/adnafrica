@@ -151,7 +151,7 @@ const open = reactive({
                                             >Currency</span
                                         >
                                     </router-link>
-                                    <router-link
+                                    <!-- <router-link
                                         :to="{ name: 'admin.country' }"
                                         class="flex transform items-center rounded-b-lg px-4 py-2 text-gray-700 transition-colors duration-200 hover:bg-gray-200 hover:text-gray-700"
                                     >
@@ -170,7 +170,7 @@ const open = reactive({
                                         <span class="mx-4 font-medium"
                                             >City</span
                                         >
-                                    </router-link>
+                                    </router-link> -->
                                 </div>
                             </transition>
                         </div>

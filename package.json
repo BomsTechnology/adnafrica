@@ -19,6 +19,8 @@
     },
     "dependencies": {
         "@heroicons/vue": "^1.0.6",
+        "@vueuse/components": "^9.1.0",
+        "@vueuse/core": "^9.1.0",
         "pinia": "^2.0.14",
         "swiper": "^8.2.2",
         "vue": "^3.2.25",
