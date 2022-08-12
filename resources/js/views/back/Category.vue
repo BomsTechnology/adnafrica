@@ -107,7 +107,7 @@ onMounted(async () => {
                                 id="category"
                                 required
                                 v-model="category.parent"
-                                class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
                             >
                                 <option value="null">no parent</option>
                                 <option
@@ -195,7 +195,7 @@ onMounted(async () => {
                                     class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
                                 >
                                     <svg
-                                        class="dark:text-gray-400 h-5 w-5 text-gray-500"
+                                        class="h-5 w-5 text-gray-500"
                                         fill="currentColor"
                                         viewBox="0 0 20 20"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -211,7 +211,7 @@ onMounted(async () => {
                                     type="search"
                                     id="table-search"
                                     v-model="search"
-                                    class="dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 block w-full rounded border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 lg:w-80"
+                                    class="block w-full rounded border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 lg:w-80"
                                     placeholder="Search for items"
                                 />
                             </div>
@@ -242,7 +242,7 @@ onMounted(async () => {
                                             v-model="chkAll"
                                             id="checkbox-all-search"
                                             type="checkbox"
-                                            class="dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
+                                            class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
                                         />
                                         <label
                                             for="checkbox-all-search"
@@ -287,7 +287,7 @@ onMounted(async () => {
                                                 "
                                                 id="checkbox-table-search-1"
                                                 type="checkbox"
-                                                class="dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
+                                                class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
                                             />
                                             <label
                                                 for="checkbox-table-search-1"
@@ -305,7 +305,7 @@ onMounted(async () => {
                                     </td>
                                     <th
                                         scope="row"
-                                        class="dark:text-white whitespace-nowrap px-6 py-4 font-medium text-gray-900"
+                                        class="whitespace-nowrap px-6 py-4 font-medium text-gray-900"
                                     >
                                         {{ category.name }}
                                     </th>
@@ -313,7 +313,7 @@ onMounted(async () => {
                                         <button
                                             type="button"
                                             @click="selectCategory(category)"
-                                            class="dark:text-blue-500 font-medium text-blue-600 hover:underline"
+                                            class="font-medium text-blue-600 hover:underline"
                                         >
                                             Edit
                                         </button>
@@ -342,7 +342,7 @@ onMounted(async () => {
                                                     )
                                                 "
                                                 type="checkbox"
-                                                class="dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
+                                                class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
                                             />
                                             <label
                                                 for="checkbox-table-search-1"
@@ -358,7 +358,7 @@ onMounted(async () => {
                                     </td>
                                     <th
                                         scope="row"
-                                        class="dark:text-white whitespace-nowrap px-6 py-4 font-medium text-gray-900"
+                                        class="whitespace-nowrap px-6 py-4 font-medium text-gray-900"
                                     >
                                         {{ subCategory.name }}
                                     </th>
@@ -366,7 +366,7 @@ onMounted(async () => {
                                         <button
                                             type="button"
                                             @click="selectCategory(subCategory)"
-                                            class="dark:text-blue-500 font-medium text-blue-600 hover:underline"
+                                            class="font-medium text-blue-600 hover:underline"
                                         >
                                             Edit
                                         </button>

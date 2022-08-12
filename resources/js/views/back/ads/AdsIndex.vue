@@ -14,13 +14,13 @@ import { reactive } from "vue";
         <div
             class="mt-4 flex items-center justify-end border-b border-gray-200 px-2 py-3"
         >
-            <button
-                type="submit"
+            <router-link
+                :to="{ name: 'admin.ads.create' }"
                 class="flex items-end space-x-2 rounded bg-primary-color px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-secondary-color focus:outline-none focus:ring-4 focus:ring-blue-300"
             >
                 <PlusCircleIcon class="h-5 w-5" />
                 <span>Add Ads</span>
-            </button>
+            </router-link>
         </div>
         <div
             class="relative w-full overflow-x-auto bg-white shadow-md sm:rounded-lg"

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CurrencyRequest;
 use App\Http\Resources\CurrencyResource;
 use App\Models\Currency;
-use Illuminate\Http\Request;
 
 class CurrencyController extends Controller
 {
@@ -23,7 +22,7 @@ class CurrencyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\CurrencyRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(CurrencyRequest $request)
@@ -46,7 +45,7 @@ class CurrencyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\CurrencyRequest  $request
      * @param  \App\Models\Currency  $currency
      * @return \Illuminate\Http\Response
      */

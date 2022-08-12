@@ -15,6 +15,7 @@ import {
     HomeIcon,
     ViewGridIcon,
     MenuAlt2Icon,
+    XIcon,
 } from "@heroicons/vue/solid";
 import { CogIcon, LogoutIcon, UserCircleIcon } from "@heroicons/vue/outline";
 import { reactive } from "vue";
@@ -29,7 +30,13 @@ const open = reactive({
 </script>
 
 <template>
-    <div class="relative z-50 h-full">
+    <div
+        :class="[
+            open.menu
+                ? 'relative z-50 mr-60 h-full transition-all duration-1000'
+                : 'relative z-50 h-full transition-all duration-1000',
+        ]"
+    >
         <transition
             enter-active-class="transition duration-1000 "
             enter-from-class="-translate-x-full"
@@ -40,7 +47,7 @@ const open = reactive({
         >
             <div
                 v-if="open.menu"
-                class="flex h-screen w-64 flex-col overflow-y-auto overflow-x-hidden bg-primary-color py-4"
+                class="fixed flex h-screen w-64 flex-col overflow-y-auto overflow-x-hidden bg-primary-color py-4"
             >
                 <h2 class="text-center text-2xl font-bold text-white">
                     Adnafrica
@@ -151,7 +158,7 @@ const open = reactive({
                                             >Currency</span
                                         >
                                     </router-link>
-                                    <!-- <router-link
+                                    <router-link
                                         :to="{ name: 'admin.country' }"
                                         class="flex transform items-center rounded-b-lg px-4 py-2 text-gray-700 transition-colors duration-200 hover:bg-gray-200 hover:text-gray-700"
                                     >
@@ -170,7 +177,7 @@ const open = reactive({
                                         <span class="mx-4 font-medium"
                                             >City</span
                                         >
-                                    </router-link> -->
+                                    </router-link>
                                 </div>
                             </transition>
                         </div>
@@ -216,9 +223,10 @@ const open = reactive({
         </transition>
         <button
             @click="open.menu = !open.menu"
-            class="absolute -right-10 top-0 block rounded-r-lg bg-primary-color p-2 text-white lg:hidden"
+            class="fixed top-0 block rounded-r-lg bg-primary-color p-2 text-white"
         >
-            <MenuAlt2Icon class="h-7 w-7" />
+            <MenuAlt2Icon v-if="!open.menu" class="h-7 w-7" />
+            <XIcon v-else class="h-7 w-7" />
         </button>
     </div>
 </template>

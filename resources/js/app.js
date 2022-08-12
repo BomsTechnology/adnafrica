@@ -10,6 +10,7 @@ import Alert from "./components/Alert.vue";
 import * as ConfirmDialog from "vuejs-confirm-dialog";
 import VueTelInput from "vue-tel-input";
 import "vue-tel-input/dist/vue-tel-input.css";
+
 const pinia = createPinia();
 import router from "./router/index.js";
 const globalOptions = {
@@ -20,6 +21,7 @@ const app = createApp(App);
 app.use(pinia);
 app.use(router);
 app.use(ConfirmDialog);
+
 app.use(VueTelInput, globalOptions);
 app.component("Goback", Goback);
 app.component("Alert", Alert);
