@@ -41,7 +41,7 @@ const open = reactive({
             enter-active-class="transition duration-1000 "
             enter-from-class="-translate-x-full"
             enter-to-class=" translate-x-0"
-            leave-active-class="transition duration-1000 absolute ease-out"
+            leave-active-class="transition duration-1000  ease-out"
             leave-from-class=" translate-x-0"
             leave-to-class=" -translate-x-full "
         >

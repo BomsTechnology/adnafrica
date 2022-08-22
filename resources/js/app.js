@@ -21,7 +21,6 @@ const app = createApp(App);
 app.use(pinia);
 app.use(router);
 app.use(ConfirmDialog);
-
 app.use(VueTelInput, globalOptions);
 app.component("Goback", Goback);
 app.component("Alert", Alert);

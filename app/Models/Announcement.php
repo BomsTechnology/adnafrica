@@ -18,4 +18,9 @@ class Announcement extends Model
     {
         return $this->belongsTo(City::class);
     }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
 }

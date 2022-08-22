@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AnnouncementController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
@@ -15,6 +16,8 @@ Route::post("/login", [AuthController::class, 'login']);
 Route::post("/login-admin", [AuthController::class, 'login_admin']);
 
 Route::get('/categories', [CategoryController::class, 'index']);
+
+Route::apiResource('/announcements', AnnouncementController::class);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/categories', [CategoryController::class, 'store']);

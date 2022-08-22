@@ -2,9 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::view('/', 'welcome')->name('home');
 
 
 Route::view('{any}', 'welcome')->where('any', '.*');
