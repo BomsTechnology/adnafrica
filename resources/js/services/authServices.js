@@ -3,11 +3,11 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 export default function useAuth() {
     const user = ref([]);
-    const errors = ref("");
+    const errors = ref([]);
     const loading = ref(0);
     const router = useRouter();
     const sendEmailVerification = async (data) => {
-        errors.value = "";
+        errors.value = [];
         try {
             loading.value = 1;
             await axios.post("/api/send-verification-email", data);
@@ -15,7 +15,7 @@ export default function useAuth() {
         } catch (error) {
             if (error.response.status == 422) {
                 for (const key in e.response.data.errors)
-                    errors.value += e.response.data.errors[key][0] + "\n";
+                    errors.value.push(e.response.data.errors[key][0]);
             } else {
                 errors.value = error.response.data.message;
             }
@@ -25,7 +25,7 @@ export default function useAuth() {
     };
 
     const sendSmsVerification = async (data) => {
-        errors.value = "";
+        errors.value = [];
         try {
             loading.value = 1;
             await axios.post("/api/send-verification-sms", data);
@@ -33,7 +33,7 @@ export default function useAuth() {
         } catch (error) {
             if (error.response.status == 422) {
                 for (const key in e.response.data.errors)
-                    errors.value += e.response.data.errors[key][0] + "\n";
+                    errors.value.push(e.response.data.errors[key][0]);
             } else {
                 errors.value = error.response.data.message;
             }
@@ -43,7 +43,7 @@ export default function useAuth() {
     };
 
     const createUser = async (data) => {
-        errors.value = "";
+        errors.value = [];
         try {
             loading.value = 1;
             let response = await axios.post("/api/register", data);
@@ -55,13 +55,13 @@ export default function useAuth() {
             loading.value = 0;
             if (e.response.status == 422) {
                 for (const key in e.response.data.errors)
-                    errors.value += e.response.data.errors[key][0] + "\n";
+                    errors.value.push(e.response.data.errors[key][0]);
             }
         }
     };
 
     const loginUser = async (data) => {
-        errors.value = "";
+        errors.value = [];
         try {
             loading.value = 1;
             let response = await axios.post("/api/login", data);
@@ -76,7 +76,7 @@ export default function useAuth() {
     };
 
     const loginAdmin = async (data) => {
-        errors.value = "";
+        errors.value = [];
         try {
             loading.value = 1;
             let response = await axios.post("/api/login-admin", data);
@@ -92,7 +92,7 @@ export default function useAuth() {
         }
     };
     const cleanErrors = () => {
-        errors.value = "";
+        errors.value = [];
     };
     return {
         sendEmailVerification,

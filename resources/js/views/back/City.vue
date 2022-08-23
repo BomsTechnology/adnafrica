@@ -35,9 +35,9 @@ const saveCity = async () => {
         await createCity({ ...city });
     } else {
         await updateCity({ ...city }, city.id);
-        if (errors.value == "") isEdit.value = false;
+        if (errors.value.length == 0) isEdit.value = false;
     }
-    if (errors.value == "") {
+    if (errors.value.length == 0) {
         await getCities();
         city.country_id = "";
         city.name = "";

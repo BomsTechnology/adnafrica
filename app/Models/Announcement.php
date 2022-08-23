@@ -9,6 +9,19 @@ class Announcement extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'description',
+        'price',
+        'type',
+        'status',
+        'currency_id',
+        'country_id',
+        'city_id',
+        'user_id',
+        'category_id',
+    ];
+
     public function currency()
     {
         return $this->belongsTo(Currency::class);

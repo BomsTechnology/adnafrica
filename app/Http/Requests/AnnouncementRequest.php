@@ -13,7 +13,7 @@ class AnnouncementRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,17 @@ class AnnouncementRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "country_id" => "required|integer",
+            "city_id" => "required|integer",
+            "currency_id" => "required|integer",
+            "category_id" => "required|integer",
+            "status" => "required|integer",
+            "title" => "required|string",
+            "type" => "required|string",
+            "price" => "required|integer",
+            "description" => "required|string",
+            "images" => "required|array",
+            "user" => "required",
         ];
     }
 }

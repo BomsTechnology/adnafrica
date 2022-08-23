@@ -1,16 +1,27 @@
 import axios from "axios";
 import { ref } from "vue";
 import { axiosClient, axiosClientFile } from "@/axios";
+
 export default function useAnnouncement() {
-    const errors = ref("");
+    const errors = ref([]);
     const loading = ref(0);
     const announcements = ref([]);
     const deleteArray = ref([]);
     const chks = ref([]);
     const chkAll = ref(false);
 
+    const getFormData = (object) =>
+        Object.entries(object).reduce((fd, [key, val]) => {
+            if (Array.isArray(val)) {
+                val.forEach((v) => fd.append(`${key}[]`, v.file));
+            } else {
+                fd.append(key, val);
+            }
+            return fd;
+        }, new FormData());
+
     const getAnnouncements = async () => {
-        errors.value = "";
+        errors.value = [];
         chks.value = [];
         try {
             loading.value = 1;
@@ -38,32 +49,36 @@ export default function useAnnouncement() {
             loading.value = 0;
             if (e.response.status == 422) {
                 for (const key in e.response.data.errors)
-                    errors.value += e.response.data.errors[key][0] + "\n";
+                    errors.value.push(
+                        e.response.data.errors[key][0].replace("id", "")
+                    );
             } else {
-                errors.value = e.response.data.message;
+                errors.value.push(e.response.data.message);
             }
         }
     };
 
     const createAnnouncement = async (data) => {
-        errors.value = "";
+        errors.value = [];
         try {
             loading.value = 1;
-            await axiosClientFile.post("/announcements", data);
+            await axiosClientFile.post("/announcements", getFormData(data));
             loading.value = 2;
         } catch (e) {
             loading.value = 0;
             if (e.response.status == 422) {
                 for (const key in e.response.data.errors)
-                    errors.value += e.response.data.errors[key][0] + "\n";
+                    errors.value.push(
+                        e.response.data.errors[key][0].replace("id", "")
+                    );
             } else {
-                errors.value = e.response.data.message;
+                errors.value.push(e.response.data.message);
             }
         }
     };
 
     const updateAnnouncement = async (data, id) => {
-        errors.value = "";
+        errors.value = [];
         try {
             loading.value = 1;
             await axiosClientFile.post(`/announcements/${id}`, data);
@@ -72,15 +87,17 @@ export default function useAnnouncement() {
             loading.value = 0;
             if (e.response.status == 422) {
                 for (const key in e.response.data.errors)
-                    errors.value += e.response.data.errors[key][0] + "\n";
+                    errors.value.push(
+                        e.response.data.errors[key][0].replace("id", "")
+                    );
             } else {
-                errors.value = e.response.data.message;
+                errors.value.push(e.response.data.message);
             }
         }
     };
 
     const deleteAnnouncements = async () => {
-        errors.value = "";
+        errors.value = [];
         try {
             await axiosClient.delete(
                 `/announcements/${JSON.stringify(deleteArray.value)}`
@@ -91,9 +108,11 @@ export default function useAnnouncement() {
             loading.value = 0;
             if (e.response.status == 422) {
                 for (const key in e.response.data.errors)
-                    errors.value += e.response.data.errors[key][0] + "\n";
+                    errors.value.push(
+                        e.response.data.errors[key][0].replace("id", "")
+                    );
             } else {
-                errors.value = e.response.data.message;
+                errors.value.push(e.response.data.message);
             }
         }
     };
@@ -163,7 +182,7 @@ export default function useAnnouncement() {
     };
 
     const cleanErrors = () => {
-        errors.value = "";
+        errors.value = [];
     };
 
     return {

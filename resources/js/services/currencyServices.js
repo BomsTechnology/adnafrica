@@ -2,7 +2,7 @@ import { ref } from "vue";
 import { axiosClient, axiosClientFile } from "@/axios";
 
 export default function useCurrency() {
-    const errors = ref("");
+    const errors = ref([]);
     const loading = ref(0);
     const currencies = ref([]);
     const deleteArray = ref([]);
@@ -10,7 +10,7 @@ export default function useCurrency() {
     const chkAll = ref(false);
 
     const getCurrencies = async () => {
-        errors.value = "";
+        errors.value = [];
         chks.value = [];
         try {
             loading.value = 1;
@@ -28,15 +28,17 @@ export default function useCurrency() {
             loading.value = 0;
             if (e.response.status == 422) {
                 for (const key in e.response.data.errors)
-                    errors.value += e.response.data.errors[key][0] + "\n";
+                    errors.value.push(
+                        e.response.data.errors[key][0].replace("id", "")
+                    );
             } else {
-                errors.value = e.response.data.message;
+                errors.value.push(e.response.data.message);
             }
         }
     };
 
     const createCurrency = async (data) => {
-        errors.value = "";
+        errors.value = [];
         try {
             loading.value = 1;
             await axiosClient.post("/currencies", data);
@@ -45,15 +47,17 @@ export default function useCurrency() {
             loading.value = 0;
             if (e.response.status == 422) {
                 for (const key in e.response.data.errors)
-                    errors.value += e.response.data.errors[key][0] + "\n";
+                    errors.value.push(
+                        e.response.data.errors[key][0].replace("id", "")
+                    );
             } else {
-                errors.value = e.response.data.message;
+                errors.value.push(e.response.data.message);
             }
         }
     };
 
     const updateCurrency = async (data, id) => {
-        errors.value = "";
+        errors.value = [];
         try {
             loading.value = 1;
             await axiosClient.put(`/currencies/${id}`, data);
@@ -62,15 +66,17 @@ export default function useCurrency() {
             loading.value = 0;
             if (e.response.status == 422) {
                 for (const key in e.response.data.errors)
-                    errors.value += e.response.data.errors[key][0] + "\n";
+                    errors.value.push(
+                        e.response.data.errors[key][0].replace("id", "")
+                    );
             } else {
-                errors.value = e.response.data.message;
+                errors.value.push(e.response.data.message);
             }
         }
     };
 
     const deleteCurrencies = async () => {
-        errors.value = "";
+        errors.value = [];
         try {
             await axiosClient.delete(
                 `/currencies/${JSON.stringify(deleteArray.value)}`
@@ -81,9 +87,11 @@ export default function useCurrency() {
             loading.value = 0;
             if (e.response.status == 422) {
                 for (const key in e.response.data.errors)
-                    errors.value += e.response.data.errors[key][0] + "\n";
+                    errors.value.push(
+                        e.response.data.errors[key][0].replace("id", "")
+                    );
             } else {
-                errors.value = e.response.data.message;
+                errors.value.push(e.response.data.message);
             }
         }
     };
@@ -114,7 +122,7 @@ export default function useCurrency() {
     };
 
     const cleanErrors = () => {
-        errors.value = "";
+        errors.value = [];
     };
 
     return {

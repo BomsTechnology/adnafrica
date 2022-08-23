@@ -8,6 +8,7 @@ use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -33,7 +34,7 @@ class CategoryController extends Controller
 
         if ($request->file('image')) {
             $filename = '/uploads/category/' . time() . '.' . $request->file('image')->extension();
-            $request->file('image')->storePubliclyAs('public', $filename);
+            Storage::disk('public')->put($filename, fopen($request->file('image'), 'r+'));
         } else {
             $filename = null;
         }
@@ -67,7 +68,6 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        // dd($request->name);
         $request->validate([
             "name" => "required|string",
         ]);

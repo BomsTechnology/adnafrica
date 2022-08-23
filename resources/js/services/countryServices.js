@@ -2,7 +2,7 @@ import { ref } from "vue";
 import { axiosClient, axiosClientFile } from "@/axios";
 
 export default function useCountry() {
-    const errors = ref("");
+    const errors = ref([]);
     const loading = ref(0);
     const countries = ref([]);
     const deleteArray = ref([]);
@@ -10,7 +10,7 @@ export default function useCountry() {
     const chkAll = ref(false);
 
     const getCountries = async () => {
-        errors.value = "";
+        errors.value = [];
         chks.value = [];
         try {
             loading.value = 1;
@@ -28,49 +28,55 @@ export default function useCountry() {
             loading.value = 0;
             if (e.response.status == 422) {
                 for (const key in e.response.data.errors)
-                    errors.value += e.response.data.errors[key][0] + "\n";
+                    errors.value.push(
+                        e.response.data.errors[key][0].replace("id", "")
+                    );
             } else {
-                errors.value = e.response.data.message;
+                errors.value.push(e.response.data.message);
             }
         }
     };
 
     const createCountry = async (data) => {
-        errors.value = "";
+        errors.value = [];
         try {
             loading.value = 1;
-            await axiosClient.post("/countries", data);
+            await axiosClientFile.post("/countries", data);
             loading.value = 2;
         } catch (e) {
             loading.value = 0;
             if (e.response.status == 422) {
                 for (const key in e.response.data.errors)
-                    errors.value += e.response.data.errors[key][0] + "\n";
+                    errors.value.push(
+                        e.response.data.errors[key][0].replace("id", "")
+                    );
             } else {
-                errors.value = e.response.data.message;
+                errors.value.push(e.response.data.message);
             }
         }
     };
 
     const updateCountry = async (data, id) => {
-        errors.value = "";
+        errors.value = [];
         try {
             loading.value = 1;
-            await axiosClient.put(`/countries/${id}`, data);
+            await axiosClientFile.post(`/countries/${id}`, data);
             loading.value = 2;
         } catch (e) {
             loading.value = 0;
             if (e.response.status == 422) {
                 for (const key in e.response.data.errors)
-                    errors.value += e.response.data.errors[key][0] + "\n";
+                    errors.value.push(
+                        e.response.data.errors[key][0].replace("id", "")
+                    );
             } else {
-                errors.value = e.response.data.message;
+                errors.value.push(e.response.data.message);
             }
         }
     };
 
     const deleteCountries = async () => {
-        errors.value = "";
+        errors.value = [];
         try {
             await axiosClient.delete(
                 `/countries/${JSON.stringify(deleteArray.value)}`
@@ -81,9 +87,11 @@ export default function useCountry() {
             loading.value = 0;
             if (e.response.status == 422) {
                 for (const key in e.response.data.errors)
-                    errors.value += e.response.data.errors[key][0] + "\n";
+                    errors.value.push(
+                        e.response.data.errors[key][0].replace("id", "")
+                    );
             } else {
-                errors.value = e.response.data.message;
+                errors.value.push(e.response.data.message);
             }
         }
     };
@@ -114,7 +122,7 @@ export default function useCountry() {
     };
 
     const cleanErrors = () => {
-        errors.value = "";
+        errors.value = [];
     };
 
     return {

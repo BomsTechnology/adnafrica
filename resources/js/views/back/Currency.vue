@@ -30,9 +30,9 @@ const saveCurrency = async () => {
         await createCurrency({ ...currency });
     } else {
         await updateCurrency({ ...currency }, currency.id);
-        if (errors.value == "") isEdit.value = false;
+        if (errors.value.length == 0) isEdit.value = false;
     }
-    if (errors.value == "") {
+    if (errors.value.length == 0) {
         await getCurrencies();
         currency.symbol = "";
         currency.name = "";

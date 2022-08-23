@@ -69,7 +69,7 @@ const props = defineProps({
                 :key="ads.name"
             >
                 <div
-                    class="relative mx-auto mt-8 h-full overflow-hidden rounded-lg shadow lg:w-[800px]"
+                    class="relative mx-auto mt-8 h-full overflow-hidden rounded-lg shadow lg:w-[1000px]"
                 >
                     <img
                         :src="ads.image"

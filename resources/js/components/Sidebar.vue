@@ -47,7 +47,7 @@ const open = reactive({
         >
             <div
                 v-if="open.menu"
-                class="fixed flex h-screen w-64 flex-col overflow-y-auto overflow-x-hidden bg-primary-color py-4"
+                class="fixed flex h-screen w-64 flex-col overflow-y-auto no-scrollbar overflow-x-hidden bg-primary-color py-4"
             >
                 <h2 class="text-center text-2xl font-bold text-white">
                     Adnafrica
@@ -234,5 +234,14 @@ const open = reactive({
 <style scoped>
 .a-exact-active {
     @apply bg-gray-50 text-gray-700;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 </style>

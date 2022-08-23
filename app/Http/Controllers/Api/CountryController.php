@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CountryRequest;
 use App\Http\Resources\CountryResource;
+use Illuminate\Support\Facades\File;
 use App\Models\Country;
+use Illuminate\Support\Facades\Storage;
 
 class CountryController extends Controller
 {
@@ -27,7 +29,20 @@ class CountryController extends Controller
      */
     public function store(CountryRequest $request)
     {
-        $country = Country::create($request->validated());
+
+        $data = $request->validated();
+
+        if ($request->file('image')) {
+            $filename = '/uploads/country/' . time() . '.' . $request->file('image')->extension();
+            Storage::disk('public')->put($filename, fopen($request->file('image'), 'r+'));
+        } else {
+            $filename = null;
+        }
+
+        $country = Country::create([
+            "name" => $data['name'],
+            "image" => $filename
+        ]);
         return new CountryResource($country);
     }
 
@@ -51,7 +66,27 @@ class CountryController extends Controller
      */
     public function update(CountryRequest $request, Country $country)
     {
-        $country->update($request->validated());
+        $request->validate([
+            "name" => "required|string",
+        ]);
+
+        if ($request->file('image')) {
+            if ($country->image != NULL) {
+                if (File::exists(public_path(substr($country->image, 1, null)))) {
+                    File::delete(public_path(substr($country->image, 1, null)));
+                }
+            }
+            $filename = '/uploads/country/' . time() . '.' . $request->file('image')->extension();
+            $request->file('image')->storePubliclyAs('public', $filename);
+        } else {
+            $filename = $request->image;
+        }
+
+
+        $country->update([
+            'name' => $request->name,
+            'image' => $filename,
+        ]);
         return new CountryResource($country);
     }
 
@@ -64,7 +99,15 @@ class CountryController extends Controller
     public function destroy(string $countries)
     {
         $countries = json_decode($countries);
-        Country::whereIn('id', $countries)->delete();
+        foreach ($countries as  $item) {
+            $country = Country::find($item);
+            if ($country->image != NULL) {
+                if (File::exists(public_path(substr($country->image, 1, null)))) {
+                    File::delete(public_path(substr($country->image, 1, null)));
+                }
+            }
+            $country->delete();
+        }
         return response()->noContent();
     }
 }

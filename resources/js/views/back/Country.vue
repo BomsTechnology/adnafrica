@@ -20,20 +20,28 @@ const {
 } = useCountry();
 const country = reactive({
     name: "",
+    image: "",
 });
 const search = ref("");
 const isEdit = ref(false);
+const image = ref(null);
 
 const saveCountry = async () => {
+    let data = new FormData();
+    data.append("name", country.name);
+    data.append("image", country.image);
     if (!isEdit.value) {
-        await createCountry({ ...country });
+        await createCountry(data);
     } else {
-        await updateCountry({ ...country }, country.id);
-        if (errors.value == "") isEdit.value = false;
+        data.append("_method", "PUT");
+        await updateCountry(data, country.id);
+        if (errors.value.length == []) isEdit.value = false;
     }
-    if (errors.value == "") {
+    if (errors.value.length == []) {
         await getCountries();
         country.name = "";
+        country.name = "";
+        image.value ? (image.value.value = null) : (image.value = null);
     }
 };
 const filteredCountry = computed(() =>
@@ -41,8 +49,12 @@ const filteredCountry = computed(() =>
         country.name.toLowerCase().includes(search.value.toLowerCase())
     )
 );
+const handleImage = async () => {
+    country.image = image.value.files[0];
+};
 const selectCountry = async (cat) => {
     country.name = cat.name;
+    country.image = cat.image;
     country.id = cat.id;
     isEdit.value = true;
 };
@@ -79,6 +91,46 @@ onMounted(async () => {
                                 autocomplete="given-name"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                             />
+                        </div>
+
+                        <div
+                            class="mt-2"
+                            v-if="
+                                country.parent == null ||
+                                country.parent == 'null'
+                            "
+                        >
+                            <label
+                                class="mb-2 block text-sm font-medium text-gray-900"
+                                for="file_input"
+                                >Image</label
+                            >
+                            <div class="flex space-x-3">
+                                <div
+                                    v-if="
+                                        isEdit &&
+                                        typeof country.image === 'string'
+                                    "
+                                    class="h-10 w-10 overflow-hidden rounded-full"
+                                >
+                                    <img
+                                        v-if="country.image"
+                                        :src="country.image"
+                                        :alt="country.name"
+                                        class="h-full w-full object-cover"
+                                    />
+                                </div>
+
+                                <input
+                                    ref="image"
+                                    :required="!isEdit"
+                                    @change="handleImage()"
+                                    class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-2 text-sm text-gray-900 focus:outline-none"
+                                    id="file_input"
+                                    accept="image/*"
+                                    type="file"
+                                />
+                            </div>
                         </div>
 
                         <div class="mt-6">
@@ -176,6 +228,7 @@ onMounted(async () => {
                                 </th>
 
                                 <th scope="col" class="px-6 py-3">Name</th>
+                                <th scope="col" class="px-6 py-3">Image</th>
                                 <th scope="col" class="px-6 py-3">
                                     <span class="sr-only">Edit</span>
                                 </th>
@@ -225,6 +278,13 @@ onMounted(async () => {
                                 >
                                     {{ country.name }}
                                 </th>
+                                <td class="px-6 py-4">
+                                    <img
+                                        :src="country.image"
+                                        :alt="country.name"
+                                        class="h-10 w-10 object-cover"
+                                    />
+                                </td>
                                 <td class="px-6 py-4 text-right">
                                     <button
                                         type="button"

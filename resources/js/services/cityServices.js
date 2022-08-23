@@ -2,7 +2,7 @@ import { ref } from "vue";
 import { axiosClient, axiosClientFile } from "@/axios";
 
 export default function useCity() {
-    const errors = ref("");
+    const errors = ref([]);
     const loading = ref(0);
     const cities = ref([]);
     const deleteArray = ref([]);
@@ -10,7 +10,7 @@ export default function useCity() {
     const chkAll = ref(false);
 
     const getCities = async () => {
-        errors.value = "";
+        errors.value = [];
         chks.value = [];
         try {
             loading.value = 1;
@@ -28,15 +28,17 @@ export default function useCity() {
             loading.value = 0;
             if (e.response.status == 422) {
                 for (const key in e.response.data.errors)
-                    errors.value += e.response.data.errors[key][0] + "\n";
+                    errors.value.push(
+                        e.response.data.errors[key][0].replace("id", "")
+                    );
             } else {
-                errors.value = e.response.data.message;
+                errors.value.push(e.response.data.message);
             }
         }
     };
 
     const createCity = async (data) => {
-        errors.value = "";
+        errors.value = [];
         try {
             loading.value = 1;
             await axiosClient.post("/cities", data);
@@ -45,15 +47,17 @@ export default function useCity() {
             loading.value = 0;
             if (e.response.status == 422) {
                 for (const key in e.response.data.errors)
-                    errors.value += e.response.data.errors[key][0] + "\n";
+                    errors.value.push(
+                        e.response.data.errors[key][0].replace("id", "")
+                    );
             } else {
-                errors.value = e.response.data.message;
+                errors.value.push(e.response.data.message);
             }
         }
     };
 
     const updateCity = async (data, id) => {
-        errors.value = "";
+        errors.value = [];
         try {
             loading.value = 1;
             await axiosClient.put(`/cities/${id}`, data);
@@ -62,15 +66,17 @@ export default function useCity() {
             loading.value = 0;
             if (e.response.status == 422) {
                 for (const key in e.response.data.errors)
-                    errors.value += e.response.data.errors[key][0] + "\n";
+                    errors.value.push(
+                        e.response.data.errors[key][0].replace("id", "")
+                    );
             } else {
-                errors.value = e.response.data.message;
+                errors.value.push(e.response.data.message);
             }
         }
     };
 
     const deleteCities = async () => {
-        errors.value = "";
+        errors.value = [];
         try {
             await axiosClient.delete(
                 `/cities/${JSON.stringify(deleteArray.value)}`
@@ -81,9 +87,11 @@ export default function useCity() {
             loading.value = 0;
             if (e.response.status == 422) {
                 for (const key in e.response.data.errors)
-                    errors.value += e.response.data.errors[key][0] + "\n";
+                    errors.value.push(
+                        e.response.data.errors[key][0].replace("id", "")
+                    );
             } else {
-                errors.value = e.response.data.message;
+                errors.value.push(e.response.data.message);
             }
         }
     };
@@ -114,7 +122,7 @@ export default function useCity() {
     };
 
     const cleanErrors = () => {
-        errors.value = "";
+        errors.value = [];
     };
 
     return {

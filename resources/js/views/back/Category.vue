@@ -41,9 +41,9 @@ const saveCategory = async () => {
     } else {
         data.append("_method", "PUT");
         await updateCategory(data, category.id);
-        if (errors.value == "") isEdit.value = false;
+        if (errors.value.length == []) isEdit.value = false;
     }
-    if (errors.value == "") {
+    if (errors.value.length == []) {
         await getCategories();
         category.image = "";
         category.name = "";
@@ -152,6 +152,7 @@ onMounted(async () => {
                                     ref="image"
                                     :required="!isEdit"
                                     @change="handleImage()"
+                                    accept="image/*"
                                     class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-2 text-sm text-gray-900 focus:outline-none"
                                     id="file_input"
                                     type="file"

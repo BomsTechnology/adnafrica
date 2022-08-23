@@ -2,7 +2,7 @@ import axios from "axios";
 import { ref } from "vue";
 import { axiosClient, axiosClientFile } from "@/axios";
 export default function useCategory() {
-    const errors = ref("");
+    const errors = ref([]);
     const loading = ref(0);
     const categories = ref([]);
     const deleteArray = ref([]);
@@ -10,7 +10,7 @@ export default function useCategory() {
     const chkAll = ref(false);
 
     const getCategories = async () => {
-        errors.value = "";
+        errors.value = [];
         chks.value = [];
         try {
             loading.value = 1;
@@ -38,15 +38,17 @@ export default function useCategory() {
             loading.value = 0;
             if (e.response.status == 422) {
                 for (const key in e.response.data.errors)
-                    errors.value += e.response.data.errors[key][0] + "\n";
+                    errors.value.push(
+                        e.response.data.errors[key][0].replace("id", "")
+                    );
             } else {
-                errors.value = e.response.data.message;
+                errors.value.push(e.response.data.message);
             }
         }
     };
 
     const createCategory = async (data) => {
-        errors.value = "";
+        errors.value = [];
         try {
             loading.value = 1;
             await axiosClientFile.post("/categories", data);
@@ -55,15 +57,17 @@ export default function useCategory() {
             loading.value = 0;
             if (e.response.status == 422) {
                 for (const key in e.response.data.errors)
-                    errors.value += e.response.data.errors[key][0] + "\n";
+                    errors.value.push(
+                        e.response.data.errors[key][0].replace("id", "")
+                    );
             } else {
-                errors.value = e.response.data.message;
+                errors.value.push(e.response.data.message);
             }
         }
     };
 
     const updateCategory = async (data, id) => {
-        errors.value = "";
+        errors.value = [];
         try {
             loading.value = 1;
             await axiosClientFile.post(`/categories/${id}`, data);
@@ -72,15 +76,17 @@ export default function useCategory() {
             loading.value = 0;
             if (e.response.status == 422) {
                 for (const key in e.response.data.errors)
-                    errors.value += e.response.data.errors[key][0] + "\n";
+                    errors.value.push(
+                        e.response.data.errors[key][0].replace("id", "")
+                    );
             } else {
-                errors.value = e.response.data.message;
+                errors.value.push(e.response.data.message);
             }
         }
     };
 
     const deleteCategories = async () => {
-        errors.value = "";
+        errors.value = [];
         try {
             await axiosClient.delete(
                 `/categories/${JSON.stringify(deleteArray.value)}`
@@ -91,9 +97,11 @@ export default function useCategory() {
             loading.value = 0;
             if (e.response.status == 422) {
                 for (const key in e.response.data.errors)
-                    errors.value += e.response.data.errors[key][0] + "\n";
+                    errors.value.push(
+                        e.response.data.errors[key][0].replace("id", "")
+                    );
             } else {
-                errors.value = e.response.data.message;
+                errors.value.push(e.response.data.message);
             }
         }
     };
@@ -163,7 +171,7 @@ export default function useCategory() {
     };
 
     const cleanErrors = () => {
-        errors.value = "";
+        errors.value = [];
     };
 
     return {

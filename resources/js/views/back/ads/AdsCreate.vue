@@ -1,29 +1,39 @@
 <script setup>
 import { computed, onMounted, reactive } from "vue";
+import { useRouter } from "vue-router";
 import DropZone from "@/components/media/DropZone.vue";
 import useAnnouncement from "@/services/announcementServices";
+import useCategory from "@/services/categoryServices";
 import useCurrency from "@/services/currencyServices";
 import useCountry from "@/services/countryServices";
 import useCity from "@/services/cityServices";
 import SelectFilter from "@/components/SelectFilter.vue";
+import { useAuthenticateStore } from "@/stores/authenticate";
 
+const authenticateStore = useAuthenticateStore();
+const router = useRouter();
 const { errors, loading, announcements, cleanErrors, createAnnouncement } =
     useAnnouncement();
+const { categories, getCategories } = useCategory();
 const { cities, getCities } = useCity();
 const { countries, getCountries } = useCountry();
 const { currencies, getCurrencies } = useCurrency();
 const announcement = reactive({
+    user: JSON.stringify(authenticateStore.user),
     country_id: "",
+    category_id: "",
     city_id: "",
     currency_id: 3,
     type: "offer",
     title: "",
     price: "",
+    description: "",
     status: 1,
-    files: [],
+    images: [],
 });
 
 onMounted(async () => {
+    await getCategories();
     await getCountries();
     await getCities();
     await getCurrencies();
@@ -34,17 +44,12 @@ const filteredCity = computed(() =>
 );
 
 async function storeAnnouncement() {
-    let data = new FormData();
-    data.append("title", announcement.title);
-    data.append("type", announcement.type);
-    data.append("price", announcement.price);
-    data.append("status", announcement.status);
-    data.append("files", announcement.files);
-    data.append("country_id", announcement.country_id);
-    data.append("country_id", announcement.country_id);
-    data.append("city_id", announcement.city_id);
-    data.append("currency_id", announcement.currency_id);
-    createAnnouncement({ ...data });
+    await createAnnouncement({ ...announcement });
+    if (errors.value.length != 0) {
+        router.replace({ name: "admin.ads.create", hash: "#errors" });
+    } else {
+        router.push({ name: "admin.ads.index" });
+    }
 }
 </script>
 <template>
@@ -63,9 +68,44 @@ async function storeAnnouncement() {
                         <input
                             type="text"
                             id="title"
+                            required
                             v-model="announcement.title"
                             class="block w-full rounded border border-gray-300 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
                         />
+                    </div>
+
+                    <div class="col-span-2">
+                        <label
+                            for="title"
+                            class="mb-2 block text-sm font-medium text-gray-900"
+                            >Category</label
+                        >
+                        <select
+                            id="type"
+                            v-model="announcement.category_id"
+                            required
+                            class="form-select block w-full rounded border border-gray-300 p-2.5 text-sm text-gray-900 focus:border-indigo-500 focus:ring-indigo-500"
+                        >
+                            <template
+                                v-for="(category, index) in categories"
+                                :key="category.id"
+                            >
+                                <option :value="category.id">
+                                    {{ category.name }}
+                                </option>
+                                <option
+                                    class="pl-4"
+                                    v-if="category.children.length != 0"
+                                    v-for="(
+                                        subCategory, i
+                                    ) in category.children"
+                                    :key="subCategory.id"
+                                    :value="subCategory.id"
+                                >
+                                    - {{ subCategory.name }}
+                                </option>
+                            </template>
+                        </select>
                     </div>
 
                     <div class="col-span-2 lg:col-span-1">
@@ -78,6 +118,7 @@ async function storeAnnouncement() {
                             v-model="announcement.country_id"
                             :data="countries"
                             :placeholder="'Select Country'"
+                            :required="true"
                             :className="'w-full h-full mt-1 block rounded-md border bg-white  border-gray-300 p-2.5 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 text-sm'"
                         />
                     </div>
@@ -93,6 +134,7 @@ async function storeAnnouncement() {
                             :data="filteredCity"
                             :resetField="true"
                             :placeholder="'Select City'"
+                            :required="true"
                             :className="'w-full h-full mt-1 block rounded-md border bg-white  border-gray-300 p-2.5 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 text-sm'"
                         />
                     </div>
@@ -106,6 +148,7 @@ async function storeAnnouncement() {
                         <select
                             id="type"
                             v-model="announcement.type"
+                            required
                             class="form-select block w-full rounded border border-gray-300 p-2.5 text-sm text-gray-900 focus:border-indigo-500 focus:ring-indigo-500"
                         >
                             <option value="offer">Offre</option>
@@ -123,11 +166,13 @@ async function storeAnnouncement() {
                             <input
                                 type="price"
                                 id="title"
+                                required
                                 v-model="announcement.price"
                                 class="block w-4/5 rounded-l border border-gray-300 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
                             />
                             <select
                                 id="currency"
+                                required
                                 v-model="announcement.currency_id"
                                 class="form-select block w-1/5 rounded-r border border-gray-300 p-2.5 text-sm text-gray-900 focus:border-indigo-500 focus:ring-indigo-500"
                             >
@@ -150,7 +195,7 @@ async function storeAnnouncement() {
                         >
                         <div class="mt-1 w-full">
                             <DropZone
-                                v-model="announcement.files"
+                                v-model="announcement.images"
                                 :multiple="true"
                             />
                         </div>
@@ -166,7 +211,9 @@ async function storeAnnouncement() {
                         <div class="mt-1">
                             <textarea
                                 id="description"
-                                rows="3"
+                                v-model="announcement.description"
+                                rows="5"
+                                required
                                 class="mt-1 block w-full rounded-md border border-gray-300 p-2.5 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 placeholder=""
                             />
