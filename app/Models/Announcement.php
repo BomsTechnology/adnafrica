@@ -11,6 +11,7 @@ class Announcement extends Model
 
     protected $fillable = [
         'title',
+        'slug',
         'description',
         'price',
         'type',
@@ -35,5 +36,10 @@ class Announcement extends Model
     public function country()
     {
         return $this->belongsTo(Country::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(Image::class);
     }
 }

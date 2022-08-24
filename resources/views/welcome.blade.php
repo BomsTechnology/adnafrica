@@ -13,7 +13,6 @@
 <body class="bg-gray-50 font-montserrat">
 
     <div id="app">
-        <App></App>
     </div>
 </body>
 

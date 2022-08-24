@@ -28,7 +28,9 @@ const props = defineProps({
         <div
             class="absolute top-0 z-50 flex w-full items-center justify-between py-6 px-8"
         >
-            <h1 class="text-lg font-bold text-gray-600">05 Photos</h1>
+            <h1 class="text-lg font-bold text-gray-600">
+                {{ props.list.length }} Photos
+            </h1>
 
             <div class="flex items-center justify-center space-x-2">
                 <button
@@ -66,16 +68,18 @@ const props = defineProps({
             <swiper-slide
                 class="h-full"
                 v-for="ads in props.list"
-                :key="ads.name"
+                :key="ads.path"
             >
                 <div
                     class="relative mx-auto mt-8 h-full overflow-hidden rounded-lg shadow lg:w-[1000px]"
                 >
-                    <img
-                        :src="ads.image"
-                        class="h-full w-full bg-cover object-cover"
-                        alt=""
-                    />
+                    <a :href="ads.path" target="_blank">
+                        <img
+                            :src="ads.path"
+                            class="h-full w-full object-cover"
+                            alt=""
+                        />
+                    </a>
                 </div>
             </swiper-slide>
         </swiper>
@@ -106,11 +110,11 @@ const props = defineProps({
             <swiper-slide
                 class="h-full"
                 v-for="ads in props.list"
-                :key="ads.name"
+                :key="ads.path"
             >
                 <div class="h-full w-full overflow-hidden rounded-lg">
                     <img
-                        :src="ads.image"
+                        :src="ads.path"
                         class="h-full w-full bg-cover object-cover"
                         alt=""
                     />
@@ -119,7 +123,7 @@ const props = defineProps({
         </swiper>
     </div>
 </template>
-<style>
+<style scoped>
 .mySwiper {
     height: 20%;
     box-sizing: border-box;

@@ -152,11 +152,11 @@ const autoList = [
             <CarrousselCategory />
         </div>
     </section>
-    <section class="py-14 px-4 md:px-28">
+    <!-- <section class="py-14 px-4 md:px-28">
         <div>
             <h1 class="text-2xl font-bold">D'après vos dernières recherches</h1>
             <CarrousselAds :list="cuisineList" :category="'Cuisine'" />
             <CarrousselAds :list="autoList" :category="'Automobile'" />
         </div>
-    </section>
+    </section> -->
 </template>

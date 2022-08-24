@@ -1,3 +1,8 @@
+<script>
+export default {
+    inheritAttrs: false,
+};
+</script>
 <script setup>
 import Ping from "./Ping.vue";
 import {
@@ -17,7 +22,9 @@ import {
 import { ref, onMounted, reactive } from "vue";
 import useCategory from "@/services/categoryServices";
 import { onClickOutside } from "@vueuse/core";
+import { useAuthenticateStore } from "@/stores/authenticate";
 
+const authenticateStore = useAuthenticateStore();
 const { loading, categories, getCategories } = useCategory();
 const open = ref(false);
 const categoryModal = ref(null);
@@ -258,7 +265,25 @@ const selectedSubCategory = async (subCategory) => {
                         /></router-link>
 
                         <router-link
-                            :to="{ name: 'account' }"
+                            v-if="authenticateStore.user"
+                            :to="{
+                                name: 'account',
+                                params: {
+                                    id: authenticateStore.user.id
+                                        ? authenticateStore.user.id
+                                        : '',
+                                    slug: authenticateStore.user.slug
+                                        ? authenticateStore.user.slug
+                                        : '',
+                                },
+                            }"
+                            class="relative"
+                            title="Mon compte"
+                            ><UserIcon class="h-8 w-8"
+                        /></router-link>
+                        <router-link
+                            :to="{ name: 'login' }"
+                            v-else
                             class="relative"
                             title="Mon compte"
                             ><UserIcon class="h-8 w-8"
@@ -321,7 +346,26 @@ const selectedSubCategory = async (subCategory) => {
                     </router-link>
                     <hr class="my-6 h-px border-none bg-gray-300" />
                     <router-link
-                        :to="{ name: 'account' }"
+                        v-if="authenticateStore.user"
+                        :to="{
+                            name: 'account',
+                            params: {
+                                id: authenticateStore.user.id
+                                    ? authenticateStore.user.id
+                                    : '',
+                                slug: authenticateStore.user.slug
+                                    ? authenticateStore.user.slug
+                                    : '',
+                            },
+                        }"
+                        class="mx-1 flex w-full transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
+                    >
+                        <UserIcon class="h-6 w-6" />
+                        <span>Mon Compte</span>
+                    </router-link>
+                    <router-link
+                        v-else
+                        :to="{ name: 'login' }"
                         class="mx-1 flex w-full transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
                     >
                         <UserIcon class="h-6 w-6" />

@@ -54,8 +54,9 @@ const routes = [
         },
     },
     {
-        path: "/ads",
+        path: "/ads/:id/:slug",
         name: "ads.single",
+        props: true,
         components: {
             default: SingleAds,
             navbar: NavBar,
@@ -93,7 +94,8 @@ const routes = [
         },
     },
     {
-        path: "/account",
+        path: "/account/:id/:slug",
+        props: true,
         name: "account",
         components: {
             default: Account,
@@ -295,6 +297,14 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     const authenticateStore = useAuthenticateStore();
 
+    if (to.params.slug) {
+        document.title =
+            `${to.params.slug[0].toUpperCase()}${to.params.slug
+                .replaceAll("-", " ")
+                .slice(1)} | ` + siteName;
+    } else {
+        document.title = to.meta.title;
+    }
     if (
         to.meta.isAdmin &&
         (!authenticateStore.user || authenticateStore.user.type != "admin") &&
@@ -307,10 +317,6 @@ router.beforeEach((to, from, next) => {
     } else {
         next();
     }
-});
-
-router.afterEach((to) => {
-    document.title = to.meta.title;
 });
 
 export default router;

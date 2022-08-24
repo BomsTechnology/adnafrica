@@ -1,39 +1,28 @@
-import axios from "axios";
 import { ref } from "vue";
 import { axiosClient, axiosClientFile } from "@/axios";
 
-export default function useAnnouncement() {
+export default function useUser() {
     const errors = ref([]);
     const loading = ref(0);
-    const announcements = ref([]);
-    const announcement = ref([]);
+    const users = ref([]);
+    const user = ref([]);
     const deleteArray = ref([]);
     const chks = ref([]);
     const chkAll = ref(false);
 
-    const getFormData = (object) =>
-        Object.entries(object).reduce((fd, [key, val]) => {
-            if (Array.isArray(val)) {
-                val.forEach((v) => fd.append(`${key}[]`, v.file));
-            } else {
-                fd.append(key, val);
-            }
-            return fd;
-        }, new FormData());
-
-    const getAnnouncements = async () => {
+    const getUsers = async () => {
         errors.value = [];
         chks.value = [];
         try {
             loading.value = 1;
-            let response = await axiosClient.get("/announcements");
-            announcements.value = response.data.data;
+            let response = await axiosClient.get("/users");
+            users.value = response.data.data;
             loading.value = 2;
-            announcements.value.forEach((announcement) => {
+
+            users.value.forEach((user) => {
                 chks.value.push({
-                    id: announcement.id,
+                    id: user.id,
                     value: false,
-                    children: [],
                 });
             });
         } catch (e) {
@@ -49,11 +38,11 @@ export default function useAnnouncement() {
         }
     };
 
-    const createAnnouncement = async (data) => {
+    const createUser = async (data) => {
         errors.value = [];
         try {
             loading.value = 1;
-            await axiosClientFile.post("/announcements", getFormData(data));
+            await axiosClient.post("/users", data);
             loading.value = 2;
         } catch (e) {
             loading.value = 0;
@@ -68,11 +57,11 @@ export default function useAnnouncement() {
         }
     };
 
-    const updateAnnouncement = async (data, id) => {
+    const updateUser = async (data, id) => {
         errors.value = [];
         try {
             loading.value = 1;
-            await axiosClientFile.post(`/announcements/${id}`, data);
+            await axiosClient.put(`/users/${id}`, data);
             loading.value = 2;
         } catch (e) {
             loading.value = 0;
@@ -87,14 +76,14 @@ export default function useAnnouncement() {
         }
     };
 
-    const deleteAnnouncements = async () => {
+    const deleteUsers = async () => {
         errors.value = [];
         try {
             await axiosClient.delete(
-                `/announcements/${JSON.stringify(deleteArray.value)}`
+                `/users/${JSON.stringify(deleteArray.value)}`
             );
             deleteArray.value = [];
-            await getAnnouncements();
+            await getUsers();
         } catch (e) {
             loading.value = 0;
             if (e.response.status == 422) {
@@ -119,15 +108,15 @@ export default function useAnnouncement() {
 
     const checkAll = async () => {
         if (chkAll.value) {
-            chks.value.forEach((announcement) => {
-                if (!announcement.value) {
-                    announcement.value = true;
-                    deleteArray.value.push(announcement.id);
+            chks.value.forEach((user) => {
+                if (!user.value) {
+                    user.value = true;
+                    deleteArray.value.push(user.id);
                 }
             });
         } else {
-            chks.value.forEach((announcement) => {
-                announcement.value = false;
+            chks.value.forEach((user) => {
+                user.value = false;
             });
             deleteArray.value = [];
         }
@@ -137,40 +126,13 @@ export default function useAnnouncement() {
         errors.value = [];
     };
 
-    const getAnnouncement = async (id) => {
+    const getUser = async (id) => {
         errors.value = [];
         try {
             loading.value = 1;
-            let response = await axiosClient.get(`/announcements/${id}`);
-            announcement.value = response.data.data;
+            let response = await axiosClient.get(`/users/${id}`);
+            user.value = response.data.data;
             loading.value = 2;
-        } catch (e) {
-            loading.value = 0;
-            if (e.response.status == 422) {
-                for (const key in e.response.data.errors)
-                    errors.value.push(
-                        e.response.data.errors[key][0].replace("id", "")
-                    );
-            } else {
-                errors.value.push(e.response.data.message);
-            }
-        }
-    };
-
-    const getAnnouncementUser = async (id) => {
-        errors.value = [];
-        try {
-            loading.value = 1;
-            let response = await axiosClient.get(`/announcements-user/${id}`);
-            announcements.value = response.data.data;
-            loading.value = 2;
-            announcements.value.forEach((announcement) => {
-                chks.value.push({
-                    id: announcement.id,
-                    value: false,
-                    children: [],
-                });
-            });
         } catch (e) {
             loading.value = 0;
             if (e.response.status == 422) {
@@ -191,14 +153,13 @@ export default function useAnnouncement() {
         loading,
         checkAll,
         cleanErrors,
-        announcement,
-        announcements,
-        getAnnouncement,
-        getAnnouncements,
+        user,
+        users,
+        getUser,
+        getUsers,
+        updateUser,
+        createUser,
+        deleteUsers,
         toogleDeleteArray,
-        updateAnnouncement,
-        createAnnouncement,
-        deleteAnnouncements,
-        getAnnouncementUser,
     };
 }

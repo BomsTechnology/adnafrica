@@ -12,6 +12,10 @@ const props = defineProps({
         type: Boolean,
         default: true,
     },
+    subCategory: {
+        type: Boolean,
+        default: false,
+    },
     className: {
         type: String,
         default: "",
@@ -33,16 +37,47 @@ const emit = defineEmits(["update:modelValue", "resetValue"]);
 const open = ref(false);
 const search = ref("");
 const itemModal = ref(null);
+const subCategory = ref(false);
 const selectItem = reactive({
     id: "",
     name: "",
 });
 
-const filteredData = computed(() =>
-    props.data.filter((item) =>
+const filteredData = computed(() => {
+    let data = props.data.filter((item) =>
         item.name.toLowerCase().includes(search.value.toLowerCase())
-    )
-);
+    );
+    if (data.length != 0) {
+        subCategory.value = props.subCategory;
+        return data;
+    } else if (props.subCategory) {
+        subCategory.value = false;
+        data = props.data.filter((item) =>
+            item.name.toLowerCase().includes(search.value.toLowerCase())
+        );
+        if (data.length != 0) {
+            return data;
+        } else {
+            data = [];
+            for (let i = 0; i < props.data.length; i++) {
+                if (props.data[i].children.length != 0) {
+                    props.data[i].children.forEach((element) => {
+                        if (
+                            element.name
+                                .toLowerCase()
+                                .includes(search.value.toLowerCase())
+                        ) {
+                            data.push(element);
+                        }
+                    });
+                }
+            }
+            return data;
+        }
+    } else {
+        return [];
+    }
+});
 
 async function changeValue(item) {
     selectItem.id = item.id;
@@ -61,11 +96,29 @@ async function resetValue() {
 
 watch(props, async (newProps, oldProps) => {
     if (newProps.modelValue) {
-        let currentData = newProps.data.find(
-            (item) => item.id == newProps.modelValue
-        );
-        selectItem.id = currentData.id;
-        selectItem.name = currentData.name;
+        if (!props.subCategory) {
+            let currentData = newProps.data.find(
+                (item) => item.id == newProps.modelValue
+            );
+            selectItem.id = currentData.id;
+            selectItem.name = currentData.name;
+        } else {
+            for (let i = 0; i < newProps.data.length; i++) {
+                if (newProps.data[i].id == newProps.modelValue) {
+                    selectItem.id = newProps.data[i].id;
+                    selectItem.name = newProps.data[i].name;
+                    i = newProps.data.length;
+                } else if (newProps.data[i].children.length != 0) {
+                    newProps.data[i].children.forEach((element) => {
+                        if (element.id == newProps.modelValue) {
+                            selectItem.id = element.id;
+                            selectItem.name = element.name;
+                            i = newProps.data.length;
+                        }
+                    });
+                }
+            }
+        }
     } else {
         resetValue();
     }
@@ -109,10 +162,46 @@ onClickOutside(itemModal, () => {
                 >
                     {{ placeholder }}
                 </span>
-                <span
-                    v-if="filteredData.length != 0"
+                <template
+                    v-if="filteredData.length != 0 && subCategory"
                     v-for="(item, index) in filteredData"
                     :key="index"
+                >
+                    <span
+                        class="block w-full bg-gray-50 px-3 py-2 font-bold text-gray-900"
+                    >
+                        {{ item.name }}
+                    </span>
+                    <div>
+                        <span
+                            @click="changeValue(item)"
+                            :class="[
+                                selectItem.id == item.id
+                                    ? 'block w-full cursor-pointer bg-blue-400 py-2 pr-3 pl-8 font-semibold text-white hover:bg-gray-100 hover:text-gray-900'
+                                    : 'block w-full cursor-pointer py-2 pr-3 pl-8 hover:bg-gray-100 hover:font-semibold hover:text-gray-900',
+                            ]"
+                        >
+                            {{ item.name }}
+                        </span>
+                        <span
+                            v-if="item.children.length != 0"
+                            v-for="subitem in item.children"
+                            :key="subitem.id"
+                            @click="changeValue(subitem)"
+                            :class="[
+                                selectItem.id == subitem.id
+                                    ? 'block w-full cursor-pointer bg-blue-400 py-2 pr-3 pl-8 font-semibold text-white hover:bg-gray-100 hover:text-gray-900'
+                                    : 'block w-full cursor-pointer py-2 pr-3 pl-8 hover:bg-gray-100 hover:font-semibold hover:text-gray-900',
+                            ]"
+                        >
+                            {{ subitem.name }}
+                        </span>
+                    </div>
+                </template>
+                <span
+                    v-else-if="filteredData.length != 0"
+                    v-for="(item, index) in filteredData"
+                    :key="item.id"
                     @click="changeValue(item)"
                     :class="[
                         selectItem.id == item.id ||

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Notifications\EmailVerficationNotification;
 use Illuminate\Auth\Events\Registered;
@@ -110,7 +111,7 @@ class AuthController extends Controller
             'status' => true,
             'message' => 'Login successful!',
             'data' => [
-                'user' => $user,
+                'user' => new UserResource($user),
                 'token' => $token
             ]
         ];
@@ -137,7 +138,9 @@ class AuthController extends Controller
             'status' => true,
             'message' => 'Login successful!',
             'data' => [
-                'user' => $admin,
+                'user' => new UserResource(
+                    $admin
+                ),
                 'token' => $token
             ]
         ];

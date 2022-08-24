@@ -12,8 +12,7 @@ import { useAuthenticateStore } from "@/stores/authenticate";
 
 const authenticateStore = useAuthenticateStore();
 const router = useRouter();
-const { errors, loading, announcements, cleanErrors, createAnnouncement } =
-    useAnnouncement();
+const { errors, loading, cleanErrors, createAnnouncement } = useAnnouncement();
 const { categories, getCategories } = useCategory();
 const { cities, getCities } = useCity();
 const { countries, getCountries } = useCountry();
@@ -80,32 +79,14 @@ async function storeAnnouncement() {
                             class="mb-2 block text-sm font-medium text-gray-900"
                             >Category</label
                         >
-                        <select
-                            id="type"
+                        <SelectFilter
                             v-model="announcement.category_id"
-                            required
-                            class="form-select block w-full rounded border border-gray-300 p-2.5 text-sm text-gray-900 focus:border-indigo-500 focus:ring-indigo-500"
-                        >
-                            <template
-                                v-for="(category, index) in categories"
-                                :key="category.id"
-                            >
-                                <option :value="category.id">
-                                    {{ category.name }}
-                                </option>
-                                <option
-                                    class="pl-4"
-                                    v-if="category.children.length != 0"
-                                    v-for="(
-                                        subCategory, i
-                                    ) in category.children"
-                                    :key="subCategory.id"
-                                    :value="subCategory.id"
-                                >
-                                    - {{ subCategory.name }}
-                                </option>
-                            </template>
-                        </select>
+                            :data="categories"
+                            :placeholder="'Select category'"
+                            :required="true"
+                            :subCategory="true"
+                            :className="'w-full h-full mt-1 block rounded-md border bg-white  border-gray-300 p-2.5 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 text-sm'"
+                        />
                     </div>
 
                     <div class="col-span-2 lg:col-span-1">

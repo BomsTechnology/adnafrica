@@ -7,8 +7,10 @@ use App\Http\Requests\AnnouncementRequest;
 use App\Http\Resources\AnnouncementResource;
 use App\Models\Announcement;
 use App\Models\Image;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image as ImageInt;
 
 class AnnouncementController extends Controller
@@ -36,7 +38,7 @@ class AnnouncementController extends Controller
     {
 
         foreach ($images as $image) {
-            $filename = "/uploads/ads/{$user->id}_{$user->firstname}/" . str_replace(" ", "_", strtolower($title)) . '_' . time() . '.' . $image->extension();
+            $filename = "/uploads/ads/{$user->id}_{$user->firstname}/" . Str::slug($title, '_') . '_' . time() . '.' . $image->extension();
             Storage::disk('public')->put($filename, fopen($image, 'r+'));
 
             $imagePath = public_path($filename);
@@ -71,6 +73,7 @@ class AnnouncementController extends Controller
         $user = json_decode($request->user);
         $ads =  Announcement::create([
             "title" => $data["title"],
+            "slug" => Str::slug($data["title"]),
             "description" => $data["description"],
             "price" => $data["price"],
             "type" => $data["type"],
@@ -82,6 +85,8 @@ class AnnouncementController extends Controller
             "user_id" => $user->id,
         ]);
         $this->saveImages($request->images, $data['title'], $ads->id, $user);
+
+        return new AnnouncementResource($ads);
     }
 
     /**
@@ -92,7 +97,7 @@ class AnnouncementController extends Controller
      */
     public function show(Announcement $announcement)
     {
-        //
+        return new AnnouncementResource($announcement);
     }
 
     /**
@@ -105,6 +110,17 @@ class AnnouncementController extends Controller
     public function update(AnnouncementRequest $request, Announcement $announcement)
     {
         //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function byUser(User  $user)
+    {
+        return AnnouncementResource::collection($user->announcements()->get());
     }
 
     /**

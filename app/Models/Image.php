@@ -13,4 +13,9 @@ class Image extends Model
         'path',
         'announcement_id'
     ];
+
+    public function announcement()
+    {
+        return $this->belongsTo(Announcement::class);
+    }
 }

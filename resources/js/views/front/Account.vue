@@ -7,16 +7,26 @@ import {
     SwitchHorizontalIcon,
     AdjustmentsIcon,
 } from "@heroicons/vue/solid";
+import useUser from "@/services/userServices";
 import AccountAds from "@/components/AccountAds.vue";
 import AccountSetting from "@/components/AccountSetting.vue";
 import AccountTransaction from "@/components/AccountTransaction.vue";
 import { useAuthenticateStore } from "@/stores/authenticate";
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
 
+const props = defineProps({
+    id: String,
+    slug: String,
+});
+const { errors, loading, user, getUser } = useUser();
 const open = reactive({
     ads: true,
     transaction: false,
     setting: false,
+});
+
+onMounted(async () => {
+    await getUser(props.id);
 });
 
 const authenticateStore = useAuthenticateStore();
@@ -50,36 +60,34 @@ function changeTab(tab) {
                 class="flex flex-col items-center space-x-2 py-3 px-2 text-center lg:flex-row lg:text-left"
             >
                 <div class="mr-2 h-28 w-28 overflow-hidden rounded-full">
+                    <Spin v-if="loading == 1" />
                     <img
-                        src="/images/icone/default_avatar.svg"
+                        v-else
+                        :src="user.avatar"
                         class="h-full w-full bg-cover object-cover"
                         alt=""
                     />
                 </div>
-                <div>
+                <div v-if="loading == 2">
                     <h2 class="text-justify text-xl font-bold text-gray-800">
-                        {{ authenticateStore.user.firstname }}
-                        <span v-if="authenticateStore.user.lastname">
-                            {{ authenticateStore.user.lastname }}</span
-                        >
+                        {{ user.firstname }}
+                        <span v-if="user.lastname"> {{ user.lastname }}</span>
                     </h2>
                     <h3 class="mt-1 text-sm font-semibold text-gray-600">
                         A rejoint adnafrica en
                         {{
-                            new Date(
-                                authenticateStore.user.created_at
-                            ).toLocaleDateString("fr-FR", {
+                            new Date(user.date).toLocaleDateString("fr-FR", {
                                 year: "numeric",
                                 month: "long",
                             })
                         }}
                     </h3>
-                    <!-- <h4
+                    <h4
                         class="mt-1 flex items-center space-x-1 text-xs font-light text-gray-400"
                     >
                         <LocationMarkerIcon class="h-3 w-3" />
                         <span>Douala Bonamousadi</span>
-                    </h4> -->
+                    </h4>
                 </div>
             </div>
             <div class="flex justify-center lg:flex-col">
@@ -190,7 +198,7 @@ function changeTab(tab) {
                 leave-to-class=" -translate-x-full opacity-0"
                 mode="out-in"
             >
-                <div v-if="open.ads"><AccountAds /></div>
+                <div v-if="open.ads"><AccountAds :user-id="props.id" /></div>
                 <div v-if="open.transaction"><AccountSetting /></div>
                 <div v-if="open.setting"><AccountTransaction /></div>
             </transition-group>

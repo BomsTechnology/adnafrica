@@ -25,6 +25,7 @@ const category = reactive({
     parent: null,
 });
 const image = ref(null);
+const showSubCat = ref(true);
 const search = ref("");
 const isEdit = ref(false);
 
@@ -51,11 +52,32 @@ const saveCategory = async () => {
         image.value ? (image.value.value = null) : (image.value = null);
     }
 };
-const filteredCategory = computed(() =>
-    categories.value.filter((category) =>
-        category.name.toLowerCase().includes(search.value.toLowerCase())
-    )
-);
+const filteredCategory = computed(() => {
+    let data = categories.value.filter((item) =>
+        item.name.toLowerCase().includes(search.value.toLowerCase())
+    );
+    if (data.length != 0) {
+        showSubCat.value = true;
+        return data;
+    } else {
+        showSubCat.value = false;
+        data = [];
+        for (let i = 0; i < categories.value.length; i++) {
+            if (categories.value[i].children.length != 0) {
+                categories.value[i].children.forEach((element) => {
+                    if (
+                        element.name
+                            .toLowerCase()
+                            .includes(search.value.toLowerCase())
+                    ) {
+                        data.push(element);
+                    }
+                });
+            }
+        }
+        return data;
+    }
+});
 const selectCategory = async (cat) => {
     category.image = cat.image;
     category.name = cat.name;
@@ -321,7 +343,10 @@ onMounted(async () => {
                                     </td>
                                 </tr>
                                 <tr
-                                    v-if="category.children.length != 0"
+                                    v-if="
+                                        showSubCat &&
+                                        category.children.length != 0
+                                    "
                                     v-for="(
                                         subCategory, i
                                     ) in category.children"
@@ -331,6 +356,7 @@ onMounted(async () => {
                                     <td class="w-4 p-4">
                                         <div class="flex items-center">
                                             <input
+                                                v-if="chks[index].children[i]"
                                                 id="checkbox-table-search-1"
                                                 v-model="
                                                     chks[index].children[i]

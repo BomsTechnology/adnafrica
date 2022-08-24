@@ -282,7 +282,7 @@ onMounted(async () => {
                                     <img
                                         :src="country.image"
                                         :alt="country.name"
-                                        class="h-10 w-10 object-cover"
+                                        class="h-5 w-8 object-cover"
                                     />
                                 </td>
                                 <td class="px-6 py-4 text-right">

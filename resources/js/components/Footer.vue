@@ -1,3 +1,8 @@
+<script>
+export default {
+    inheritAttrs: false,
+};
+</script>
 <script setup>
 import { ArrowCircleUpIcon } from "@heroicons/vue/solid";
 const goTop = () => {

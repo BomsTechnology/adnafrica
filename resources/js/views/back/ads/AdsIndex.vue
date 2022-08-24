@@ -5,7 +5,49 @@ import {
     PlusCircleIcon,
     TrashIcon,
 } from "@heroicons/vue/solid";
-import { reactive } from "vue";
+import useAnnouncement from "@/services/announcementServices";
+import useCategory from "@/services/categoryServices";
+import { computed, onMounted, reactive, ref } from "vue";
+import SelectFilter from "@/components/SelectFilter.vue";
+
+const { categories, getCategories } = useCategory();
+const {
+    chks,
+    chkAll,
+    errors,
+    loading,
+    checkAll,
+    cleanErrors,
+    announcements,
+    getAnnouncements,
+    deleteAnnouncements,
+    toogleDeleteArray,
+} = useAnnouncement();
+const search = reactive({ words: "", category: "" });
+
+const filteredAnnouncement = computed(() => {
+    if (search.category) {
+        return announcements.value.filter((announcement) =>
+            announcement.title
+                .toLowerCase()
+                .includes(
+                    search.words.toLowerCase() &&
+                        announcement.category.id == search.category
+                )
+        );
+    } else {
+        return announcements.value.filter((announcement) =>
+            announcement.title
+                .toLowerCase()
+                .includes(search.words.toLowerCase())
+        );
+    }
+});
+
+onMounted(async () => {
+    await getAnnouncements();
+    await getCategories();
+});
 </script>
 
 <template>
@@ -22,6 +64,7 @@ import { reactive } from "vue";
                 <span>Add Ads</span>
             </router-link>
         </div>
+        <Error :errors="errors" @cleanErrors="cleanErrors" />
         <div
             class="relative w-full overflow-x-auto bg-white shadow-md sm:rounded-lg"
         >
@@ -50,34 +93,26 @@ import { reactive } from "vue";
                         <input
                             type="search"
                             id="table-search"
+                            v-model="search.words"
                             class="dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 block w-full rounded border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 lg:w-80"
                             placeholder="Search for items"
                         />
                     </div>
-                    <div
-                        class="flex cursor-pointer items-center justify-between rounded border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 hover:bg-gray-100"
-                    >
-                        <div>
-                            <TableIcon class="h-5 w-5 text-gray-400" />
-                        </div>
-                        <div class="mx-4">Catégorie</div>
-                        <div>
-                            <ChevronDownIcon class="h-5 w-5 text-gray-400" />
-                        </div>
-                    </div>
-                    <div>
-                        <button
-                            type="submit"
-                            class="block w-full rounded bg-primary-color px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-secondary-color focus:outline-none focus:ring-4 focus:ring-blue-300"
-                        >
-                            Rechercher
-                        </button>
+                    <div class="">
+                        <SelectFilter
+                            v-model="search.category"
+                            :data="categories"
+                            :placeholder="'Select category'"
+                            :subCategory="true"
+                            :className="'w-full h-full mt-1 block rounded-md border bg-white  border-gray-300 p-2.5 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 text-sm'"
+                        />
                     </div>
                 </div>
                 <div class="mt-1 flex justify-end lg:mt-0 lg:block">
                     <button
                         type="button"
-                        title="options"
+                        title="delete"
+                        @click="deleteAnnouncements()"
                         class="flex items-center justify-between space-x-2 rounded border border-red-500 p-2 text-red-500 hover:bg-red-500 hover:text-white"
                     >
                         <TrashIcon class="h-6 w-6" />
@@ -97,18 +132,20 @@ import { reactive } from "vue";
                         <th scope="col" class="p-4">
                             <div class="flex items-center">
                                 <input
+                                    @change="checkAll()"
+                                    v-model="chkAll"
                                     id="checkbox-all-search"
                                     type="checkbox"
-                                    class="dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
+                                    class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
                                 />
                                 <label for="checkbox-all-search" class="sr-only"
                                     >checkbox</label
                                 >
                             </div>
                         </th>
-                        <th scope="col" class="px-6 py-3">Product name</th>
-                        <th scope="col" class="px-6 py-3">Color</th>
+                        <th scope="col" class="px-6 py-3">Ads title</th>
                         <th scope="col" class="px-6 py-3">Category</th>
+                        <th scope="col" class="px-6 py-3">Country</th>
                         <th scope="col" class="px-6 py-3">Price</th>
                         <th scope="col" class="px-6 py-3">
                             <span class="sr-only">Edit</span>
@@ -116,15 +153,33 @@ import { reactive } from "vue";
                     </tr>
                 </thead>
                 <tbody>
+                    <tr v-if="loading == 1">
+                        <td colspan="6">
+                            <div
+                                class="flex w-full items-center justify-center p-3 text-center"
+                            >
+                                <Spin
+                                    :width="'w-10'"
+                                    :height="'h-10'"
+                                    :color="'text-primary-color'"
+                                />
+                            </div>
+                        </td>
+                    </tr>
                     <tr
-                        class="dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600 border-b bg-white hover:bg-gray-50"
+                        v-else-if="filteredAnnouncement.length != 0"
+                        v-for="(announcement, index) in filteredAnnouncement"
+                        :key="announcement.id"
+                        class="border-b bg-white hover:bg-gray-50"
                     >
                         <td class="w-4 p-4">
                             <div class="flex items-center">
                                 <input
+                                    v-model="chks[index].value"
+                                    @change="toogleDeleteArray(index)"
                                     id="checkbox-table-search-1"
                                     type="checkbox"
-                                    class="dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
+                                    class="-600 h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
                                 />
                                 <label
                                     for="checkbox-table-search-1"
@@ -135,87 +190,45 @@ import { reactive } from "vue";
                         </td>
                         <th
                             scope="row"
-                            class="dark:text-white whitespace-nowrap px-6 py-4 font-medium text-gray-900"
+                            class="whitespace-nowrap px-6 py-4 font-medium text-gray-900"
                         >
-                            Apple MacBook Pro 17"
+                            {{ announcement.title }}
                         </th>
-                        <td class="px-6 py-4">Sliver</td>
-                        <td class="px-6 py-4">Laptop</td>
-                        <td class="px-6 py-4">$2999</td>
+                        <td class="px-6 py-4">
+                            {{ announcement.category.name }}
+                        </td>
+
+                        <td class="px-6 py-4">
+                            <img
+                                :src="announcement.country.image"
+                                :alt="announcement.country.name"
+                                class="h-5 w-8 object-cover"
+                            />
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ announcement.price }}
+                            {{ announcement.currency.symbol }}
+                        </td>
                         <td class="px-6 py-4 text-right">
-                            <a
-                                href="#"
+                            <router-link
+                                :to="{
+                                    name: 'ads.single',
+                                    params: {
+                                        id: announcement.id,
+                                        slug: announcement.slug,
+                                    },
+                                }"
                                 class="dark:text-blue-500 font-medium text-blue-600 hover:underline"
-                                >Edit</a
+                                >view</router-link
                             >
                         </td>
                     </tr>
-                    <tr
-                        class="dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600 border-b bg-white hover:bg-gray-50"
-                    >
-                        <td class="w-4 p-4">
-                            <div class="flex items-center">
-                                <input
-                                    id="checkbox-table-search-2"
-                                    type="checkbox"
-                                    class="dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
-                                />
-                                <label
-                                    for="checkbox-table-search-2"
-                                    class="sr-only"
-                                    >checkbox</label
-                                >
-                            </div>
-                        </td>
-                        <th
-                            scope="row"
-                            class="dark:text-white whitespace-nowrap px-6 py-4 font-medium text-gray-900"
+                    <tr v-else>
+                        <td
+                            colspan="6"
+                            class="p-3 text-center text-2xl font-bold"
                         >
-                            Microsoft Surface Pro
-                        </th>
-                        <td class="px-6 py-4">White</td>
-                        <td class="px-6 py-4">Laptop PC</td>
-                        <td class="px-6 py-4">$1999</td>
-                        <td class="px-6 py-4 text-right">
-                            <a
-                                href="#"
-                                class="dark:text-blue-500 font-medium text-blue-600 hover:underline"
-                                >Edit</a
-                            >
-                        </td>
-                    </tr>
-                    <tr
-                        class="dark:bg-gray-800 dark:hover:bg-gray-600 bg-white hover:bg-gray-50"
-                    >
-                        <td class="w-4 p-4">
-                            <div class="flex items-center">
-                                <input
-                                    id="checkbox-table-search-3"
-                                    type="checkbox"
-                                    class="dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
-                                />
-                                <label
-                                    for="checkbox-table-search-3"
-                                    class="sr-only"
-                                    >checkbox</label
-                                >
-                            </div>
-                        </td>
-                        <th
-                            scope="row"
-                            class="dark:text-white whitespace-nowrap px-6 py-4 font-medium text-gray-900"
-                        >
-                            Magic Mouse 2
-                        </th>
-                        <td class="px-6 py-4">Black</td>
-                        <td class="px-6 py-4">Accessories</td>
-                        <td class="px-6 py-4">$99</td>
-                        <td class="px-6 py-4 text-right">
-                            <a
-                                href="#"
-                                class="dark:text-blue-500 font-medium text-blue-600 hover:underline"
-                                >Edit</a
-                            >
+                            <span>NO ADS</span>
                         </td>
                     </tr>
                 </tbody>
