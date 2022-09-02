@@ -136,7 +136,7 @@ const autoList = [
 </script>
 
 <template>
-    <div class="px-4 text-center">
+    <div class="mt-10 px-4 text-center">
         <h1 class="text-2xl font-bold lg:text-3xl">
             Retrouvez vos entreprises africaines et annonces classées
         </h1>

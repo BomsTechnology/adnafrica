@@ -5,7 +5,7 @@ import {
     OfficeBuildingIcon,
     EyeIcon,
     HomeIcon,
-} from "@heroicons/vue/outline";
+} from "@heroicons/vue/24/outline";
 import useAuth from "@/services/authServices.js";
 import { useAuthenticateStore } from "@/stores/authenticate";
 import LeaveModal from "@/components/LeaveModal.vue";
@@ -157,7 +157,7 @@ const toogleShowCPassword = async () => {
 <template>
     <DialogsWrapper />
     <Goback />
-    <section class="mb-16">
+    <section class="mb-16 mt-10">
         <div
             class="dark:bg-gray-800 relative m-auto w-full max-w-sm rounded-md bg-white p-6 shadow-md"
         >

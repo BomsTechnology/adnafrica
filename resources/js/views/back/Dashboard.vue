@@ -5,7 +5,7 @@ import {
     UserGroupIcon,
     ClipboardListIcon,
     QuestionMarkCircleIcon,
-} from "@heroicons/vue/solid";
+} from "@heroicons/vue/24/solid";
 </script>
 
 <template>

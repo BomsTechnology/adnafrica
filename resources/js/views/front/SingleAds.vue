@@ -3,7 +3,7 @@ import { onMounted, ref } from "vue";
 import CarrousselAds from "@/components/CarrousselAds.vue";
 import {
     ShareIcon,
-    LocationMarkerIcon,
+    MapPinIcon,
     ExclamationIcon,
     HashtagIcon,
     StarIcon,
@@ -11,9 +11,9 @@ import {
     PhoneIcon,
     ChatAltIcon,
     CurrencyEuroIcon,
-} from "@heroicons/vue/solid";
+} from "@heroicons/vue/24/solid";
 import Slider from "@/components/Slider.vue";
-import { HeartIcon } from "@heroicons/vue/outline";
+import { HeartIcon } from "@heroicons/vue/24/outline";
 import useAnnouncement from "@/services/announcementServices";
 const { errors, loading, cleanErrors, announcement, getAnnouncement } =
     useAnnouncement();
@@ -104,7 +104,7 @@ const cuisineList = [
         <div v-else>
             <Goback />
             <nav
-                class="fixed top-0 z-40 hidden w-full bg-white p-4 shadow-lg lg:px-28"
+                class="fixed top-0 z-40 mt-10 hidden w-full bg-white p-4 shadow-lg lg:px-28"
                 id="navAds"
             >
                 <div class="flex items-center justify-between">
@@ -407,7 +407,7 @@ const cuisineList = [
                                     <h1
                                         class="flex space-x-3 text-lg font-semibold"
                                     >
-                                        <LocationMarkerIcon class="h-6 w-6" />
+                                        <MapPinIcon class="h-6 w-6" />
                                         <span>Douala Bonamousadi</span>
                                     </h1>
                                     <div

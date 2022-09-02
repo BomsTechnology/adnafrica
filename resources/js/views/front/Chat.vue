@@ -1,13 +1,13 @@
 <script setup>
 import {
-    SearchIcon,
+    MagnifyingGlassIcon,
     TrashIcon,
     PaperAirplaneIcon,
     HashtagIcon,
-    LocationMarkerIcon,
+    MapPinIcon,
     ChatAlt2Icon,
     DotsCircleHorizontalIcon,
-} from "@heroicons/vue/solid";
+} from "@heroicons/vue/24/solid";
 import { reactive } from "vue";
 const open = reactive({
     chat: true,
@@ -41,7 +41,7 @@ function changeView(view) {
         <Goback />
     </div>
 
-    <section class="px-4 md:px-28">
+    <section class="mt-10 px-4 md:px-28">
         <div
             class="relative mb-10 flex h-[600px] w-full rounded-lg bg-white shadow-lg"
         >
@@ -76,7 +76,7 @@ function changeView(view) {
                     <div
                         class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
                     >
-                        <SearchIcon class="h-5 w-5 text-gray-500" />
+                        <MagnifyingGlassIcon class="h-5 w-5 text-gray-500" />
                     </div>
                     <input
                         type="text"
@@ -179,7 +179,7 @@ function changeView(view) {
                     <div
                         class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
                     >
-                        <SearchIcon class="h-5 w-5 text-gray-500" />
+                        <MagnifyingGlassIcon class="h-5 w-5 text-gray-500" />
                     </div>
                     <input
                         type="text"
@@ -473,7 +473,7 @@ function changeView(view) {
                         <h1
                             class="text-md flex items-center space-x-3 font-semibold"
                         >
-                            <LocationMarkerIcon class="h-4 w-4" />
+                            <MapPinIcon class="h-4 w-4" />
                             <span>Douala Bonamousadi</span>
                         </h1>
                         <div
@@ -592,7 +592,7 @@ function changeView(view) {
                         <h1
                             class="text-md flex items-center space-x-3 font-semibold"
                         >
-                            <LocationMarkerIcon class="h-4 w-4" />
+                            <MapPinIcon class="h-4 w-4" />
                             <span>Douala Bonamousadi</span>
                         </h1>
                         <div

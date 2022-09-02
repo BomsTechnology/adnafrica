@@ -8,6 +8,7 @@ const SingleAds = () => import("@/views/front/SingleAds.vue");
 const Chat = () => import("@/views/front/Chat.vue");
 const Favorite = () => import("@/views/front/Favorite.vue");
 const Account = () => import("@/views/front/Account.vue");
+const Company = () => import("@/views/front/Company.vue");
 const DashHome = () => import("@/views/back/DashHome.vue");
 const NavBar = () => import("@/components/Navbar.vue");
 const Footer = () => import("@/components/Footer.vue");
@@ -104,6 +105,20 @@ const routes = [
         },
         meta: {
             title: siteName + " - ads",
+            requiresAuth: true,
+        },
+    },
+    {
+        path: "/company/:id?/:slug?",
+        props: true,
+        name: "company",
+        components: {
+            default: Company,
+            navbar: NavBar,
+            footer: Footer,
+        },
+        meta: {
+            title: siteName + " - Company",
             requiresAuth: true,
         },
     },

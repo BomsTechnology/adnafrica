@@ -6,8 +6,8 @@ import "swiper/css/navigation";
 import "swiper/css/free-mode";
 import "swiper/css/thumbs";
 import { FreeMode, Navigation, Zoom, Thumbs } from "swiper";
-import { XIcon, CurrencyEuroIcon } from "@heroicons/vue/solid";
-import { HeartIcon } from "@heroicons/vue/outline";
+import { XMarkIcon, CurrencyEuroIcon } from "@heroicons/vue/24/solid";
+import { HeartIcon } from "@heroicons/vue/24/outline";
 import { ref } from "vue";
 
 const modules = [FreeMode, Navigation, Thumbs, Zoom];
@@ -49,7 +49,7 @@ const props = defineProps({
                     <HeartIcon class="h-7 w-7 bg-transparent text-pink-500" />
                 </button>
                 <button @click="props.tooglSlider()">
-                    <XIcon class="h-8 w-8 text-gray-600" />
+                    <XMarkIcon class="h-8 w-8 text-gray-600" />
                 </button>
             </div>
         </div>

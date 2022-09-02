@@ -1,16 +1,16 @@
 <script setup>
 import {
     StarIcon,
-    SpeakerphoneIcon,
-    LocationMarkerIcon,
-    DotsVerticalIcon,
-    SwitchHorizontalIcon,
-    AdjustmentsIcon,
-} from "@heroicons/vue/solid";
+    MegaphoneIcon,
+    MapPinIcon,
+    EllipsisVerticalIcon,
+    ArrowsRightLeftIcon,
+    AdjustmentsHorizontalIcon,
+} from "@heroicons/vue/24/solid";
 import useUser from "@/services/userServices";
-import AccountAds from "@/components/AccountAds.vue";
-import AccountSetting from "@/components/AccountSetting.vue";
-import AccountTransaction from "@/components/AccountTransaction.vue";
+import AccountAds from "@/components/account/AccountAds.vue";
+import AccountSetting from "@/components/account/AccountSetting.vue";
+import AccountTransaction from "@/components/account/AccountTransaction.vue";
 import { useAuthenticateStore } from "@/stores/authenticate";
 import { reactive, onMounted } from "vue";
 
@@ -52,7 +52,7 @@ function changeTab(tab) {
 </script>
 
 <template>
-    <div class="px-4 md:px-28">
+    <div class="mt-10 px-4 md:px-28">
         <div
             class="flex w-full flex-col items-center justify-between rounded-lg bg-white py-2 px-8 lg:h-48 lg:flex-row"
         >
@@ -85,7 +85,7 @@ function changeTab(tab) {
                     <h4
                         class="mt-1 flex items-center space-x-1 text-xs font-light text-gray-400"
                     >
-                        <LocationMarkerIcon class="h-3 w-3" />
+                        <MapPinIcon class="h-3 w-3" />
                         <span>Douala Bonamousadi</span>
                     </h4>
                 </div>
@@ -96,7 +96,7 @@ function changeTab(tab) {
                     title="options"
                     class="flex items-center justify-center space-x-2 rounded border border-primary-color p-2 text-primary-color hover:bg-primary-color hover:text-white"
                 >
-                    <DotsVerticalIcon class="h-6 w-6" />
+                    <EllipsisVerticalIcon class="h-6 w-6" />
                     <span class="hidden text-sm font-thin lg:block"
                         >Options</span
                     >
@@ -133,7 +133,7 @@ function changeTab(tab) {
                         ]"
                     >
                         <span
-                            ><SpeakerphoneIcon
+                            ><MegaphoneIcon
                                 :class="[
                                     open.ads
                                         ? 'mr-2 h-5 w-5 text-primary-color'
@@ -155,7 +155,7 @@ function changeTab(tab) {
                         aria-current="page"
                     >
                         <span
-                            ><SwitchHorizontalIcon
+                            ><ArrowsRightLeftIcon
                                 :class="[
                                     open.transaction
                                         ? 'mr-2 h-5 w-5 text-primary-color'
@@ -176,7 +176,7 @@ function changeTab(tab) {
                         ]"
                     >
                         <span
-                            ><AdjustmentsIcon
+                            ><AdjustmentsHorizontalIcon
                                 :class="[
                                     open.setting
                                         ? 'mr-2 h-5 w-5 text-primary-color'

@@ -17,7 +17,7 @@ const login = async () => {
 
 <template>
     <Goback />
-    <section class="mb-16">
+    <section class="mb-16 mt-10">
         <div class="m-auto w-full max-w-sm rounded-md bg-white p-6 shadow-md">
             <h1 class="text-center text-3xl font-semibold text-gray-700">
                 Se Connecter

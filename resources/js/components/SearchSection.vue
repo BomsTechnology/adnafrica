@@ -2,12 +2,12 @@
 import {
     ChevronDownIcon,
     ChevronRightIcon,
-    SearchIcon,
-    LocationMarkerIcon,
-    CollectionIcon,
-    ViewBoardsIcon,
+    MagnifyingGlassIcon,
+    MapPinIcon,
+    RectangleStackIcon,
+    ViewColumnsIcon,
     ArrowLeftIcon,
-} from "@heroicons/vue/solid";
+} from "@heroicons/vue/24/solid";
 import { ref, onMounted, reactive } from "vue";
 import useCategory from "@/services/categoryServices";
 import {
@@ -204,7 +204,7 @@ const returnCategory = async () => {
             </div>
             <div class="relative lg:col-span-2">
                 <span class="absolute left-3 top-3"
-                    ><ViewBoardsIcon class="h-6 w-6 text-gray-400"
+                    ><ViewColumnsIcon class="h-6 w-6 text-gray-400"
                 /></span>
                 <select
                     class="form-selec block w-full rounded border border-gray-300 bg-gray-50 py-3 pl-12 text-sm text-gray-900 focus:border-primary-color focus:ring-primary-color"
@@ -219,7 +219,7 @@ const returnCategory = async () => {
                 class="flex w-full cursor-pointer items-center justify-between overflow-x-hidden rounded border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 hover:bg-gray-100 lg:col-span-2"
             >
                 <div>
-                    <CollectionIcon class="h-6 w-6 text-gray-400" />
+                    <RectangleStackIcon class="h-6 w-6 text-gray-400" />
                 </div>
                 <div class="w-full whitespace-nowrap pl-4">
                     <span v-if="selectCategory.subCategory == 'all'">
@@ -235,7 +235,7 @@ const returnCategory = async () => {
             </div>
             <div class="relative lg:col-span-2">
                 <span class="absolute left-3 top-3"
-                    ><SearchIcon class="h-6 w-6 text-gray-400"
+                    ><MagnifyingGlassIcon class="h-6 w-6 text-gray-400"
                 /></span>
                 <input
                     type="text"
@@ -246,7 +246,7 @@ const returnCategory = async () => {
             </div>
             <div class="relative lg:col-span-2">
                 <span class="absolute left-3 top-2"
-                    ><LocationMarkerIcon class="h-6 w-6 text-gray-400"
+                    ><MapPinIcon class="h-6 w-6 text-gray-400"
                 /></span>
                 <input
                     type="text"
@@ -260,7 +260,7 @@ const returnCategory = async () => {
                     type="submit"
                     class="flex w-full justify-center rounded bg-primary-color px-5 py-3 text-center text-sm font-medium text-white hover:bg-secondary-color focus:outline-none focus:ring-4 focus:ring-blue-300"
                 >
-                    <SearchIcon class="h-6 w-6" />
+                    <MagnifyingGlassIcon class="h-6 w-6" />
                 </button>
             </div>
         </div>

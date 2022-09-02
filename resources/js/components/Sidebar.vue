@@ -1,12 +1,12 @@
 <script setup>
 import {
-    CollectionIcon,
+    RectangleStackIcon,
     ChevronDownIcon,
     UserGroupIcon,
     ClipboardListIcon,
     QuestionMarkCircleIcon,
     CurrencyEuroIcon,
-    SpeakerphoneIcon,
+    MegaphoneIcon,
     GlobeIcon,
     OfficeBuildingIcon,
     ChevronUpIcon,
@@ -15,9 +15,9 @@ import {
     HomeIcon,
     ViewGridIcon,
     MenuAlt2Icon,
-    XIcon,
-} from "@heroicons/vue/solid";
-import { CogIcon, LogoutIcon, UserCircleIcon } from "@heroicons/vue/outline";
+    XMarkIcon,
+} from "@heroicons/vue/24/solid";
+import { CogIcon, LogoutIcon, UserCircleIcon } from "@heroicons/vue/24/outline";
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthenticateStore } from "@/stores/authenticate";
@@ -47,7 +47,7 @@ const open = reactive({
         >
             <div
                 v-if="open.menu"
-                class="fixed flex h-screen w-64 flex-col overflow-y-auto no-scrollbar overflow-x-hidden bg-primary-color py-4"
+                class="no-scrollbar fixed flex h-screen w-64 flex-col overflow-y-auto overflow-x-hidden bg-primary-color py-4"
             >
                 <h2 class="text-center text-2xl font-bold text-white">
                     Adnafrica
@@ -102,7 +102,7 @@ const open = reactive({
                                 class="mt-2 flex w-full transform items-center justify-between px-4 py-2 text-white transition-colors duration-200 hover:bg-gray-200 hover:text-gray-700"
                             >
                                 <div class="flex items-center">
-                                    <SpeakerphoneIcon class="h-5 w-5" />
+                                    <MegaphoneIcon class="h-5 w-5" />
                                     <span class="mx-4 font-medium">Ads</span>
                                 </div>
 
@@ -142,7 +142,7 @@ const open = reactive({
                                         :to="{ name: 'admin.category' }"
                                         class="flex transform items-center px-4 py-2 text-gray-700 transition-colors duration-200 hover:bg-gray-200 hover:text-gray-700"
                                     >
-                                        <CollectionIcon class="h-5 w-5" />
+                                        <RectangleStackIcon class="h-5 w-5" />
 
                                         <span class="mx-4 font-medium"
                                             >Categories</span
@@ -226,7 +226,7 @@ const open = reactive({
             class="fixed top-0 block rounded-r-lg bg-primary-color p-2 text-white"
         >
             <MenuAlt2Icon v-if="!open.menu" class="h-7 w-7" />
-            <XIcon v-else class="h-7 w-7" />
+            <XMarkIcon v-else class="h-7 w-7" />
         </button>
     </div>
 </template>

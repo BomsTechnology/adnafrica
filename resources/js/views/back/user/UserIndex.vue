@@ -1,10 +1,10 @@
 <script setup>
 import {
-    TableIcon,
+    TableCellsIcon,
     ChevronDownIcon,
     UserAddIcon,
     TrashIcon,
-} from "@heroicons/vue/solid";
+} from "@heroicons/vue/24/solid";
 import { reactive } from "vue";
 </script>
 
@@ -58,7 +58,7 @@ import { reactive } from "vue";
                         class="flex cursor-pointer items-center justify-between rounded border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 hover:bg-gray-100"
                     >
                         <div>
-                            <TableIcon class="h-5 w-5 text-gray-400" />
+                            <TableCellsIcon class="h-5 w-5 text-gray-400" />
                         </div>
                         <div class="mx-4">Catégorie</div>
                         <div>

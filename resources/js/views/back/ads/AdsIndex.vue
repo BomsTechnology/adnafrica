@@ -1,10 +1,10 @@
 <script setup>
 import {
-    TableIcon,
+    TableCellsIcon,
     ChevronDownIcon,
     PlusCircleIcon,
     TrashIcon,
-} from "@heroicons/vue/solid";
+} from "@heroicons/vue/24/solid";
 import useAnnouncement from "@/services/announcementServices";
 import useCategory from "@/services/categoryServices";
 import { computed, onMounted, reactive, ref } from "vue";

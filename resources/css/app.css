@@ -14,24 +14,6 @@
     @apply !text-xs !font-bold md:!text-lg;
 }
 
-.noScroll {
-    @apply w-full bg-primary-color text-white;
-}
-
-.isScroll {
-    @apply fixed top-0 w-full bg-white/90 text-gray-800 shadow-lg;
-}
-
-.noScroll .add-ads {
-    @apply text-primary-color;
-}
-.isScroll .add-ads {
-    @apply border !border-gray-800 hover:!bg-white hover:!text-gray-800;
-}
-
-.isScrollMobile {
-    @apply fixed top-14 mt-10 w-full;
-}
 /* width */
 ::-webkit-scrollbar {
     width: 10px;

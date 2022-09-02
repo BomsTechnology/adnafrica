@@ -3,8 +3,8 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper";
-import { SpeakerphoneIcon } from "@heroicons/vue/solid";
-import { HeartIcon } from "@heroicons/vue/outline";
+import { MegaphoneIcon } from "@heroicons/vue/24/solid";
+import { HeartIcon } from "@heroicons/vue/24/outline";
 import { ref } from "vue";
 
 const modules = [Navigation];
@@ -34,7 +34,7 @@ const toogleFavorite = () => {
         v-if="props.category != null"
         class="mt-8 flex w-auto items-center space-x-2 py-4 font-semibold text-gray-500 decoration-primary-color decoration-dotted decoration-2 hover:underline hover:underline-offset-2"
     >
-        <span><SpeakerphoneIcon class="h-6 w-6 rotate-[-25deg]" /></span>
+        <span><MegaphoneIcon class="h-6 w-6 rotate-[-25deg]" /></span>
         <span>{{ props.category }}</span>
     </h1>
     <swiper

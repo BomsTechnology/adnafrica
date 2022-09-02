@@ -1,5 +1,5 @@
 <script setup>
-import { CloudUploadIcon } from "@heroicons/vue/solid";
+import { CloudUploadIcon } from "@heroicons/vue/24/solid";
 import { ref } from "vue";
 import UploadList from "./UploadList.vue";
 

@@ -1,11 +1,11 @@
 <script setup>
 import {
-    TableIcon,
+    TableCellsIcon,
     ChevronDownIcon,
-    TrendingDownIcon,
-    TrendingUpIcon,
+    ArrowTrendingDownIcon,
+    ArrowTrendingUpIcon,
     TrashIcon,
-} from "@heroicons/vue/solid";
+} from "@heroicons/vue/24/solid";
 import useAnnouncement from "@/services/announcementServices";
 import SelectFilter from "@/components/SelectFilter.vue";
 import useCategory from "@/services/categoryServices";
@@ -93,7 +93,7 @@ function changeTab(tab) {
                     ]"
                 >
                     <span
-                        ><TrendingUpIcon
+                        ><ArrowTrendingUpIcon
                             :class="[
                                 open.online
                                     ? 'mr-2 h-5 w-5 text-primary-color'
@@ -115,7 +115,7 @@ function changeTab(tab) {
                     aria-current="page"
                 >
                     <span
-                        ><TrendingDownIcon
+                        ><ArrowTrendingDownIcon
                             :class="[
                                 open.expired
                                     ? 'mr-2 h-5 w-5 text-primary-color'

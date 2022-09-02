@@ -1,9 +1,9 @@
 <script setup>
-import { HeartIcon } from "@heroicons/vue/solid";
+import { HeartIcon } from "@heroicons/vue/24/solid";
 </script>
 
 <template>
-    <section class="mb-10 px-4 md:px-28">
+    <section class="mb-10 mt-10 px-4 md:px-28">
         <div class="min-h-max">
             <h1 class="text-lg font-bold lg:text-2xl">
                 Retrouvez vos annonces sauvegardées

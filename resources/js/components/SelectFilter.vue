@@ -1,5 +1,5 @@
 <script setup>
-import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/vue/solid";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/vue/24/solid";
 import { computed, reactive, ref, watch } from "vue";
 import { onClickOutside } from "@vueuse/core";
 
