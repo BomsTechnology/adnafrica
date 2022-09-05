@@ -4,12 +4,12 @@ import CarrousselAds from "@/components/CarrousselAds.vue";
 import {
     ShareIcon,
     MapPinIcon,
-    ExclamationIcon,
+    ExclamationTriangleIcon,
     HashtagIcon,
     StarIcon,
     ChevronRightIcon,
     PhoneIcon,
-    ChatAltIcon,
+    ChatBubbleLeftEllipsisIcon,
     CurrencyEuroIcon,
 } from "@heroicons/vue/24/solid";
 import Slider from "@/components/Slider.vue";
@@ -90,6 +90,15 @@ const cuisineList = [
         image: "/images/ads/cuisine/7.jpg",
     },
 ];
+const isScroll = ref(false);
+document.addEventListener("scroll", function () {
+    let bodyTopPosition = document.body.getBoundingClientRect().top;
+    if (bodyTopPosition < -150) {
+        isScroll.value = true;
+    } else {
+        isScroll.value = false;
+    }
+});
 </script>
 
 <template>
@@ -104,8 +113,11 @@ const cuisineList = [
         <div v-else>
             <Goback />
             <nav
-                class="fixed top-0 z-40 mt-10 hidden w-full bg-white p-4 shadow-lg lg:px-28"
-                id="navAds"
+                :class="[
+                    isScroll
+                        ? 'fixed top-0 z-40  w-full bg-white p-4 shadow-lg lg:px-28'
+                        : 'hidden',
+                ]"
             >
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-2">
@@ -490,7 +502,9 @@ const cuisineList = [
                                         title="Signaler"
                                         class="flex items-center justify-center rounded bg-white p-2 hover:scale-95 hover:bg-gray-100"
                                     >
-                                        <ExclamationIcon class="mr-2 h-5 w-5" />
+                                        <ExclamationTriangleIcon
+                                            class="mr-2 h-5 w-5"
+                                        />
                                         <span class="text-sm"
                                             >Signaler l'annonce</span
                                         >
@@ -576,7 +590,9 @@ const cuisineList = [
                                 title="Envoyer un message"
                                 class="flex w-full items-center justify-center rounded bg-blue-500 p-2 text-white hover:bg-blue-400"
                             >
-                                <ChatAltIcon class="mr-2 h-5 w-5" />
+                                <ChatBubbleLeftEllipsisIcon
+                                    class="mr-2 h-5 w-5"
+                                />
                                 <span class="text-sm">Envoyer un message</span>
                             </button>
                             <button

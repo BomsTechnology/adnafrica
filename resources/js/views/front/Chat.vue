@@ -5,8 +5,8 @@ import {
     PaperAirplaneIcon,
     HashtagIcon,
     MapPinIcon,
-    ChatAlt2Icon,
-    DotsCircleHorizontalIcon,
+    ChatBubbleLeftRightIcon,
+    EllipsisHorizontalCircleIcon,
 } from "@heroicons/vue/24/solid";
 import { reactive } from "vue";
 const open = reactive({
@@ -55,7 +55,7 @@ function changeView(view) {
                         : 'absolute -left-2 top-2 z-10 rounded-full border border-primary-color bg-white p-2 text-primary-color shadow lg:hidden',
                 ]"
             >
-                <ChatAlt2Icon class="h-5 w-5" />
+                <ChatBubbleLeftRightIcon class="h-5 w-5" />
             </button>
             <button
                 @click="changeView('detail')"
@@ -66,7 +66,7 @@ function changeView(view) {
                         : 'absolute -right-2 top-2 z-10 rounded-full border border-primary-color bg-white p-2 text-primary-color shadow lg:hidden',
                 ]"
             >
-                <DotsCircleHorizontalIcon class="h-5 w-5" />
+                <EllipsisHorizontalCircleIcon class="h-5 w-5" />
             </button>
             <!-- end  mobile button change view -->
 

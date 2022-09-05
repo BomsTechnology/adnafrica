@@ -10,7 +10,7 @@ import {
     GlobeIcon,
     OfficeBuildingIcon,
     ChevronUpIcon,
-    ChatAlt2Icon,
+    ChatBubbleLeftRightIcon,
     StarIcon,
     HomeIcon,
     ViewGridIcon,
@@ -213,7 +213,7 @@ const open = reactive({
                             :to="{ name: 'admin.message' }"
                             class="mt-2 flex transform items-center px-4 py-2 text-white transition-colors duration-200 hover:bg-gray-200 hover:text-gray-700"
                         >
-                            <ChatAlt2Icon class="h-5 w-5" />
+                            <ChatBubbleLeftRightIcon class="h-5 w-5" />
 
                             <span class="mx-4 font-medium">Messages</span>
                         </router-link>

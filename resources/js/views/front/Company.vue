@@ -10,9 +10,68 @@ import {
     GlobeAltIcon,
 } from "@heroicons/vue/24/outline";
 import { Cog6ToothIcon, StarIcon, HeartIcon } from "@heroicons/vue/24/solid";
+import { ref } from "vue";
+
+const isScroll = ref(false);
+document.addEventListener("scroll", function () {
+    let bodyTopPosition = document.body.getBoundingClientRect().top;
+    if (bodyTopPosition < -300) {
+        isScroll.value = true;
+    } else {
+        isScroll.value = false;
+    }
+});
 </script>
 <template>
     <section>
+        <nav
+            :class="[
+                isScroll
+                    ? 'fixed top-0 z-40  w-full bg-white  shadow-lg lg:px-28'
+                    : 'hidden',
+            ]"
+        >
+            <div
+                class="flex w-full overflow-x-auto py-3 px-2 text-xs font-semibold text-gray-800 md:text-sm"
+            >
+                <h1 class="mr-4 text-xl font-bold text-gray-800">
+                    Mon Entreprise
+                </h1>
+                <a
+                    href="#about"
+                    class="flex items-center space-x-1 border-x border-gray-800 px-4 hover:font-bold"
+                    ><span><QuestionMarkCircleIcon class="h-5 w-5" /></span
+                    ><span class="hidden lg:block">A propos</span></a
+                >
+                <a
+                    href="#services"
+                    class="flex items-center space-x-1 border-r border-gray-800 px-4 hover:font-bold"
+                    ><span><ClockIcon class="h-5 w-5" /></span
+                    ><span class="hidden lg:block">Horaires / Services</span></a
+                >
+                <a
+                    href="#pictures"
+                    class="flex items-center space-x-1 border-r border-gray-800 px-4 hover:font-bold"
+                >
+                    <span><PhotoIcon class="h-5 w-5" /></span>
+                    <span class="hidden lg:block">Image de l'entreprise</span>
+                </a>
+                <a
+                    href="#ads"
+                    class="flex items-center space-x-1 border-r border-gray-800 px-4 hover:font-bold"
+                >
+                    <span><MegaphoneIcon class="h-5 w-5" /></span>
+                    <span class="hidden lg:block"> Annonces (0)</span>
+                </a>
+                <a
+                    href="#rating"
+                    class="flex items-center space-x-1 border-r border-gray-800 px-4 hover:font-bold"
+                >
+                    <span><DocumentTextIcon class="h-5 w-5" /></span>
+                    <span class="hidden lg:block"> Avis (0)</span>
+                </a>
+            </div>
+        </nav>
         <div class="w-full">
             <div
                 class="h-60 w-full bg-cover pt-10"

@@ -18,16 +18,27 @@ import {
     MapPinIcon,
     ChevronRightIcon,
 } from "@heroicons/vue/24/solid";
-import { ref } from "vue";
+import { ref, watch, onMounted } from "vue";
 import { useAuthenticateStore } from "@/stores/authenticate";
 import { ArrowUpCircleIcon } from "@heroicons/vue/24/solid";
+import { useRoute, useRouter } from "vue-router";
+import router from "@/router";
 
+const route = useRoute();
+const currentRoute = ref("");
+watch(route, (nRoute, oRoute) => {
+    currentRoute.value = nRoute.name;
+});
+onMounted(async () => {
+    currentRoute.value = route.name;
+});
 const authenticateStore = useAuthenticateStore();
 const open = ref(false);
 
 const isScroll = ref(false);
-document.addEventListener("scroll", function () {
+document.addEventListener("scroll", async function () {
     let bodyTopPosition = document.body.getBoundingClientRect().top;
+    // await router.isReady();
     if (bodyTopPosition < -150) {
         isScroll.value = true;
     } else {
@@ -47,7 +58,9 @@ const goTop = () => {
 <template>
     <nav
         :class="[
-            isScroll
+            isScroll &&
+            currentRoute != 'ads.single' &&
+            currentRoute != 'company'
                 ? 'fixed top-0 z-40  w-full bg-white/90 text-gray-800 shadow-lg'
                 : 'z-40 w-full bg-primary-color text-white',
         ]"
