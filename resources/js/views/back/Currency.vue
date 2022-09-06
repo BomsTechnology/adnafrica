@@ -1,8 +1,7 @@
 <script setup>
 import { TrashIcon } from "@heroicons/vue/24/solid";
 import { reactive, ref, onMounted, computed } from "vue";
-import useCurrency from "@/services/currencyServices";
-import Spin from "@/components/Spin.vue";
+import useCurrency from "@/composables/currencyServices";
 
 const {
     chks,

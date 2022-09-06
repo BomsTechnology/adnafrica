@@ -6,10 +6,11 @@ import {
     XMarkIcon,
     ChevronRightIcon,
     ArrowLeftIcon,
+    BuildingOffice2Icon,
 } from "@heroicons/vue/24/solid";
 import { ref, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
-import useSearch from "@/services/searchServices";
+import useSearch from "@/composables/searchServices";
 
 const {
     mount,
@@ -307,10 +308,13 @@ watch(route, async (newRoute, oldRoute) => {
                 >
                     <div class="border border-gray-200 p-2">
                         <div class="h-32 w-32 overflow-hidden">
-                            <img
+                            <!-- <img
                                 src="/images/avatar/1.jpg"
                                 alt=""
                                 class="h-full w-full object-cover"
+                            /> -->
+                            <BuildingOffice2Icon
+                                class="h-full w-full text-gray-500"
                             />
                         </div>
                     </div>

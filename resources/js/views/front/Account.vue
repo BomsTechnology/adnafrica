@@ -7,7 +7,7 @@ import {
     ArrowsRightLeftIcon,
     AdjustmentsHorizontalIcon,
 } from "@heroicons/vue/24/solid";
-import useUser from "@/services/userServices";
+import useUser from "@/composables/userServices";
 import AccountAds from "@/components/account/AccountAds.vue";
 import AccountSetting from "@/components/account/AccountSetting.vue";
 import AccountTransaction from "@/components/account/AccountTransaction.vue";

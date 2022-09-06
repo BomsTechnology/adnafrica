@@ -3,7 +3,7 @@ import { onMounted, ref } from "vue";
 
 import {
     UserGroupIcon,
-    ClipboardListIcon,
+    ClipboardDocumentListIcon,
     QuestionMarkCircleIcon,
 } from "@heroicons/vue/24/solid";
 </script>
@@ -45,7 +45,7 @@ import {
                 <div
                     class="flex h-36 items-center justify-center space-x-6 rounded-lg bg-white p-4 text-emerald-500 shadow"
                 >
-                    <div><ClipboardListIcon class="h-12 w-12" /></div>
+                    <div><ClipboardDocumentListIcon class="h-12 w-12" /></div>
                     <div class="text-center text-2xl font-bold">
                         <h2></h2>
                         <h1>Reservations</h1>

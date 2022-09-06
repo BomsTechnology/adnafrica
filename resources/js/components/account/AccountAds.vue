@@ -6,9 +6,9 @@ import {
     ArrowTrendingUpIcon,
     TrashIcon,
 } from "@heroicons/vue/24/solid";
-import useAnnouncement from "@/services/announcementServices";
+import useAnnouncement from "@/composables/announcementServices";
 import SelectFilter from "@/components/SelectFilter.vue";
-import useCategory from "@/services/categoryServices";
+import useCategory from "@/composables/categoryServices";
 import { computed, reactive, watch, onMounted } from "vue";
 
 const props = defineProps({

@@ -1,8 +1,7 @@
 <script setup>
 import { TrashIcon } from "@heroicons/vue/24/solid";
 import { reactive, ref, onMounted, computed } from "vue";
-import useCategory from "@/services/categoryServices";
-import Spin from "@/components/Spin.vue";
+import useCategory from "@/composables/categoryServices";
 
 const {
     chks,

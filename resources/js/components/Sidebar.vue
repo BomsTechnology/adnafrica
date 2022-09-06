@@ -3,21 +3,25 @@ import {
     RectangleStackIcon,
     ChevronDownIcon,
     UserGroupIcon,
-    ClipboardListIcon,
+    ClipboardDocumentListIcon,
     QuestionMarkCircleIcon,
     CurrencyEuroIcon,
     MegaphoneIcon,
-    GlobeIcon,
-    OfficeBuildingIcon,
+    GlobeEuropeAfricaIcon,
+    BuildingOfficeIcon,
     ChevronUpIcon,
     ChatBubbleLeftRightIcon,
     StarIcon,
     HomeIcon,
-    ViewGridIcon,
-    MenuAlt2Icon,
+    Squares2X2Icon,
+    Bars3BottomLeftIcon,
     XMarkIcon,
 } from "@heroicons/vue/24/solid";
-import { CogIcon, LogoutIcon, UserCircleIcon } from "@heroicons/vue/24/outline";
+import {
+    CogIcon,
+    ArrowLeftOnRectangleIcon,
+    UserCircleIcon,
+} from "@heroicons/vue/24/outline";
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthenticateStore } from "@/stores/authenticate";
@@ -81,7 +85,7 @@ const open = reactive({
                             title="logout"
                             class="rounded-full p-2 text-white hover:bg-gray-50 hover:text-gray-700"
                         >
-                            <LogoutIcon class="h-6 w-6" />
+                            <ArrowLeftOnRectangleIcon class="h-6 w-6" />
                         </button>
                     </div>
                 </div>
@@ -132,7 +136,7 @@ const open = reactive({
                                         :to="{ name: 'admin.ads.index' }"
                                         class="flex transform items-center rounded-t-lg px-4 py-2 text-gray-700 transition-colors duration-200 hover:bg-gray-200 hover:text-gray-700"
                                     >
-                                        <ViewGridIcon class="h-5 w-5" />
+                                        <Squares2X2Icon class="h-5 w-5" />
 
                                         <span class="mx-4 font-medium"
                                             >All Ads</span
@@ -162,7 +166,9 @@ const open = reactive({
                                         :to="{ name: 'admin.country' }"
                                         class="flex transform items-center rounded-b-lg px-4 py-2 text-gray-700 transition-colors duration-200 hover:bg-gray-200 hover:text-gray-700"
                                     >
-                                        <GlobeIcon class="h-5 w-5" />
+                                        <GlobeEuropeAfricaIcon
+                                            class="h-5 w-5"
+                                        />
 
                                         <span class="mx-4 font-medium"
                                             >Country</span
@@ -172,7 +178,7 @@ const open = reactive({
                                         :to="{ name: 'admin.city' }"
                                         class="flex transform items-center rounded-b-lg px-4 py-2 text-gray-700 transition-colors duration-200 hover:bg-gray-200 hover:text-gray-700"
                                     >
-                                        <OfficeBuildingIcon class="h-5 w-5" />
+                                        <BuildingOfficeIcon class="h-5 w-5" />
 
                                         <span class="mx-4 font-medium"
                                             >City</span
@@ -195,7 +201,7 @@ const open = reactive({
                             :to="{ name: 'admin.feedback' }"
                             class="mt-2 flex transform items-center px-4 py-2 text-white transition-colors duration-200 hover:bg-gray-200 hover:text-gray-700"
                         >
-                            <ClipboardListIcon class="h-5 w-5" />
+                            <ClipboardDocumentListIcon class="h-5 w-5" />
 
                             <span class="mx-4 font-medium">Feedback</span>
                         </router-link>
@@ -225,7 +231,7 @@ const open = reactive({
             @click="open.menu = !open.menu"
             class="fixed top-0 block rounded-r-lg bg-primary-color p-2 text-white"
         >
-            <MenuAlt2Icon v-if="!open.menu" class="h-7 w-7" />
+            <Bars3BottomLeftIcon v-if="!open.menu" class="h-7 w-7" />
             <XMarkIcon v-else class="h-7 w-7" />
         </button>
     </div>

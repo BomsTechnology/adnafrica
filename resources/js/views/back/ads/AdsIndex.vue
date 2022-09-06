@@ -5,8 +5,8 @@ import {
     PlusCircleIcon,
     TrashIcon,
 } from "@heroicons/vue/24/solid";
-import useAnnouncement from "@/services/announcementServices";
-import useCategory from "@/services/categoryServices";
+import useAnnouncement from "@/composables/announcementServices";
+import useCategory from "@/composables/categoryServices";
 import { computed, onMounted, reactive, ref } from "vue";
 import SelectFilter from "@/components/SelectFilter.vue";
 

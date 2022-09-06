@@ -2,11 +2,11 @@
 import { computed, onMounted, reactive } from "vue";
 import { useRouter } from "vue-router";
 import DropZone from "@/components/media/DropZone.vue";
-import useAnnouncement from "@/services/announcementServices";
-import useCategory from "@/services/categoryServices";
-import useCurrency from "@/services/currencyServices";
-import useCountry from "@/services/countryServices";
-import useCity from "@/services/cityServices";
+import useAnnouncement from "@/composables/announcementServices";
+import useCategory from "@/composables/categoryServices";
+import useCurrency from "@/composables/currencyServices";
+import useCountry from "@/composables/countryServices";
+import useCity from "@/composables/cityServices";
 import SelectFilter from "@/components/SelectFilter.vue";
 import { useAuthenticateStore } from "@/stores/authenticate";
 

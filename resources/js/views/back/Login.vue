@@ -1,5 +1,5 @@
 <script setup>
-import useAuth from "@/services/authServices.js";
+import useAuth from "@/composables/authServices.js";
 import { reactive } from "vue";
 
 const { loginAdmin, errors, loading, cleanErrors } = useAuth();

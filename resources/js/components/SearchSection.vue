@@ -14,7 +14,7 @@ import {
     breakpointsTailwind,
     useBreakpoints,
 } from "@vueuse/core";
-import useSearch from "@/services/searchServices";
+import useSearch from "@/composables/searchServices";
 
 const props = defineProps({
     gender: {

@@ -2,11 +2,11 @@
 import { reactive, ref, onMounted } from "vue";
 import {
     UserIcon,
-    OfficeBuildingIcon,
+    BuildingOfficeIcon,
     EyeIcon,
     HomeIcon,
 } from "@heroicons/vue/24/outline";
-import useAuth from "@/services/authServices.js";
+import useAuth from "@/composables/authServices.js";
 import { useAuthenticateStore } from "@/stores/authenticate";
 import LeaveModal from "@/components/LeaveModal.vue";
 import { createConfirmDialog } from "vuejs-confirm-dialog";
@@ -198,7 +198,7 @@ const toogleShowCPassword = async () => {
                     >
                         <span>Créer un compte professionel</span>
 
-                        <OfficeBuildingIcon class="h-5 w-5" />
+                        <BuildingOfficeIcon class="h-5 w-5" />
                     </button>
                 </div>
                 <!-- level 1 -->

@@ -14,7 +14,7 @@ import {
 } from "@heroicons/vue/24/solid";
 import Slider from "@/components/Slider.vue";
 import { HeartIcon } from "@heroicons/vue/24/outline";
-import useAnnouncement from "@/services/announcementServices";
+import useAnnouncement from "@/composables/announcementServices";
 const { errors, loading, cleanErrors, announcement, getAnnouncement } =
     useAnnouncement();
 const props = defineProps({

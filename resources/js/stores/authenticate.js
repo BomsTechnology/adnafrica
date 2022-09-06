@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-// import useAuth from "@/services/authServices.js";
+// import useAuth from "@/composables/authServices.js";
 // const { sendEmailVerification, sendSmsVerification, errors } = useAuth();
 
 export const useAuthenticateStore = defineStore("authenticate", {

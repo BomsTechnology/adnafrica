@@ -1,5 +1,5 @@
 import { onMounted, reactive } from "vue";
-import useCategory from "@/services/categoryServices";
+import useCategory from "@/composables/categoryServices";
 
 export default function useSearch() {
     const { loading, categories, getCategories } = useCategory();
