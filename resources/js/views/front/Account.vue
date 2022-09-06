@@ -69,7 +69,9 @@ function changeTab(tab) {
                     />
                 </div>
                 <div v-if="loading == 2">
-                    <h2 class="text-justify text-xl font-bold text-gray-800">
+                    <h2
+                        class="mt-3 text-center text-xl font-bold text-gray-800 lg:mt-0"
+                    >
                         {{ user.firstname }}
                         <span v-if="user.lastname"> {{ user.lastname }}</span>
                     </h2>
@@ -83,7 +85,7 @@ function changeTab(tab) {
                         }}
                     </h3>
                     <h4
-                        class="mt-1 flex items-center space-x-1 text-xs font-light text-gray-400"
+                        class="mt-1 flex items-center justify-center space-x-1 text-xs font-light text-gray-400 lg:justify-start"
                     >
                         <MapPinIcon class="h-3 w-3" />
                         <span>Douala Bonamousadi</span>

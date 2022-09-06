@@ -22,9 +22,9 @@ import { ref, watch, onMounted } from "vue";
 import { useAuthenticateStore } from "@/stores/authenticate";
 import { ArrowUpCircleIcon } from "@heroicons/vue/24/solid";
 import { useRoute, useRouter } from "vue-router";
-import router from "@/router";
 
 const route = useRoute();
+const router = useRouter();
 const currentRoute = ref("");
 watch(route, (nRoute, oRoute) => {
     currentRoute.value = nRoute.name;
@@ -34,7 +34,22 @@ onMounted(async () => {
 });
 const authenticateStore = useAuthenticateStore();
 const open = ref(false);
-
+const navigationTo = async (routeName) => {
+    open.value = false;
+    if (routeName == "account") {
+        router.push({
+            name: "account",
+            params: {
+                id: authenticateStore.user.id ? authenticateStore.user.id : "",
+                slug: authenticateStore.user.slug
+                    ? authenticateStore.user.slug
+                    : "",
+            },
+        });
+    } else {
+        router.push({ name: routeName });
+    }
+};
 const isScroll = ref(false);
 document.addEventListener("scroll", async function () {
     let bodyTopPosition = document.body.getBoundingClientRect().top;
@@ -186,13 +201,13 @@ const goTop = () => {
         >
             <div class="items-center bg-white p-4 shadow md:flex" v-if="open">
                 <div class="-mx-1 w-full py-2">
-                    <router-link
-                        :to="{ name: 'login' }"
-                        class="mx-1 flex w-full transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2"
+                    <span
+                        @click="navigationTo('login')"
+                        class="mx-1 flex w-full transform cursor-pointer items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2"
                     >
                         <DocumentPlusIcon class="h-6 w-6" />
                         <span>Déposer une annonce</span>
-                    </router-link>
+                    </span>
                     <hr class="my-6 h-px border-none bg-gray-300" />
                     <!-- <router-link
                         :to="{ name: 'alert' }"
@@ -201,47 +216,37 @@ const goTop = () => {
                         <BellIcon class="h-6 w-6" />
                         <span>Mes Alertes</span>
                     </router-link> -->
-                    <router-link
-                        :to="{ name: 'favorite' }"
-                        class="mx-1 flex w-full transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
+                    <span
+                        @click="navigationTo('favorite')"
+                        class="mx-1 flex w-full transform cursor-pointer items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
                     >
                         <HeartIcon class="h-6 w-6" />
                         <span>Mes Favoris</span>
-                    </router-link>
-                    <router-link
-                        :to="{ name: 'chat' }"
-                        class="mx-1 flex w-full transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
+                    </span>
+                    <span
+                        @click="navigationTo('chat')"
+                        class="mx-1 flex w-full transform cursor-pointer items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
                     >
                         <ChatBubbleOvalLeftEllipsisIcon class="h-6 w-6" />
                         <span>Mes Messages</span>
-                    </router-link>
+                    </span>
                     <hr class="my-6 h-px border-none bg-gray-300" />
-                    <router-link
+                    <span
+                        @click="navigationTo('account')"
                         v-if="authenticateStore.user"
-                        :to="{
-                            name: 'account',
-                            params: {
-                                id: authenticateStore.user.id
-                                    ? authenticateStore.user.id
-                                    : '',
-                                slug: authenticateStore.user.slug
-                                    ? authenticateStore.user.slug
-                                    : '',
-                            },
-                        }"
-                        class="mx-1 flex w-full transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
+                        class="mx-1 flex w-full transform cursor-pointer items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
                     >
                         <UserIcon class="h-6 w-6" />
                         <span>Mon Compte</span>
-                    </router-link>
-                    <router-link
+                    </span>
+                    <span
+                        @click="navigationTo('login')"
                         v-else
-                        :to="{ name: 'login' }"
-                        class="mx-1 flex w-full transform items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
+                        class="mx-1 flex w-full transform cursor-pointer items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2 md:w-auto"
                     >
                         <UserIcon class="h-6 w-6" />
                         <span>Mon Compte</span>
-                    </router-link>
+                    </span>
                 </div>
             </div>
         </Transition>

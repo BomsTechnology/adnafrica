@@ -34,40 +34,40 @@ document.addEventListener("scroll", function () {
             <div
                 class="flex w-full overflow-x-auto py-3 px-2 text-xs font-semibold text-gray-800 md:text-sm"
             >
-                <h1 class="mr-4 text-xl font-bold text-gray-800">
+                <h1 class="mr-4 text-sm font-bold text-gray-800">
                     Mon Entreprise
                 </h1>
                 <a
                     href="#about"
                     class="flex items-center space-x-1 border-x border-gray-800 px-4 hover:font-bold"
-                    ><span><QuestionMarkCircleIcon class="h-5 w-5" /></span
+                    ><span><QuestionMarkCircleIcon class="h-4 w-4" /></span
                     ><span class="hidden lg:block">A propos</span></a
                 >
                 <a
                     href="#services"
                     class="flex items-center space-x-1 border-r border-gray-800 px-4 hover:font-bold"
-                    ><span><ClockIcon class="h-5 w-5" /></span
+                    ><span><ClockIcon class="h-4 w-4" /></span
                     ><span class="hidden lg:block">Horaires / Services</span></a
                 >
                 <a
                     href="#pictures"
                     class="flex items-center space-x-1 border-r border-gray-800 px-4 hover:font-bold"
                 >
-                    <span><PhotoIcon class="h-5 w-5" /></span>
+                    <span><PhotoIcon class="h-4 w-4" /></span>
                     <span class="hidden lg:block">Image de l'entreprise</span>
                 </a>
                 <a
                     href="#ads"
                     class="flex items-center space-x-1 border-r border-gray-800 px-4 hover:font-bold"
                 >
-                    <span><MegaphoneIcon class="h-5 w-5" /></span>
+                    <span><MegaphoneIcon class="h-4 w-4" /></span>
                     <span class="hidden lg:block"> Annonces (0)</span>
                 </a>
                 <a
                     href="#rating"
                     class="flex items-center space-x-1 border-r border-gray-800 px-4 hover:font-bold"
                 >
-                    <span><DocumentTextIcon class="h-5 w-5" /></span>
+                    <span><DocumentTextIcon class="h-4 w-4" /></span>
                     <span class="hidden lg:block"> Avis (0)</span>
                 </a>
             </div>
@@ -240,11 +240,11 @@ document.addEventListener("scroll", function () {
             </div>
         </div>
         <div class="container mx-auto w-[90%] p-4 md:w-5/6 lg:flex">
-            <div class="lg:w-2/3">
+            <div class="space-y-10 lg:w-2/3">
                 <div class="mt-4">
                     <h1
                         id="about"
-                        class="flex items-center space-x-4 text-xl font-bold tracking-widest"
+                        class="flex items-center space-x-4 font-bold tracking-widest lg:text-xl"
                     >
                         <span
                             ><QuestionMarkCircleIcon
@@ -272,7 +272,7 @@ document.addEventListener("scroll", function () {
                 <div class="mt-4">
                     <h1
                         id="services"
-                        class="flex items-center space-x-4 text-xl font-bold tracking-widest"
+                        class="flex items-center space-x-4 font-bold tracking-widest lg:text-xl"
                     >
                         <span
                             ><ClockIcon
@@ -313,7 +313,7 @@ document.addEventListener("scroll", function () {
                 <div class="mt-4">
                     <h1
                         id="pictures"
-                        class="flex items-center space-x-4 text-xl font-bold tracking-widest"
+                        class="flex items-center space-x-4 font-bold tracking-widest lg:text-xl"
                     >
                         <span
                             ><PhotoIcon
@@ -359,7 +359,7 @@ document.addEventListener("scroll", function () {
                 <div class="mt-4">
                     <h1
                         id="ads"
-                        class="flex items-center space-x-4 text-xl font-bold tracking-widest"
+                        class="flex items-center space-x-4 font-bold tracking-widest lg:text-xl"
                     >
                         <span
                             ><MegaphoneIcon
@@ -368,7 +368,7 @@ document.addEventListener("scroll", function () {
                     </h1>
                     <div class="mt-4 grid lg:mx-8 lg:grid-cols-2">
                         <div
-                            class="flex h-36 w-full items-center rounded-lg border shadow"
+                            class="flex h-36 w-full items-center rounded-lg border bg-white shadow"
                         >
                             <div class="h-full overflow-hidden rounded-l-lg">
                                 <img
@@ -383,12 +383,12 @@ document.addEventListener("scroll", function () {
                                 >
                                     <div>
                                         <h1
-                                            class="whitespace-normal text-lg font-bold leading-5"
+                                            class="whitespace-normal text-sm font-bold leading-5 lg:text-lg"
                                         >
                                             Gâteau à la crème chocolat
                                         </h1>
                                         <h6
-                                            class="whitespace-normal font-semibold text-gray-800"
+                                            class="whitespace-normal text-sm font-semibold text-gray-800 lg:text-lg"
                                         >
                                             10 000 XFA
                                         </h6>
@@ -421,7 +421,7 @@ document.addEventListener("scroll", function () {
                 <div class="mt-4">
                     <h1
                         id="rating"
-                        class="flex items-center space-x-4 text-xl font-bold tracking-widest"
+                        class="flex items-center space-x-4 font-bold tracking-widest lg:text-xl"
                     >
                         <span
                             ><DocumentTextIcon

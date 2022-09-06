@@ -26,11 +26,13 @@ import { HeartIcon } from "@heroicons/vue/24/solid";
                     <div class="flex h-full grow justify-between px-4">
                         <div class="flex h-full flex-col justify-between py-4">
                             <div>
-                                <h1 class="whitespace-normal text-lg font-bold">
+                                <h1
+                                    class="whitespace-normal text-sm font-bold lg:text-lg"
+                                >
                                     Gâteau à la crème chocolat
                                 </h1>
                                 <h6
-                                    class="whitespace-normal font-semibold text-gray-800"
+                                    class="whitespace-normal text-sm font-semibold text-gray-800 lg:text-lg"
                                 >
                                     10 000 XFA
                                 </h6>

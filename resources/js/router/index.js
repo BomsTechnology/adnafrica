@@ -1,18 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useAuthenticateStore } from "@/stores/authenticate";
 
-const Home = () => import("@/views/front/Home.vue");
-const Login = () => import("@/views/front/Login.vue");
-const Register = () => import("@/views/front/Register.vue");
-const SingleAds = () => import("@/views/front/SingleAds.vue");
-const Chat = () => import("@/views/front/Chat.vue");
-const Favorite = () => import("@/views/front/Favorite.vue");
-const Account = () => import("@/views/front/Account.vue");
-const Company = () => import("@/views/front/Company.vue");
-const DashHome = () => import("@/views/back/DashHome.vue");
 const NavBar = () => import("@/components/Navbar.vue");
 const Footer = () => import("@/components/Footer.vue");
-const Sidebar = () => import("@/components/Sidebar.vue");
 
 const siteName = "Adnafrica";
 
@@ -22,7 +12,7 @@ const routes = [
         path: "/",
         name: "home",
         components: {
-            default: Home,
+            default: () => import("@/views/front/Home.vue"),
             navbar: NavBar,
             footer: Footer,
         },
@@ -34,7 +24,7 @@ const routes = [
         path: "/login",
         name: "login",
         components: {
-            default: Login,
+            default: () => import("@/views/front/Login.vue"),
             navbar: NavBar,
             footer: Footer,
         },
@@ -46,7 +36,7 @@ const routes = [
         path: "/register",
         name: "register",
         components: {
-            default: Register,
+            default: () => import("@/views/front/Register.vue"),
             navbar: NavBar,
             footer: Footer,
         },
@@ -59,7 +49,7 @@ const routes = [
         name: "ads.single",
         props: true,
         components: {
-            default: SingleAds,
+            default: () => import("@/views/front/SingleAds.vue"),
             navbar: NavBar,
             footer: Footer,
         },
@@ -71,7 +61,7 @@ const routes = [
         path: "/chat",
         name: "chat",
         components: {
-            default: Chat,
+            default: () => import("@/views/front/Chat.vue"),
             navbar: NavBar,
             footer: Footer,
         },
@@ -85,7 +75,20 @@ const routes = [
         path: "/favorite",
         name: "favorite",
         components: {
-            default: Favorite,
+            default: () => import("@/views/front/Favorite.vue"),
+            navbar: NavBar,
+            footer: Footer,
+        },
+        meta: {
+            title: siteName,
+            requiresAuth: true,
+        },
+    },
+    {
+        path: "/search",
+        name: "search",
+        components: {
+            default: () => import("@/views/front/Search.vue"),
             navbar: NavBar,
             footer: Footer,
         },
@@ -99,7 +102,7 @@ const routes = [
         props: true,
         name: "account",
         components: {
-            default: Account,
+            default: () => import("@/views/front/Account.vue"),
             navbar: NavBar,
             footer: Footer,
         },
@@ -113,7 +116,7 @@ const routes = [
         props: true,
         name: "company",
         components: {
-            default: Company,
+            default: () => import("@/views/front/Company.vue"),
             navbar: NavBar,
             footer: Footer,
         },
@@ -144,8 +147,8 @@ const routes = [
         path: "/admin",
         name: "admin",
         components: {
-            default: DashHome,
-            sidebar: Sidebar,
+            default: () => import("@/views/back/DashHome.vue"),
+            sidebar: () => import("@/components/Sidebar.vue"),
         },
         meta: {
             requiresAuth: true,

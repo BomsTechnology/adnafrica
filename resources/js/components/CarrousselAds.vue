@@ -106,7 +106,7 @@ const toogleFavorite = () => {
                 </h1>
                 <div class="items-center justify-between md:flex">
                     <h6 class="whitespace-normal font-semibold text-gray-800">
-                        {{ ads.price.toLocaleString("CM") }} XFA
+                        {{ ads.price.toLocaleString("FR") }} XFA
                     </h6>
                     <h6 class="text-xs font-light text-gray-400">
                         {{ ads.location }}

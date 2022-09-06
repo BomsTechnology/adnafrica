@@ -6,7 +6,7 @@ export default {
 <script setup></script>
 
 <template>
-    <footer class="bg-footer-color py-10 px-8 text-white md:px-28">
+    <footer class="bg-footer-color py-10 px-8 text-sm text-white md:px-28">
         <div class="container mx-auto py-4">
             <div class="lg:flex">
                 <div class="-mx-6 w-full lg:w-2/5">

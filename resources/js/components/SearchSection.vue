@@ -9,46 +9,56 @@ import {
     ArrowLeftIcon,
 } from "@heroicons/vue/24/solid";
 import { ref, onMounted, reactive } from "vue";
-import useCategory from "@/services/categoryServices";
 import {
     onClickOutside,
     breakpointsTailwind,
     useBreakpoints,
 } from "@vueuse/core";
+import useSearch from "@/services/searchServices";
+
+const props = defineProps({
+    gender: {
+        type: String,
+        default: "all",
+    },
+    keywords: {
+        type: String,
+        default: "",
+    },
+    location: {
+        type: String,
+        default: "",
+    },
+    type: {
+        type: String,
+        default: "offer",
+    },
+    category: {
+        type: String,
+        default: "all",
+    },
+});
 
 const breakPoints = useBreakpoints(breakpointsTailwind);
 const isDesktop = breakPoints.greater("lg");
-const { loading, categories, getCategories } = useCategory();
+const {
+    mount,
+    searchData,
+    showCategory,
+    selectCategory,
+    selectedCategory,
+    selectedSubCategory,
+    returnCategory,
+    categories,
+} = useSearch();
 const categoryModal = ref(null);
-const showCategory = reactive({
-    modal: false,
-    category: true,
-    subCategory: false,
-});
-const selectCategory = reactive({
-    category: null,
-    subCategory: "all",
-});
+
 onMounted(async () => {
-    await getCategories();
+    mount({ ...props });
 });
 onClickOutside(categoryModal, () => {
     showCategory.modal = false;
 });
-const selectedCategory = async (category) => {
-    selectCategory.category = category;
-    showCategory.category = false;
-    showCategory.subCategory = true;
-};
-const selectedSubCategory = async (subCategory) => {
-    selectCategory.subCategory = subCategory;
-    showCategory.modal = false;
-    returnCategory();
-};
-const returnCategory = async () => {
-    showCategory.category = true;
-    showCategory.subCategory = false;
-};
 </script>
 
 <template>
@@ -57,14 +67,14 @@ const returnCategory = async () => {
         class="fixed top-0 z-10 flex h-full w-full items-center bg-black/25 px-8 lg:hidden"
     >
         <div ref="categoryModal" class="h-4/5 w-full rounded-md bg-white">
-            <div class="p-2" v-show="showCategory.category">
+            <div class="overflow-y-auto p-2" v-show="showCategory.category">
                 <button
                     @click="selectedSubCategory('all')"
                     type="button"
                     :class="[
                         selectCategory.subCategory == 'all'
-                            ? 'block w-full whitespace-nowrap rounded bg-secondary-color/25 p-2 text-left font-bold text-primary-color hover:bg-secondary-color hover:text-white'
-                            : 'block w-full whitespace-nowrap rounded p-2 text-left hover:bg-secondary-color hover:font-bold hover:text-white',
+                            ? 'block w-full whitespace-nowrap rounded bg-secondary-color/25 p-2 text-left text-sm font-bold text-primary-color hover:bg-secondary-color hover:text-white'
+                            : 'block w-full whitespace-nowrap rounded p-2 text-left text-sm hover:bg-secondary-color hover:font-bold hover:text-white',
                     ]"
                 >
                     Toutes Catégories
@@ -78,8 +88,8 @@ const returnCategory = async () => {
                         selectCategory.subCategory != 'all' &&
                         selectCategory.category != null &&
                         selectCategory.category.id == category.id
-                            ? 'group flex w-full justify-between rounded bg-secondary-color/25 p-2 text-left font-bold text-primary-color hover:bg-secondary-color hover:text-white'
-                            : ' group flex w-full justify-between rounded p-2 text-left hover:bg-secondary-color hover:text-white',
+                            ? 'group flex w-full justify-between rounded bg-secondary-color/25 p-2 text-left text-sm font-bold text-primary-color hover:bg-secondary-color hover:text-white'
+                            : ' group flex w-full justify-between rounded p-2 text-left text-sm hover:bg-secondary-color hover:text-white',
                     ]"
                 >
                     <span>{{ category.name }}</span>
@@ -89,7 +99,7 @@ const returnCategory = async () => {
                     /></span>
                 </button>
             </div>
-            <div class="p-2" v-show="showCategory.subCategory">
+            <div class="overflow-y-auto p-2" v-show="showCategory.subCategory">
                 <button
                     type="button"
                     @click="returnCategory()"
@@ -104,8 +114,8 @@ const returnCategory = async () => {
                     :class="[
                         selectCategory.subCategory.id ==
                         selectCategory.category.id
-                            ? 'block w-full whitespace-nowrap rounded bg-secondary-color/25 p-2 text-left font-bold text-primary-color hover:bg-secondary-color hover:text-white'
-                            : 'block w-full whitespace-nowrap rounded p-2 text-left hover:bg-secondary-color hover:font-bold hover:text-white',
+                            ? 'block w-full whitespace-nowrap rounded bg-secondary-color/25 p-2 text-left text-sm font-bold text-primary-color hover:bg-secondary-color hover:text-white'
+                            : 'block w-full whitespace-nowrap rounded p-2 text-left text-sm hover:bg-secondary-color hover:font-bold hover:text-white',
                     ]"
                 >
                     {{ selectCategory.category.name }}
@@ -121,8 +131,8 @@ const returnCategory = async () => {
                     type="button"
                     :class="[
                         selectCategory.subCategory.id == subCategory.id
-                            ? 'block w-full whitespace-nowrap rounded bg-secondary-color/25 p-2 text-left font-bold text-primary-color hover:bg-secondary-color hover:text-white'
-                            : 'block w-full whitespace-nowrap rounded p-2 text-left hover:bg-secondary-color hover:font-bold hover:text-white',
+                            ? 'block w-full whitespace-nowrap rounded bg-secondary-color/25 p-2 text-left text-sm font-bold text-primary-color hover:bg-secondary-color hover:text-white'
+                            : 'block w-full whitespace-nowrap rounded p-2 text-left text-sm hover:bg-secondary-color hover:font-bold hover:text-white',
                     ]"
                 >
                     {{ subCategory.name }}
@@ -194,7 +204,7 @@ const returnCategory = async () => {
                         type="button"
                         :class="[
                             selectCategory.subCategory.id == subCategory.id
-                                ? 'block w-1/2 whitespace-nowrap rounded bg-secondary-color/25 p-2 text-left font-bold text-primary-color hover:bg-secondary-color hover:text-white'
+                                ? 'block w-1/2 whitespace-nowrap rounded  bg-secondary-color/25 p-2 text-left font-bold text-primary-color hover:bg-secondary-color hover:text-white'
                                 : 'block w-1/2 whitespace-nowrap rounded p-2 text-left hover:bg-secondary-color hover:font-bold hover:text-white',
                         ]"
                     >
@@ -207,21 +217,22 @@ const returnCategory = async () => {
                     ><ViewColumnsIcon class="h-6 w-6 text-gray-400"
                 /></span>
                 <select
-                    class="form-selec block w-full rounded border border-gray-300 bg-gray-50 py-3 pl-12 text-sm text-gray-900 focus:border-primary-color focus:ring-primary-color"
-                    required
+                    class="form-select block w-full rounded border border-gray-300 bg-gray-50 py-3 pl-12 text-xs text-gray-900 focus:border-primary-color focus:ring-primary-color lg:text-sm"
+                    v-model="searchData.gender"
                 >
-                    <option value="">Entreprise</option>
-                    <option value="">Annonce</option>
+                    <option value="all">Tout</option>
+                    <option value="company">Annuaire</option>
+                    <option value="ads">Annonce</option>
                 </select>
             </div>
             <div
                 @click="showCategory.modal = !showCategory.modal"
-                class="flex w-full cursor-pointer items-center justify-between overflow-x-hidden rounded border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 hover:bg-gray-100 lg:col-span-2"
+                class="flex w-full cursor-pointer items-center justify-between overflow-x-hidden rounded border border-gray-300 bg-gray-50 p-2.5 text-xs text-gray-900 hover:bg-gray-100 lg:col-span-2 lg:text-sm"
             >
                 <div>
                     <RectangleStackIcon class="h-6 w-6 text-gray-400" />
                 </div>
-                <div class="w-full whitespace-nowrap pl-4">
+                <div class="w-full whitespace-nowrap pl-4 text-xs lg:text-sm">
                     <span v-if="selectCategory.subCategory == 'all'">
                         Toutes Catégories
                     </span>
@@ -239,9 +250,9 @@ const returnCategory = async () => {
                 /></span>
                 <input
                     type="text"
-                    class="block w-full rounded border border-gray-300 bg-gray-50 py-3 pl-12 text-sm text-gray-900 focus:border-primary-color focus:ring-primary-color"
+                    v-model="searchData.keywords"
+                    class="block w-full rounded border border-gray-300 bg-gray-50 py-3 pl-12 text-xs text-gray-900 focus:border-primary-color focus:ring-primary-color lg:text-sm"
                     placeholder="Que recherchez - vous ?"
-                    required
                 />
             </div>
             <div class="relative lg:col-span-2">
@@ -250,34 +261,48 @@ const returnCategory = async () => {
                 /></span>
                 <input
                     type="text"
-                    class="block w-full rounded border border-gray-300 bg-gray-50 py-3 pl-12 text-sm text-gray-900 focus:border-primary-color focus:ring-primary-color"
+                    class="block w-full rounded border border-gray-300 bg-gray-50 py-3 pl-12 text-xs text-gray-900 focus:border-primary-color focus:ring-primary-color lg:text-sm"
                     placeholder="Situé à..."
-                    required
+                    v-model="searchData.location"
                 />
             </div>
             <div class="col-span-2 lg:col-span-1">
-                <button
+                <router-link
+                    :to="{
+                        name: 'search',
+                        query: {
+                            gender: searchData.gender,
+                            type: searchData.type,
+                            category: searchData.category,
+                            keywords: searchData.keywords,
+                            location: searchData.location,
+                        },
+                    }"
                     type="submit"
                     class="flex w-full justify-center rounded bg-primary-color px-5 py-3 text-center text-sm font-medium text-white hover:bg-secondary-color focus:outline-none focus:ring-4 focus:ring-blue-300"
                 >
                     <MagnifyingGlassIcon class="h-6 w-6" />
-                </button>
+                </router-link>
             </div>
         </div>
         <div class="flex items-center justify-center space-x-6">
             <div class="flex items-center justify-center space-x-2">
                 <input
                     type="radio"
+                    v-model="searchData.type"
+                    value="offer"
                     class="form-radio text-primary-color focus:border-primary-color focus:ring-primary-color"
                 />
-                <h1 class="text-gray-500">Offres</h1>
+                <h1 class="text-xs text-gray-500 lg:text-sm">Offres</h1>
             </div>
             <div class="flex items-center justify-center space-x-2">
                 <input
                     type="radio"
+                    v-model="searchData.type"
+                    value="request"
                     class="form-radio text-primary-color focus:border-primary-color focus:ring-primary-color"
                 />
-                <h1 class="text-gray-500">Demande</h1>
+                <h1 class="text-xs text-gray-500 lg:text-sm">Demande</h1>
             </div>
         </div>
     </form>
