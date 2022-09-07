@@ -22,6 +22,11 @@ class CategoryController extends Controller
         return CategoryResource::collection(Category::where('parent', '=', null)->orderBy('id', 'desc')->get());
     }
 
+    public function top_categories()
+    {
+        return CategoryResource::collection(Category::where('is_top', '=', 1)->orderBy('id', 'desc')->get());
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -56,6 +61,16 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
+        return new CategoryResource($category);
+    }
+
+    public function is_top(Category $category)
+    {
+        $category->update(
+            [
+                'is_top' => !$category->is_top
+            ]
+        );
         return new CategoryResource($category);
     }
 

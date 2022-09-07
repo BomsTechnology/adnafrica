@@ -1,6 +1,6 @@
 <script setup>
 import SearchSection from "@/components/SearchSection.vue";
-import CarrousselCategory from "@/components/CarrousselCategory.vue";
+import CarrousselTopCategory from "@/components/CarrousselTopCategory.vue";
 import CarrousselAds from "@/components/CarrousselAds.vue";
 
 const cuisineList = [
@@ -147,10 +147,7 @@ const autoList = [
     </div>
     <SearchSection />
     <section class="py-14 px-4 md:px-28">
-        <div>
-            <h1 class="text-2xl font-bold">Top Catégories</h1>
-            <CarrousselCategory />
-        </div>
+        <CarrousselTopCategory />
     </section>
     <!-- <section class="py-14 px-4 md:px-28">
         <div>

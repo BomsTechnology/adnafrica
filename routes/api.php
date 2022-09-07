@@ -17,6 +17,7 @@ Route::post("/login", [AuthController::class, 'login']);
 Route::post("/login-admin", [AuthController::class, 'login_admin']);
 
 Route::get('/categories', [CategoryController::class, 'index']);
+Route::get('/categories-top', [CategoryController::class, 'top_categories']);
 
 Route::get('/announcements', [AnnouncementController::class, 'index']);
 Route::get('/announcements/{announcement}', [AnnouncementController::class, 'show']);
@@ -29,6 +30,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::post('/categories', [CategoryController::class, 'store']);
     Route::put('/categories/{category}', [CategoryController::class, 'update']);
+    Route::get('/categories-is-top/{category}', [CategoryController::class, 'is_top']);
     Route::delete('/categories/{categories}', [CategoryController::class, 'destroy']);
 
     Route::apiResource('/users', UserController::class);

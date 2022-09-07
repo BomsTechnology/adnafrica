@@ -11,6 +11,7 @@ const {
     checkAll,
     categories,
     cleanErrors,
+    toogleIsTop,
     getCategories,
     updateCategory,
     createCategory,
@@ -275,6 +276,7 @@ onMounted(async () => {
                                 </th>
                                 <th scope="col" class="px-6 py-3">Image</th>
                                 <th scope="col" class="px-6 py-3">Name</th>
+                                <th scope="col" class="px-6 py-3">Is Top</th>
                                 <th scope="col" class="px-6 py-3">
                                     <span class="sr-only">Edit</span>
                                 </th>
@@ -325,12 +327,30 @@ onMounted(async () => {
                                             class="h-10 w-10 rounded-full object-cover"
                                         />
                                     </td>
-                                    <th
+                                    <td
                                         scope="row"
                                         class="whitespace-nowrap px-6 py-4 font-medium text-gray-900"
                                     >
                                         {{ category.name }}
-                                    </th>
+                                    </td>
+                                    <td class="w-4 p-4">
+                                        <div class="flex items-center">
+                                            <input
+                                                v-model="category.is_top"
+                                                @change="
+                                                    toogleIsTop(category.id)
+                                                "
+                                                id="checkbox-table-search-1"
+                                                type="checkbox"
+                                                class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
+                                            />
+                                            <label
+                                                for="checkbox-table-search-1"
+                                                class="sr-only"
+                                                >checkbox</label
+                                            >
+                                        </div>
+                                    </td>
                                     <td class="px-6 py-4 text-right">
                                         <button
                                             type="button"
@@ -388,6 +408,7 @@ onMounted(async () => {
                                     >
                                         {{ subCategory.name }}
                                     </th>
+                                    <td></td>
                                     <td class="px-6 py-4 text-right">
                                         <button
                                             type="button"

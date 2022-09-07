@@ -13,6 +13,16 @@ class Category extends Model
     protected $fillable = [
         'name',
         'parent',
-        'image'
+        'image',
+        'is_top'
     ];
+
+    protected $casts = [
+        'is_top' => 'boolean'
+    ];
+
+    public function announcements()
+    {
+        return $this->hasMany(Announcement::class);
+    }
 }

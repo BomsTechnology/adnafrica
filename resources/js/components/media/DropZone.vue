@@ -1,5 +1,5 @@
 <script setup>
-import { CloudUploadIcon } from "@heroicons/vue/24/solid";
+import { CloudArrowUpIcon } from "@heroicons/vue/24/solid";
 import { ref } from "vue";
 import UploadList from "./UploadList.vue";
 
@@ -85,7 +85,7 @@ async function toogleActiveDrag() {
                     for="dropzone-file"
                     class="flex flex-col items-center justify-center text-center"
                 >
-                    <CloudUploadIcon
+                    <CloudArrowUpIcon
                         :class="[
                             isDrag
                                 ? 'h-8 w-8 text-white lg:h-10 lg:w-10'
