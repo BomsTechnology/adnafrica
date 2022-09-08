@@ -112,6 +112,7 @@ class AuthController extends Controller
             'message' => 'Login successful!',
             'data' => [
                 'user' => new UserResource($user),
+                'recent_search' => $user->recent_search,
                 'token' => $token
             ]
         ];
@@ -141,6 +142,7 @@ class AuthController extends Controller
                 'user' => new UserResource(
                     $admin
                 ),
+                'recent_search' => $admin->recent_search,
                 'token' => $token
             ]
         ];

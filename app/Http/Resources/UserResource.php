@@ -27,6 +27,8 @@ class UserResource extends JsonResource
             'status' => $this->status,
             'avatar' => $this->avatar,
             'location' => $this->location,
+            'recent_search' => $this->recent_search,
+            'background' => $this->background,
             'notification_phone' => $this->notification_phone,
             'notification_email' => $this->notification_email,
             'website' => $this->website,

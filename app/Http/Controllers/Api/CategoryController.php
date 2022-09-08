@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Http\Resources\CategoryResource;
+use App\Models\Announcement;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -24,6 +25,7 @@ class CategoryController extends Controller
 
     public function top_categories()
     {
+
         return CategoryResource::collection(Category::where('is_top', '=', 1)->orderBy('id', 'desc')->get());
     }
 

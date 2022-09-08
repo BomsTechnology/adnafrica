@@ -29,6 +29,8 @@ class User extends Authenticatable
         'location',
         'notification_phone',
         'notification_email',
+        'recent_search',
+        'background',
         'website',
         'facbook',
         'twitter',

@@ -94,7 +94,6 @@ const routes = [
         },
         meta: {
             title: siteName,
-            requiresAuth: true,
         },
     },
     {
@@ -108,7 +107,6 @@ const routes = [
         },
         meta: {
             title: siteName + " - ads",
-            requiresAuth: true,
         },
     },
     {
@@ -122,7 +120,6 @@ const routes = [
         },
         meta: {
             title: siteName + " - Company",
-            requiresAuth: true,
         },
     },
     {

@@ -8,6 +8,7 @@ import {
     ArrowLeftIcon,
     BuildingOffice2Icon,
 } from "@heroicons/vue/24/solid";
+import { useAuthenticateStore } from "@/stores/authenticate";
 import { ref, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import useSearch from "@/composables/searchServices";
@@ -15,6 +16,7 @@ import useSearch from "@/composables/searchServices";
 const {
     mount,
     searchData,
+    saveRecentSearch,
     showCategory,
     selectCategory,
     selectedCategory,
@@ -22,6 +24,7 @@ const {
     returnCategory,
     categories,
 } = useSearch();
+const authenticateStore = useAuthenticateStore();
 const route = useRoute();
 onMounted(async () => {
     await mount({
@@ -31,6 +34,13 @@ onMounted(async () => {
         category: route.query.category,
         location: route.query.location,
     });
+    if (
+        authenticateStore.user &&
+        authenticateStore.token &&
+        route.query.category != "all"
+    ) {
+        await saveRecentSearch(authenticateStore.user.id, route.query.category);
+    }
 });
 watch(route, async (newRoute, oldRoute) => {
     await mount({
@@ -40,6 +50,16 @@ watch(route, async (newRoute, oldRoute) => {
         category: newRoute.query.category,
         location: newRoute.query.location,
     });
+    if (
+        authenticateStore.user &&
+        authenticateStore.token &&
+        newRoute.query.category != "all"
+    ) {
+        await saveRecentSearch(
+            authenticateStore.user.id,
+            newRoute.query.category
+        );
+    }
 });
 </script>
 <template>
@@ -245,13 +265,25 @@ watch(route, async (newRoute, oldRoute) => {
     </div>
 
     <section class="space-y-6 py-14 px-4 md:px-28 lg:flex lg:space-y-0">
-        <div class="w-full lg:border-r">
+        <div
+            v-if="route.query.gender == 'ads' || route.query.gender == 'all'"
+            :class="[
+                route.query.gender == 'ads' ? 'w-full' : 'w-full lg:border-r',
+            ]"
+        >
             <h1
                 class="font-bold text-gray-800 underline decoration-primary-color underline-offset-4 md:text-xl"
             >
                 Annonces (200 résultats)
             </h1>
-            <div class="space-y-4 py-8 lg:px-3">
+            <div
+                :class="[
+                    route.query.gender == 'ads'
+                        ? 'grid grid-cols-1 gap-4 py-8 lg:grid-cols-2 lg:px-3'
+                        : 'space-y-4 py-8 lg:px-3',
+                ]"
+                class=""
+            >
                 <div
                     class="flex h-36 w-full items-center rounded-lg border bg-white shadow"
                 >
@@ -296,13 +328,32 @@ watch(route, async (newRoute, oldRoute) => {
                 </div>
             </div>
         </div>
-        <div class="w-full lg:border-l">
+        <div
+            v-if="
+                route.query.gender == 'company' || route.query.gender == 'all'
+            "
+            :class="[
+                route.query.gender == 'company'
+                    ? 'w-full'
+                    : 'w-full lg:border-l',
+            ]"
+        >
             <h1
-                class="font-bold text-gray-800 underline decoration-primary-color underline-offset-4 md:text-xl lg:text-right"
+                :class="[
+                    route.query.gender == 'company'
+                        ? 'font-bold text-gray-800 underline decoration-primary-color underline-offset-4 md:text-xl lg:text-left'
+                        : 'font-bold text-gray-800 underline decoration-primary-color underline-offset-4 md:text-xl lg:text-right',
+                ]"
             >
                 Annuaires (200 résultats)
             </h1>
-            <div class="grid grid-cols-1 gap-4 py-8 lg:grid-cols-2 lg:px-3">
+            <div
+                :class="[
+                    route.query.gender == 'company'
+                        ? 'grid grid-cols-1 gap-4 py-8 md:grid-cols-2 lg:grid-cols-4 lg:px-3'
+                        : 'grid grid-cols-1 gap-4 py-8 lg:grid-cols-2 lg:px-3',
+                ]"
+            >
                 <div
                     class="flex h-60 flex-col items-center justify-center rounded bg-white shadow"
                 >

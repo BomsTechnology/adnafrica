@@ -50,6 +50,7 @@ export default function useAuth() {
             user.value = response.data.data;
             localStorage.user = JSON.stringify(response.data.data.user);
             localStorage.tokenUser = response.data.data.token;
+            localStorage.recent_search = response.data.data.recent_search;
             loading.value = 2;
         } catch (e) {
             loading.value = 0;
@@ -68,6 +69,7 @@ export default function useAuth() {
             user.value = response.data.data;
             localStorage.user = JSON.stringify(response.data.data.user);
             localStorage.tokenUser = response.data.data.token;
+            localStorage.recent_search = response.data.data.recent_search;
             loading.value = 2;
         } catch (e) {
             loading.value = 0;
@@ -82,6 +84,7 @@ export default function useAuth() {
             let response = await axios.post("/api/login-admin", data);
             localStorage.user = JSON.stringify(response.data.data.user);
             localStorage.tokenUser = response.data.data.token;
+            localStorage.recent_search = response.data.data.recent_search;
             // router.push({
             //     name: "admin.dashboard",
             // });

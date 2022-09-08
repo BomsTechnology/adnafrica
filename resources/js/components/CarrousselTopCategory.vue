@@ -11,7 +11,6 @@ const { errors, loading, categories, getTopCategories } = useCategory();
 
 onMounted(async () => {
     await getTopCategories();
-    console.log(categories.value);
 });
 </script>
 
@@ -44,25 +43,40 @@ onMounted(async () => {
                 v-for="category in categories"
                 :key="category.name"
             >
-                <div
-                    class="h-36 w-36 overflow-hidden rounded-lg shadow lg:h-56 lg:w-56"
+                <router-link
+                    :to="{
+                        name: 'search',
+                        query: {
+                            gender: 'all',
+                            type: 'offer',
+                            category: category.id,
+                            keywords: '',
+                            location: '',
+                        },
+                    }"
                 >
-                    <img
-                        :src="category.image"
-                        class="h-full w-full bg-cover object-cover"
-                        alt=""
-                    />
-                </div>
-                <div
-                    class="absolute top-0 flex h-36 w-36 flex-col items-center justify-center rounded-lg bg-gradient-to-t from-black/60 to-transparent lg:h-56 lg:w-56"
-                >
-                    <h1 class="text-xl font-bold text-white">
-                        {{ category.name }}
-                    </h1>
-                    <h5 class="font-light text-gray-100">
-                        {{ category.nb_ads }} Annonce
-                    </h5>
-                </div>
+                    <div
+                        class="h-36 w-36 overflow-hidden rounded-lg shadow lg:h-56 lg:w-56"
+                    >
+                        <img
+                            :src="category.image"
+                            class="h-full w-full bg-cover object-cover"
+                            alt=""
+                        />
+                    </div>
+                    <div
+                        class="absolute top-0 flex h-36 w-36 flex-col items-center justify-center rounded-lg bg-gradient-to-t from-black/60 to-transparent lg:h-56 lg:w-56"
+                    >
+                        <h1 class="text-xl font-bold text-white">
+                            {{ category.name }}
+                        </h1>
+                        <h5 class="font-light text-gray-100">
+                            {{ category.nb_ads }}
+                            <span v-if="category.nb_ads > 1"> Annonce</span
+                            ><span v-else>Annonce</span>
+                        </h5>
+                    </div>
+                </router-link>
             </swiper-slide>
         </swiper>
     </div>

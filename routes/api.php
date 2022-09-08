@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\CurrencyController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\SearchController;
 
 Route::post("/register", [AuthController::class, 'register']);
 Route::post("/send-verification-email", [AuthController::class, 'sendVerificationEmail']);
@@ -23,6 +24,8 @@ Route::get('/announcements', [AnnouncementController::class, 'index']);
 Route::get('/announcements/{announcement}', [AnnouncementController::class, 'show']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/search-save-recent/{userId}/{catId}', [SearchController::class, 'saveRecentSearch']);
+
     Route::get('/announcements-user/{user}', [AnnouncementController::class, 'byUser']);
     Route::post('/announcements', [AnnouncementController::class, 'store']);
     Route::put('/announcements/{announcement}', [AnnouncementController::class, 'update']);

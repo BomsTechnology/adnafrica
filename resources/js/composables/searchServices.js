@@ -1,8 +1,11 @@
-import { onMounted, reactive } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import useCategory from "@/composables/categoryServices";
+import { axiosClient, axiosClientFile } from "@/axios";
 
 export default function useSearch() {
-    const { loading, categories, getCategories } = useCategory();
+    const { categories, getCategories } = useCategory();
+    const errors = ref([]);
+    const loading = ref(0);
 
     const searchData = reactive({
         gender: "",
@@ -52,6 +55,7 @@ export default function useSearch() {
         showCategory.subCategory = false;
         // showCategory.filter = false;
     };
+
     const filterCategory = async (id) => {
         for (let i = 0; i < categories.value.length; i++) {
             if (categories.value[i].id == id) {
@@ -67,11 +71,38 @@ export default function useSearch() {
             }
         }
     };
+
+    const saveRecentSearch = async (userId, catId) => {
+        errors.value = [];
+        try {
+            loading.value = 1;
+            let response = await axiosClient.get(
+                `/search-save-recent/${userId}/${catId}`
+            );
+            let recent_search = response.data.data;
+            localStorage.setItem("recent_search", recent_search.recent_search);
+
+            loading.value = 2;
+        } catch (e) {
+            loading.value = 0;
+            if (e.response.status == 422) {
+                for (const key in e.response.data.errors)
+                    errors.value.push(
+                        e.response.data.errors[key][0].replace("id", "")
+                    );
+            } else {
+                errors.value.push(e.response.data.message);
+            }
+        }
+    };
     return {
+        errors,
+        loading,
         searchData,
         showCategory,
         selectCategory,
         selectedCategory,
+        saveRecentSearch,
         selectedSubCategory,
         returnCategory,
         categories,

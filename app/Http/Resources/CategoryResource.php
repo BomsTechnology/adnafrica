@@ -22,7 +22,13 @@ class CategoryResource extends JsonResource
             'parent' => $this->parent,
             'image' => $this->image,
             'is_top' => $this->is_top,
-            'nb_ads' => Announcement::where('category_id', $this->parent)->get(),
+            'nb_ads' => Announcement::whereIn('category_id', function ($query) {
+                $query->select('id')
+                    ->from('categories')
+                    ->whereParent($this->id);
+            })
+                ->orWhere('category_id', $this->id)
+                ->count(),
             'children' =>  Category::where('parent', '=', $this->id)->orderBy('id', 'desc')->get(),
         ];
     }
