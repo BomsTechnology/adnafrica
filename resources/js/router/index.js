@@ -125,7 +125,7 @@ const routes = [
         },
     },
     {
-        path: "/company/:id?/:slug?",
+        path: "/company/:id/:slug",
         props: true,
         name: "company",
         components: {

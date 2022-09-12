@@ -13,6 +13,8 @@ import { useAuthenticateStore } from "@/stores/authenticate";
 import { ref, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import useSearch from "@/composables/searchServices";
+import SKSearchAds from "@/components/skeleton/SKSearchAds.vue";
+import SKSearchCompany from "@/components/skeleton/SKSearchCompany.vue";
 
 const {
     mount,
@@ -26,6 +28,8 @@ const {
     selectedSubCategory,
     returnCategory,
     categories,
+    errors,
+    loading,
 } = useSearch();
 const authenticateStore = useAuthenticateStore();
 const route = useRoute();
@@ -67,6 +71,9 @@ watch(route, async (newRoute, oldRoute) => {
         );
     }
 });
+function padTo2Digits(num) {
+    return num.toString().padStart(2, "0");
+}
 </script>
 <template>
     <!-- Search section -->
@@ -277,62 +284,149 @@ watch(route, async (newRoute, oldRoute) => {
         <div
             v-if="route.query.gender == 'ads' || route.query.gender == 'all'"
             :class="[
-                route.query.gender == 'ads' ? 'w-full' : 'w-full lg:border-r',
+                route.query.gender == 'ads'
+                    ? 'w-full'
+                    : 'w-full lg:w-1/2 lg:border-r',
             ]"
         >
-            <h1
-                class="font-bold text-gray-800 underline decoration-primary-color underline-offset-4 md:text-xl"
-            >
-                Annonces (200 résultats)
-            </h1>
-            <div
-                :class="[
-                    route.query.gender == 'ads'
-                        ? 'grid grid-cols-1 gap-4 py-8 lg:grid-cols-2 lg:px-3'
-                        : 'space-y-4 py-8 lg:px-3',
-                ]"
-                class=""
-            >
-                <div
-                    class="flex h-36 w-full items-center rounded-lg border bg-white shadow"
+            <SKSearchAds v-if="loading != 2" />
+            <div v-else>
+                <h1
+                    v-if="searchResult.ads"
+                    class="font-bold text-gray-800 underline decoration-primary-color underline-offset-4 md:text-xl"
                 >
-                    <div class="h-full overflow-hidden rounded-l-lg">
+                    Annonces ( {{ searchResult.ads.length }}
+                    <span v-if="searchResult.ads.length > 1">résultats</span>
+                    <span v-else>résultat</span> )
+                </h1>
+                <div
+                    :class="[
+                        route.query.gender == 'ads'
+                            ? 'grid-cols-2  gap-4 space-y-4 py-8 lg:grid lg:space-y-0 lg:px-3'
+                            : 'space-y-4 py-8 lg:px-3',
+                    ]"
+                    class=""
+                >
+                    <div
+                        v-if="searchResult.ads && searchResult.ads.length >= 1"
+                        v-for="announcement in searchResult.ads"
+                        :key="announcement.id"
+                        class="h-full w-full items-center rounded-lg border bg-white shadow lg:flex lg:h-36"
+                    >
+                        <router-link
+                            :to="{
+                                name: 'ads.single',
+                                params: {
+                                    id: announcement.id,
+                                    slug: announcement.slug,
+                                },
+                            }"
+                            class="relative h-full overflow-hidden"
+                        >
+                            <img
+                                :src="announcement.images[0].path"
+                                class="h-36 w-full rounded-t-lg bg-cover object-cover lg:h-full lg:w-60 lg:rounded-l-lg lg:rounded-tr-none"
+                                alt=""
+                            />
+                            <div
+                                class="absolute bottom-2 right-4 flex h-6 w-6 items-center justify-center rounded-full bg-black/50 text-sm text-white shadow"
+                            >
+                                {{ announcement.images.length }}
+                            </div>
+                        </router-link>
+                        <div class="flex h-full grow justify-between px-4">
+                            <router-link
+                                :to="{
+                                    name: 'ads.single',
+                                    params: {
+                                        id: announcement.id,
+                                        slug: announcement.slug,
+                                    },
+                                }"
+                                class="flex h-full flex-col justify-between py-2"
+                            >
+                                <div>
+                                    <h1
+                                        class="whitespace-normal text-sm font-bold leading-5 lg:text-lg"
+                                    >
+                                        {{ announcement.title }}
+                                    </h1>
+                                    <h6
+                                        class="whitespace-normal text-sm font-semibold text-gray-800 lg:text-lg"
+                                    >
+                                        {{
+                                            announcement.price.toLocaleString(
+                                                "FR"
+                                            )
+                                        }}
+                                        {{ announcement.currency.symbol }}
+                                    </h6>
+                                </div>
+                                <div class="text-xs font-light text-gray-400">
+                                    <h6 class="flex items-center space-x-2">
+                                        <span>{{
+                                            announcement.category.name
+                                        }}</span>
+
+                                        <span v-if="announcement.country"
+                                            ><img
+                                                :src="
+                                                    announcement.country.image
+                                                "
+                                                :alt="announcement.country.name"
+                                                class="h-3 w-4 object-cover"
+                                        /></span>
+                                    </h6>
+                                    <h6>
+                                        {{ announcement.city.name }}
+                                        {{ announcement.country.name }} -
+                                        {{
+                                            new Date(
+                                                announcement.date
+                                            ).toLocaleDateString("fr-FR", {
+                                                day: "numeric",
+                                                year: "numeric",
+                                                month: "long",
+                                            })
+                                        }}
+                                        à
+                                        {{
+                                            `${padTo2Digits(
+                                                new Date(
+                                                    announcement.date
+                                                ).getHours()
+                                            )}h${padTo2Digits(
+                                                new Date(
+                                                    announcement.date
+                                                ).getMinutes()
+                                            )}`
+                                        }}
+                                    </h6>
+                                </div>
+                            </router-link>
+                            <div class="flex h-full items-end py-4">
+                                <button
+                                    type="button"
+                                    title="Ajouter/Retirer aux favoris"
+                                    class="flex h-10 w-10 items-center justify-center rounded-full bg-white shadow hover:scale-95 hover:bg-pink-300 focus:bg-pink-300"
+                                >
+                                    <HeartIcon
+                                        class="h-7 w-7 bg-transparent text-pink-500"
+                                    />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        v-else
+                        class="flex w-full flex-col items-center justify-center"
+                    >
+                        <h1 class="text-xl font-semibold">Aucun Résultat</h1>
                         <img
-                            src="/images/ads/cuisine/1.jpg"
-                            class="h-full w-full bg-cover object-cover"
+                            src="/images/icone/no_data.png"
+                            class="h-32 lg:h-96"
                             alt=""
                         />
-                    </div>
-                    <div class="flex h-full grow justify-between px-4">
-                        <div class="flex h-full flex-col justify-between py-2">
-                            <div>
-                                <h1
-                                    class="whitespace-normal text-sm font-bold leading-5 lg:text-lg"
-                                >
-                                    Gâteau à la crème chocolat
-                                </h1>
-                                <h6
-                                    class="whitespace-normal text-sm font-semibold text-gray-800 lg:text-lg"
-                                >
-                                    10 000 XFA
-                                </h6>
-                            </div>
-                            <div class="text-xs font-light text-gray-400">
-                                <h6>Automobile</h6>
-                                <h6>Douala Bonamousadi - 12/05/2022 à 16h30</h6>
-                            </div>
-                        </div>
-                        <div class="flex h-full items-end py-4">
-                            <button
-                                type="button"
-                                title="Ajouter/Retirer aux favoris"
-                                class="flex h-10 w-10 items-center justify-center rounded-full bg-white shadow hover:scale-95 hover:bg-pink-300 focus:bg-pink-300"
-                            >
-                                <HeartIcon
-                                    class="h-7 w-7 bg-transparent text-pink-500"
-                                />
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -344,47 +438,84 @@ watch(route, async (newRoute, oldRoute) => {
             :class="[
                 route.query.gender == 'company'
                     ? 'w-full'
-                    : 'w-full lg:border-l',
+                    : 'w-full lg:w-1/2 lg:border-l',
             ]"
         >
-            <h1
-                :class="[
-                    route.query.gender == 'company'
-                        ? 'font-bold text-gray-800 underline decoration-primary-color underline-offset-4 md:text-xl lg:text-left'
-                        : 'font-bold text-gray-800 underline decoration-primary-color underline-offset-4 md:text-xl lg:text-right',
-                ]"
-            >
-                Annuaires (200 résultats)
-            </h1>
-            <div
-                :class="[
-                    route.query.gender == 'company'
-                        ? 'grid grid-cols-1 gap-4 py-8 md:grid-cols-2 lg:grid-cols-4 lg:px-3'
-                        : 'grid grid-cols-1 gap-4 py-8 lg:grid-cols-2 lg:px-3',
-                ]"
-            >
-                <div
-                    class="flex h-60 flex-col items-center justify-center rounded bg-white shadow"
+            <SKSearchCompany v-if="loading != 2" />
+            <div v-else>
+                <h1
+                    v-if="searchResult.company"
+                    :class="[
+                        route.query.gender == 'company'
+                            ? 'font-bold text-gray-800 underline decoration-primary-color underline-offset-4 md:text-xl lg:text-left'
+                            : 'font-bold text-gray-800 underline decoration-primary-color underline-offset-4 md:text-xl lg:text-right',
+                    ]"
                 >
-                    <div class="border border-gray-200 p-2">
-                        <div class="h-32 w-32 overflow-hidden">
-                            <!-- <img
-                                src="/images/avatar/1.jpg"
-                                alt=""
-                                class="h-full w-full object-cover"
-                            /> -->
-                            <BuildingOffice2Icon
-                                class="h-full w-full text-gray-500"
-                            />
-                        </div>
-                    </div>
-                    <h1 class="mt-2 font-bold">Gno Solutions</h1>
-                    <h4
-                        class="mt-1 flex items-center space-x-1 text-xs font-light text-gray-500"
+                    Annuaires ( {{ searchResult.company.length }}
+                    <span v-if="searchResult.company.length > 1"
+                        >résultats</span
                     >
-                        <MapPinIcon class="h-4 w-4" />
-                        <span>Douala Bonamousadi</span>
-                    </h4>
+                    <span v-else>résultat</span> )
+                </h1>
+                <div
+                    :class="[
+                        route.query.gender == 'company'
+                            ? 'grid grid-cols-1 gap-4 py-8 md:grid-cols-2 lg:grid-cols-4 lg:px-3'
+                            : 'grid grid-cols-1 gap-4 py-8 lg:grid-cols-2 lg:px-3',
+                    ]"
+                >
+                    <router-link
+                        v-if="
+                            searchResult.company &&
+                            searchResult.company.length >= 1
+                        "
+                        v-for="company in searchResult.company"
+                        :key="company.id"
+                        :to="{
+                            name: 'company',
+                            params: {
+                                id: company.id,
+                                slug: company.slug,
+                            },
+                        }"
+                        class="flex h-60 flex-col items-center justify-center rounded bg-white shadow"
+                    >
+                        <div class="border border-gray-200 p-2">
+                            <div class="h-32 w-32 overflow-hidden">
+                                <img
+                                    v-if="
+                                        company.avatar !=
+                                        '/images/icone/default_avatar.svg'
+                                    "
+                                    :src="company.avatar"
+                                    alt=""
+                                    class="h-full w-full object-cover"
+                                />
+                                <BuildingOffice2Icon
+                                    v-else
+                                    class="h-full w-full text-gray-500"
+                                />
+                            </div>
+                        </div>
+                        <h1 class="mt-2 font-bold">{{ company.firstname }}</h1>
+                        <h4
+                            class="mt-1 flex items-center space-x-1 text-xs font-light text-gray-500"
+                        >
+                            <MapPinIcon class="h-4 w-4" />
+                            <span>{{ company.location }}</span>
+                        </h4>
+                    </router-link>
+                    <div
+                        v-else
+                        class="col-span-4 flex flex-col items-center justify-center"
+                    >
+                        <h1 class="text-xl font-semibold">Aucun Résultat</h1>
+                        <img
+                            src="/images/icone/no_data.png"
+                            class="h-32 lg:h-96"
+                            alt=""
+                        />
+                    </div>
                 </div>
             </div>
         </div>

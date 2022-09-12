@@ -141,7 +141,7 @@ document.addEventListener("scroll", function () {
                                 class="whitespace-normal text-xs font-semibold text-gray-800 lg:text-sm"
                                 v-if="announcement.currency"
                             >
-                                {{ announcement.price }}
+                                {{ announcement.price.toLocaleString("FR") }}
                                 {{ announcement.currency.symbol }}
                             </h6>
                         </div>

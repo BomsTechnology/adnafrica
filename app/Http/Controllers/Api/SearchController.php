@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AnnouncementResource;
+use App\Http\Resources\UserResource;
 use App\Models\Announcement;
 use App\Models\Category;
 use App\Models\User;
@@ -26,8 +28,8 @@ class SearchController extends Controller
                 if ($category->parent != NULL) {
                     $ads = Announcement::whereCategoryId($data->category)->inRandomOrder()->get();
                     $company = User::where('type', 'professional')->whereCategoryId($data->category)->inRandomOrder()->get();
-                    $results["ads"] = $ads;
-                    $results["company"] = $company;
+                    $results["ads"] = AnnouncementResource::collection($ads);
+                    $results["company"] = UserResource::collection($company);
                 } else {
                     $ads = Announcement::whereIn('category_id', function ($query) use ($data) {
                         $query->select('id')
@@ -46,21 +48,21 @@ class SearchController extends Controller
                         ->orWhere('category_id', $data->category);
                     $company =  $company->where('type', 'professional')->inRandomOrder()
                         ->get();
-                    $results["ads"] = $ads;
-                    $results["company"] = $company;
+                    $results["ads"] = AnnouncementResource::collection($ads);
+                    $results["company"] = UserResource::collection($company);
                 }
             } else {
                 $ads = Announcement::latest()->inRandomOrder()->get();
                 $company = User::where('type', 'professional')->inRandomOrder()->get();
-                $results["ads"] = $ads;
-                $results["company"] = $company;
+                $results["ads"] = AnnouncementResource::collection($ads);
+                $results["company"] = UserResource::collection($company);
             }
-        } elseif ($data->gender != 'company') {
+        } elseif ($data->gender == 'company') {
             if ($data->category != 'all') {
                 $category = Category::find($data->category);
                 if ($category->parent != NULL) {
                     $company = User::where('type', 'professional')->whereCategoryId($data->category)->inRandomOrder()->get();
-                    $results["company"] = $company;
+                    $results["company"] = UserResource::collection($company);
                 } else {
                     $company = User::whereIn('category_id', function ($query) use ($data) {
                         $query->select('id')
@@ -70,18 +72,18 @@ class SearchController extends Controller
                         ->orWhere('category_id', $data->category);
                     $company =  $company->where('type', 'professional')->inRandomOrder()
                         ->get();
-                    $results["company"] = $company;
+                    $results["company"] = UserResource::collection($company);
                 }
             } else {
                 $company = User::where('type', 'professional')->inRandomOrder()->get();
-                $results["company"] = $company;
+                $results["company"] = UserResource::collection($company);
             }
         } else {
             if ($data->category != 'all') {
                 $category = Category::find($data->category);
                 if ($category->parent != NULL) {
                     $ads = Announcement::whereCategoryId($data->category)->inRandomOrder()->get();
-                    $results["ads"] = $ads;
+                    $results["ads"] = AnnouncementResource::collection($ads);
                 } else {
                     $ads = Announcement::whereIn('category_id', function ($query) use ($data) {
                         $query->select('id')
@@ -91,11 +93,11 @@ class SearchController extends Controller
                         ->orWhere('category_id', $data->category)
                         ->inRandomOrder()
                         ->get();
-                    $results["ads"] = $ads;
+                    $results["ads"] = AnnouncementResource::collection($ads);
                 }
             } else {
                 $ads = Announcement::latest()->inRandomOrder()->get();
-                $results["ads"] = $ads;
+                $results["ads"] = AnnouncementResource::collection($ads);
             }
         }
         $response = [

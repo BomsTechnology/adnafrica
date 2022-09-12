@@ -8,10 +8,22 @@ import {
     MapPinIcon,
     DocumentTextIcon,
     GlobeAltIcon,
+    BuildingOffice2Icon,
 } from "@heroicons/vue/24/outline";
 import { Cog6ToothIcon, StarIcon, HeartIcon } from "@heroicons/vue/24/solid";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import useUser from "@/composables/userServices";
+import { useAuthenticateStore } from "@/stores/authenticate";
+const props = defineProps({
+    id: String,
+    slug: String,
+});
+const { errors, loading, user, getUser } = useUser();
 
+onMounted(async () => {
+    await getUser(props.id);
+});
+const authenticateStore = useAuthenticateStore();
 const isScroll = ref(false);
 document.addEventListener("scroll", function () {
     let bodyTopPosition = document.body.getBoundingClientRect().top;
@@ -75,7 +87,7 @@ document.addEventListener("scroll", function () {
         <div class="w-full">
             <div
                 class="h-60 w-full bg-cover pt-10"
-                style="background-image: url('images/ads/cuisine/4.jpg')"
+                style="background-image: url('/images/ads/cuisine/4.jpg')"
             >
                 <div
                     class="h-full w-full bg-gradient-to-t from-gray-50 to-transparent"
@@ -93,15 +105,23 @@ document.addEventListener("scroll", function () {
                         <div class="border border-gray-200 p-2">
                             <div class="h-28 w-28 overflow-hidden">
                                 <img
-                                    src="/images/avatar/1.jpg"
+                                    v-if="
+                                        user.avatar !=
+                                        '/images/icone/default_avatar.svg'
+                                    "
+                                    :src="user.avatar"
                                     alt=""
                                     class="h-full w-full object-cover"
+                                />
+                                <BuildingOffice2Icon
+                                    v-else
+                                    class="h-full w-full text-gray-500"
                                 />
                             </div>
                         </div>
                         <div>
                             <h1 class="text-xl font-bold text-gray-800">
-                                Mon Entreprise
+                                {{ user.firstname }}
                             </h1>
 
                             <span
@@ -121,7 +141,7 @@ document.addEventListener("scroll", function () {
                                 class="mt-3 flex items-center space-x-1 text-sm font-light text-gray-800"
                             >
                                 <MapPinIcon class="h-5 w-5" />
-                                <span>Douala Bonamousadi</span>
+                                <span>{{ user.location }}</span>
                             </h4>
                             <div
                                 class="mt-2 flex items-center justify-center space-x-2 lg:justify-start"
@@ -190,10 +210,21 @@ document.addEventListener("scroll", function () {
                             </div>
                         </div>
                     </div>
-                    <div class="mt-3 lg:mt-0">
-                        <span>
+                    <div
+                        v-if="
+                            authenticateStore.user &&
+                            user.id === authenticateStore.user.id
+                        "
+                        class="mt-3 lg:mt-0"
+                    >
+                        <router-link
+                            :to="{
+                                name: 'account',
+                                params: { id: user.id, slug: user.slug },
+                            }"
+                        >
                             <Cog6ToothIcon class="h-8 w-8" />
-                        </span>
+                        </router-link>
                     </div>
                 </div>
                 <div

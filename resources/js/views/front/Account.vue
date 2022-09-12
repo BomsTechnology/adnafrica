@@ -13,6 +13,7 @@ import AccountSetting from "@/components/account/AccountSetting.vue";
 import AccountTransaction from "@/components/account/AccountTransaction.vue";
 import { useAuthenticateStore } from "@/stores/authenticate";
 import { reactive, onMounted } from "vue";
+import AccountListAds from "@/components/account/AccountListAds.vue";
 
 const props = defineProps({
     id: String,
@@ -73,7 +74,7 @@ function changeTab(tab) {
                         class="mt-3 text-center text-xl font-bold text-gray-800 lg:mt-0"
                     >
                         {{ user.firstname }}
-                        <span v-if="user.lastname"> {{ user.lastname }}</span>
+                        {{ user.lastname }}
                     </h2>
                     <h3 class="mt-1 text-sm font-semibold text-gray-600">
                         A rejoint adnafrica en
@@ -88,7 +89,7 @@ function changeTab(tab) {
                         class="mt-1 flex items-center justify-center space-x-1 text-xs font-light text-gray-400 lg:justify-start"
                     >
                         <MapPinIcon class="h-3 w-3" />
-                        <span>Douala Bonamousadi</span>
+                        <span>{{ user.location }}</span>
                     </h4>
                 </div>
             </div>
@@ -119,91 +120,101 @@ function changeTab(tab) {
                 </span>
             </div>
         </div>
-
-        <div class="border-b border-gray-200">
-            <ul
-                class="-mb-px flex flex-wrap text-center text-sm font-medium text-gray-900"
-            >
-                <li class="mr-2">
-                    <button
-                        @click="changeTab('ads')"
-                        type="button"
-                        :class="[
-                            open.ads
-                                ? 'inline-flex rounded-t-lg border-b-2 border-primary-color p-4 text-primary-color'
-                                : 'group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-secondary-color hover:text-secondary-color',
-                        ]"
-                    >
-                        <span
-                            ><MegaphoneIcon
-                                :class="[
-                                    open.ads
-                                        ? 'mr-2 h-5 w-5 text-primary-color'
-                                        : 'mr-2 h-5 w-5 text-gray-700 group-hover:text-secondary-color',
-                                ]"
-                        /></span>
-                        <span class="hidden md:block">Annonces</span>
-                    </button>
-                </li>
-                <li class="mr-2">
-                    <button
-                        @click="changeTab('transaction')"
-                        type="button"
-                        :class="[
-                            open.transaction
-                                ? 'inline-flex rounded-t-lg border-b-2 border-primary-color p-4 text-primary-color'
-                                : 'group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-secondary-color hover:text-secondary-color',
-                        ]"
-                        aria-current="page"
-                    >
-                        <span
-                            ><ArrowsRightLeftIcon
-                                :class="[
-                                    open.transaction
-                                        ? 'mr-2 h-5 w-5 text-primary-color'
-                                        : 'mr-2 h-5 w-5 text-gray-700 group-hover:text-secondary-color',
-                                ]"
-                        /></span>
-                        <span class="hidden md:block">Transactions</span>
-                    </button>
-                </li>
-                <li class="mr-2">
-                    <button
-                        @click="changeTab('setting')"
-                        type="button"
-                        :class="[
-                            open.setting
-                                ? 'inline-flex rounded-t-lg border-b-2 border-primary-color p-4 text-primary-color'
-                                : 'group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-secondary-color hover:text-secondary-color',
-                        ]"
-                    >
-                        <span
-                            ><AdjustmentsHorizontalIcon
-                                :class="[
-                                    open.setting
-                                        ? 'mr-2 h-5 w-5 text-primary-color'
-                                        : 'mr-2 h-5 w-5 text-gray-700 group-hover:text-secondary-color',
-                                ]"
-                        /></span>
-                        <span class="hidden md:block">Paramètres</span>
-                    </button>
-                </li>
-            </ul>
+        <div
+            v-if="
+                authenticateStore.user && user.id === authenticateStore.user.id
+            "
+        >
+            <div class="border-b border-gray-200">
+                <ul
+                    class="-mb-px flex flex-wrap text-center text-sm font-medium text-gray-900"
+                >
+                    <li class="mr-2">
+                        <button
+                            @click="changeTab('ads')"
+                            type="button"
+                            :class="[
+                                open.ads
+                                    ? 'inline-flex rounded-t-lg border-b-2 border-primary-color p-4 text-primary-color'
+                                    : 'group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-secondary-color hover:text-secondary-color',
+                            ]"
+                        >
+                            <span
+                                ><MegaphoneIcon
+                                    :class="[
+                                        open.ads
+                                            ? 'mr-2 h-5 w-5 text-primary-color'
+                                            : 'mr-2 h-5 w-5 text-gray-700 group-hover:text-secondary-color',
+                                    ]"
+                            /></span>
+                            <span class="hidden md:block">Annonces</span>
+                        </button>
+                    </li>
+                    <li class="mr-2">
+                        <button
+                            @click="changeTab('transaction')"
+                            type="button"
+                            :class="[
+                                open.transaction
+                                    ? 'inline-flex rounded-t-lg border-b-2 border-primary-color p-4 text-primary-color'
+                                    : 'group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-secondary-color hover:text-secondary-color',
+                            ]"
+                            aria-current="page"
+                        >
+                            <span
+                                ><ArrowsRightLeftIcon
+                                    :class="[
+                                        open.transaction
+                                            ? 'mr-2 h-5 w-5 text-primary-color'
+                                            : 'mr-2 h-5 w-5 text-gray-700 group-hover:text-secondary-color',
+                                    ]"
+                            /></span>
+                            <span class="hidden md:block">Transactions</span>
+                        </button>
+                    </li>
+                    <li class="mr-2">
+                        <button
+                            @click="changeTab('setting')"
+                            type="button"
+                            :class="[
+                                open.setting
+                                    ? 'inline-flex rounded-t-lg border-b-2 border-primary-color p-4 text-primary-color'
+                                    : 'group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-secondary-color hover:text-secondary-color',
+                            ]"
+                        >
+                            <span
+                                ><AdjustmentsHorizontalIcon
+                                    :class="[
+                                        open.setting
+                                            ? 'mr-2 h-5 w-5 text-primary-color'
+                                            : 'mr-2 h-5 w-5 text-gray-700 group-hover:text-secondary-color',
+                                    ]"
+                            /></span>
+                            <span class="hidden md:block">Paramètres</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <div class="relative h-[1000px]">
+                <transition-group
+                    enter-active-class="transition duration-1000"
+                    enter-from-class="opacity-0 translate-x-20"
+                    enter-to-class="opacity-1 translate-x-0"
+                    leave-active-class="transition duration-1000 absolute ease-out"
+                    leave-from-class="opacity-1 translate-x-0"
+                    leave-to-class=" -translate-x-full opacity-0"
+                    mode="out-in"
+                >
+                    <div v-if="open.ads">
+                        <AccountAds :user-id="props.id" />
+                    </div>
+                    <div v-if="open.transaction"><AccountSetting /></div>
+                    <div v-if="open.setting"><AccountTransaction /></div>
+                </transition-group>
+            </div>
         </div>
-        <div class="relative h-[1000px]">
-            <transition-group
-                enter-active-class="transition duration-1000"
-                enter-from-class="opacity-0 translate-x-20"
-                enter-to-class="opacity-1 translate-x-0"
-                leave-active-class="transition duration-1000 absolute ease-out"
-                leave-from-class="opacity-1 translate-x-0"
-                leave-to-class=" -translate-x-full opacity-0"
-                mode="out-in"
-            >
-                <div v-if="open.ads"><AccountAds :user-id="props.id" /></div>
-                <div v-if="open.transaction"><AccountSetting /></div>
-                <div v-if="open.setting"><AccountTransaction /></div>
-            </transition-group>
+        <div v-else class="py-8">
+            <AccountListAds :user-id="props.id" />
         </div>
     </div>
 </template>

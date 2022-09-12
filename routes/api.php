@@ -25,10 +25,13 @@ Route::get('/search/{userId}', [SearchController::class, 'searching']);
 Route::get('/announcements', [AnnouncementController::class, 'index']);
 Route::get('/announcements/{announcement}', [AnnouncementController::class, 'show']);
 
+Route::apiResource('/users', UserController::class);
+
+Route::get('/announcements-user/{user}', [AnnouncementController::class, 'byUser']);
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/search-save-recent/{userId}/{catId}', [SearchController::class, 'saveRecentSearch']);
 
-    Route::get('/announcements-user/{user}', [AnnouncementController::class, 'byUser']);
     Route::post('/announcements', [AnnouncementController::class, 'store']);
     Route::put('/announcements/{announcement}', [AnnouncementController::class, 'update']);
     Route::delete('/announcements/{announcement}', [AnnouncementController::class, 'destroy']);
@@ -38,7 +41,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/categories-is-top/{category}', [CategoryController::class, 'is_top']);
     Route::delete('/categories/{categories}', [CategoryController::class, 'destroy']);
 
-    Route::apiResource('/users', UserController::class);
+
 
     Route::apiResource('/currencies', CurrencyController::class);
 
