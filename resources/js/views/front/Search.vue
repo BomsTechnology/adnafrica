@@ -7,6 +7,7 @@ import {
     ChevronRightIcon,
     ArrowLeftIcon,
     BuildingOffice2Icon,
+    FunnelIcon,
 } from "@heroicons/vue/24/solid";
 import { useAuthenticateStore } from "@/stores/authenticate";
 import { ref, onMounted, watch } from "vue";
@@ -16,6 +17,8 @@ import useSearch from "@/composables/searchServices";
 const {
     mount,
     searchData,
+    searchResult,
+    searching,
     saveRecentSearch,
     showCategory,
     selectCategory,
@@ -34,6 +37,8 @@ onMounted(async () => {
         category: route.query.category,
         location: route.query.location,
     });
+    await searching();
+    console.log(searchResult.value);
     if (
         authenticateStore.user &&
         authenticateStore.token &&
@@ -50,6 +55,7 @@ watch(route, async (newRoute, oldRoute) => {
         category: newRoute.query.category,
         location: newRoute.query.location,
     });
+    await searching();
     if (
         authenticateStore.user &&
         authenticateStore.token &&
@@ -76,9 +82,12 @@ watch(route, async (newRoute, oldRoute) => {
             <button
                 type="button"
                 @click="showCategory.filter = true"
-                class="rounded-full bg-primary-color py-1 px-3 text-sm text-white shadow transition-all hover:bg-secondary-color hover:shadow-xl lg:text-lg"
+                class="flex items-center space-x-2 rounded-full bg-primary-color py-1 px-3 text-sm text-white shadow transition-all hover:bg-secondary-color hover:shadow-xl lg:text-lg"
             >
-                Tous les filtres
+                <span
+                    ><FunnelIcon
+                        class="h-4 w-4 text-white lg:h-6 lg:w-6" /></span
+                ><span>Tous les filtres</span>
             </button>
         </div>
     </div>

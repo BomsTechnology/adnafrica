@@ -84,6 +84,21 @@ const routes = [
             requiresAuth: true,
         },
     },
+
+    {
+        path: "/create-ads",
+        name: "create-ads",
+        components: {
+            default: () => import("@/views/front/CreateAds.vue"),
+            navbar: NavBar,
+            footer: Footer,
+        },
+        meta: {
+            title: siteName,
+            requiresAuth: true,
+        },
+    },
+
     {
         path: "/search",
         name: "search",

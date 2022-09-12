@@ -2,7 +2,7 @@
 import SearchSection from "@/components/SearchSection.vue";
 import CarrousselTopCategory from "@/components/CarrousselTopCategory.vue";
 import CarrousselAds from "@/components/CarrousselAds.vue";
-
+import { DocumentPlusIcon } from "@heroicons/vue/24/solid";
 const cuisineList = [
     {
         name: "Gâteau à la crème chocolat",
@@ -81,6 +81,17 @@ const cuisineList = [
         </h5>
     </div>
     <SearchSection />
+    <div class="-mt-4 flex justify-center">
+        <router-link
+            :to="{ name: 'create-ads' }"
+            class="flex items-center space-x-2 rounded-full bg-primary-color py-1 px-3 text-sm text-white shadow transition-all hover:bg-secondary-color hover:shadow-xl lg:text-lg"
+        >
+            <span
+                ><DocumentPlusIcon
+                    class="h-4 w-4 text-white lg:h-6 lg:w-6" /></span
+            ><span>Déposer une annonce</span>
+        </router-link>
+    </div>
     <section class="py-14 px-4 md:px-28">
         <CarrousselTopCategory />
     </section>

@@ -5,6 +5,7 @@ import { axiosClient, axiosClientFile } from "@/axios";
 export default function useSearch() {
     const { categories, getCategories } = useCategory();
     const errors = ref([]);
+    const searchResult = ref([]);
     const loading = ref(0);
 
     const searchData = reactive({
@@ -13,6 +14,7 @@ export default function useSearch() {
         location: "",
         type: "",
         category: "",
+        criteria: [],
     });
     const showCategory = reactive({
         filter: false,
@@ -95,7 +97,31 @@ export default function useSearch() {
             }
         }
     };
+    const searching = async () => {
+        errors.value = [];
+        try {
+            loading.value = 1;
+            let response = await axiosClient.get(
+                `/search/${JSON.stringify(searchData)}`
+            );
+            searchResult.value = response.data.data;
+            loading.value = 2;
+        } catch (e) {
+            loading.value = 0;
+            if (e.response.status == 422) {
+                for (const key in e.response.data.errors)
+                    errors.value.push(
+                        e.response.data.errors[key][0].replace("id", "")
+                    );
+            } else {
+                errors.value.push(e.response.data.message);
+            }
+        }
+    };
+
     return {
+        searchResult,
+        searching,
         errors,
         loading,
         searchData,

@@ -20,6 +20,8 @@ Route::post("/login-admin", [AuthController::class, 'login_admin']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories-top', [CategoryController::class, 'top_categories']);
 
+Route::get('/search/{userId}', [SearchController::class, 'searching']);
+
 Route::get('/announcements', [AnnouncementController::class, 'index']);
 Route::get('/announcements/{announcement}', [AnnouncementController::class, 'show']);
 

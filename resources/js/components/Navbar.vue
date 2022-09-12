@@ -175,7 +175,7 @@ const goTop = () => {
                         /></router-link>
                     </div>
                     <router-link
-                        :to="{ name: 'login' }"
+                        :to="{ name: 'create-ads' }"
                         :class="[
                             isScroll
                                 ? 'mx-1 flex w-1/2 items-center space-x-2 rounded border border-gray-800 bg-white px-3 py-2 text-center text-sm font-medium leading-5 transition-colors hover:bg-gray-800 hover:text-white md:mx-2 md:w-auto'
@@ -202,7 +202,7 @@ const goTop = () => {
             <div class="items-center bg-white p-4 shadow md:flex" v-if="open">
                 <div class="-mx-1 w-full py-2">
                     <span
-                        @click="navigationTo('login')"
+                        @click="navigationTo('create-ads')"
                         class="mx-1 flex w-full transform cursor-pointer items-center space-x-2 rounded border-white bg-white px-3 py-2 text-center text-sm font-medium leading-5 text-gray-700 transition-colors duration-200 hover:border hover:bg-primary-color hover:text-white md:mx-2"
                     >
                         <DocumentPlusIcon class="h-6 w-6" />

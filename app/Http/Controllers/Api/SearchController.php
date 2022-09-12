@@ -3,19 +3,107 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Announcement;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function searching($data)
     {
-        //
+
+        $data = json_decode($data);
+        $results = [
+            "ads" => "",
+            "company" => "",
+        ];
+        // dd($data);
+        if ($data->gender == 'all') {
+            if ($data->category != 'all') {
+                $category = Category::find($data->category);
+                if ($category->parent != NULL) {
+                    $ads = Announcement::whereCategoryId($data->category)->inRandomOrder()->get();
+                    $company = User::where('type', 'professional')->whereCategoryId($data->category)->inRandomOrder()->get();
+                    $results["ads"] = $ads;
+                    $results["company"] = $company;
+                } else {
+                    $ads = Announcement::whereIn('category_id', function ($query) use ($data) {
+                        $query->select('id')
+                            ->from('categories')
+                            ->whereParent($data->category);
+                    })
+                        ->orWhere('category_id', $data->category)
+                        ->inRandomOrder()
+                        ->get();
+                    $company = User::whereIn('category_id', function ($query) use ($data) {
+                        $query->select('id')
+                            ->from('categories')
+                            ->whereParent($data->category);
+                    })
+
+                        ->orWhere('category_id', $data->category);
+                    $company =  $company->where('type', 'professional')->inRandomOrder()
+                        ->get();
+                    $results["ads"] = $ads;
+                    $results["company"] = $company;
+                }
+            } else {
+                $ads = Announcement::latest()->inRandomOrder()->get();
+                $company = User::where('type', 'professional')->inRandomOrder()->get();
+                $results["ads"] = $ads;
+                $results["company"] = $company;
+            }
+        } elseif ($data->gender != 'company') {
+            if ($data->category != 'all') {
+                $category = Category::find($data->category);
+                if ($category->parent != NULL) {
+                    $company = User::where('type', 'professional')->whereCategoryId($data->category)->inRandomOrder()->get();
+                    $results["company"] = $company;
+                } else {
+                    $company = User::whereIn('category_id', function ($query) use ($data) {
+                        $query->select('id')
+                            ->from('categories')
+                            ->whereParent($data->category);
+                    })
+                        ->orWhere('category_id', $data->category);
+                    $company =  $company->where('type', 'professional')->inRandomOrder()
+                        ->get();
+                    $results["company"] = $company;
+                }
+            } else {
+                $company = User::where('type', 'professional')->inRandomOrder()->get();
+                $results["company"] = $company;
+            }
+        } else {
+            if ($data->category != 'all') {
+                $category = Category::find($data->category);
+                if ($category->parent != NULL) {
+                    $ads = Announcement::whereCategoryId($data->category)->inRandomOrder()->get();
+                    $results["ads"] = $ads;
+                } else {
+                    $ads = Announcement::whereIn('category_id', function ($query) use ($data) {
+                        $query->select('id')
+                            ->from('categories')
+                            ->whereParent($data->category);
+                    })
+                        ->orWhere('category_id', $data->category)
+                        ->inRandomOrder()
+                        ->get();
+                    $results["ads"] = $ads;
+                }
+            } else {
+                $ads = Announcement::latest()->inRandomOrder()->get();
+                $results["ads"] = $ads;
+            }
+        }
+        $response = [
+            'status' => true,
+            'message' => 'Login successful!',
+            'data' => $results
+        ];
+        return response($response, 201);
     }
 
 
