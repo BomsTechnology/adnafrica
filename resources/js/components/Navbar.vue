@@ -167,8 +167,8 @@ const goTop = () => {
                             ><UserIcon class="h-8 w-8"
                         /></router-link>
                         <router-link
-                            :to="{ name: 'login' }"
                             v-else
+                            :to="{ name: 'login' }"
                             class="relative"
                             title="Mon compte"
                             ><UserIcon class="h-8 w-8"

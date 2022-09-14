@@ -84,7 +84,7 @@ class AuthController extends Controller
             'status' => true,
             'message' => 'registered successfully!',
             'data' => [
-                'user' => $user,
+                'user' => new UserResource($user),
                 'token' => $token
             ]
         ];

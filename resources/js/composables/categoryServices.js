@@ -41,6 +41,11 @@ export default function useCategory() {
                     errors.value.push(
                         e.response.data.errors[key][0].replace("id", "")
                     );
+            } else if (e.response.status == 401) {
+                localStorage.removeItem("user");
+                localStorage.removeItem("tokenUser");
+                localStorage.removeItem("recent_search");
+                location.href = "/";
             } else {
                 errors.value.push(e.response.data.message);
             }
@@ -62,6 +67,11 @@ export default function useCategory() {
                     errors.value.push(
                         e.response.data.errors[key][0].replace("id", "")
                     );
+            } else if (e.response.status == 401) {
+                localStorage.removeItem("user");
+                localStorage.removeItem("tokenUser");
+                localStorage.removeItem("recent_search");
+                location.href = "/";
             } else {
                 errors.value.push(e.response.data.message);
             }
@@ -81,6 +91,11 @@ export default function useCategory() {
                     errors.value.push(
                         e.response.data.errors[key][0].replace("id", "")
                     );
+            } else if (e.response.status == 401) {
+                localStorage.removeItem("user");
+                localStorage.removeItem("tokenUser");
+                localStorage.removeItem("recent_search");
+                location.href = "/";
             } else {
                 errors.value.push(e.response.data.message);
             }
@@ -100,6 +115,11 @@ export default function useCategory() {
                     errors.value.push(
                         e.response.data.errors[key][0].replace("id", "")
                     );
+            } else if (e.response.status == 401) {
+                localStorage.removeItem("user");
+                localStorage.removeItem("tokenUser");
+                localStorage.removeItem("recent_search");
+                location.href = "/";
             } else {
                 errors.value.push(e.response.data.message);
             }
@@ -118,6 +138,11 @@ export default function useCategory() {
                     errors.value.push(
                         e.response.data.errors[key][0].replace("id", "")
                     );
+            } else if (e.response.status == 401) {
+                localStorage.removeItem("user");
+                localStorage.removeItem("tokenUser");
+                localStorage.removeItem("recent_search");
+                location.href = "/";
             } else {
                 errors.value.push(e.response.data.message);
             }
@@ -139,6 +164,11 @@ export default function useCategory() {
                     errors.value.push(
                         e.response.data.errors[key][0].replace("id", "")
                     );
+            } else if (e.response.status == 401) {
+                localStorage.removeItem("user");
+                localStorage.removeItem("tokenUser");
+                localStorage.removeItem("recent_search");
+                location.href = "/";
             } else {
                 errors.value.push(e.response.data.message);
             }
