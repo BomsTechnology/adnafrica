@@ -2,7 +2,7 @@
 import {
     TableCellsIcon,
     ChevronDownIcon,
-    UserAddIcon,
+    UserPlusIcon,
     TrashIcon,
 } from "@heroicons/vue/24/solid";
 import { reactive } from "vue";
@@ -18,7 +18,7 @@ import { reactive } from "vue";
                 type="submit"
                 class="flex items-end space-x-2 rounded bg-primary-color px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-secondary-color focus:outline-none focus:ring-4 focus:ring-blue-300"
             >
-                <UserAddIcon class="h-5 w-5" />
+                <UserPlusIcon class="h-5 w-5" />
                 <span>Add User</span>
             </button>
         </div>

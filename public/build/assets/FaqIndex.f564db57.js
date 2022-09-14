@@ -1,0 +1,1 @@
+import{_ as e,c as s,o as t,a as o}from"./app.4eaf8dc0.js";const c={},a={class:"h-full p-8"},n=o("h1",{class:"text-3xl font-bold"},"Faqs",-1),_=[n];function r(d,l){return t(),s("div",a,_)}const i=e(c,[["render",r]]);export{i as default};
